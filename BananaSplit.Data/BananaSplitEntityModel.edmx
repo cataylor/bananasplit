@@ -1,0 +1,839 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BananaSplitTables.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="BananaSplitTablesStoreContainer">
+          <EntitySet Name="ApiAccess" EntityType="BananaSplitTables.Store.ApiAccess" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="BananaSplitTables.Store.Invoice" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="BananaSplitTables.Store.Location" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="BananaSplitTables.Store.Member" store:Type="Tables" />
+          <EntitySet Name="MemberType" EntityType="BananaSplitTables.Store.MemberType" store:Type="Tables" />
+          <EntitySet Name="Partnership" EntityType="BananaSplitTables.Store.Partnership" store:Type="Tables" />
+          <EntitySet Name="PartnerTicket" EntityType="BananaSplitTables.Store.PartnerTicket" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="BananaSplitTables.Store.State" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="BananaSplitTables.Store.Team" store:Type="Tables" />
+          <EntitySet Name="TicketPrice" EntityType="BananaSplitTables.Store.TicketPrice" store:Type="Tables" />
+          <AssociationSet Name="FK_ApiAccess_Member" Association="BananaSplitTables.Store.FK_ApiAccess_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ApiAccess" EntitySet="ApiAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Managing_Member" Association="BananaSplitTables.Store.FK_Invoice_Managing_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Member" Association="BananaSplitTables.Store.FK_Invoice_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_State" Association="BananaSplitTables.Store.FK_Location_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_MemberTypeId" Association="BananaSplitTables.Store.FK_Member_MemberTypeId">
+            <End Role="MemberType" EntitySet="MemberType" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_Member" Association="BananaSplitTables.Store.FK_PartnerTicket_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Partnership" EntitySet="Partnership" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_MemberId" Association="BananaSplitTables.Store.FK_PartnerTicket_MemberId">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="PartnerTicket" EntitySet="PartnerTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_PartnershipId" Association="BananaSplitTables.Store.FK_PartnerTicket_PartnershipId">
+            <End Role="Partnership" EntitySet="Partnership" />
+            <End Role="PartnerTicket" EntitySet="PartnerTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_TicketPrice" Association="BananaSplitTables.Store.FK_PartnerTicket_TicketPrice">
+            <End Role="TicketPrice" EntitySet="TicketPrice" />
+            <End Role="PartnerTicket" EntitySet="PartnerTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Location" Association="BananaSplitTables.Store.FK_Team_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPrice_Member" Association="BananaSplitTables.Store.FK_TicketPrice_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="TicketPrice" EntitySet="TicketPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPrice_Team" Association="BananaSplitTables.Store.FK_TicketPrice_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TicketPrice" EntitySet="TicketPrice" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ApiAccess">
+          <Key>
+            <PropertyRef Name="ApiAccessId" />
+          </Key>
+          <Property Name="ApiAccessId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="84" />
+          <Property Name="AppKey" Type="nvarchar" Nullable="false" MaxLength="24" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="SecretKey" Type="nvarchar" Nullable="false" MaxLength="24" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="InvoiceId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ManagingMemberId" Type="bigint" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="DateSent" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="40" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="40" />
+          <Property Name="Email" Type="nvarchar" MaxLength="64" />
+          <Property Name="IsVerfied" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="DateLastAccessed" Type="datetime" Nullable="false" />
+          <Property Name="FacebookId" Type="nvarchar" MaxLength="64" />
+          <Property Name="MemberTypeId" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="MemberType">
+          <Key>
+            <PropertyRef Name="MemberTypeId" />
+          </Key>
+          <Property Name="MemberTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MemberTypeName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partnership">
+          <Key>
+            <PropertyRef Name="PartnershipId" />
+          </Key>
+          <Property Name="PartnershipId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="MaxNumberOfTickets" Type="smallint" Nullable="false" />
+          <Property Name="ManagingMemberId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PartnerTicket">
+          <Key>
+            <PropertyRef Name="PartnerTicketId" />
+          </Key>
+          <Property Name="PartnerTicketId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TicketPriceId" Type="bigint" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="DateESigned" Type="bigint" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="PartnerShipId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="nvarchar" Nullable="false" MaxLength="80" />
+          <Property Name="StateAbbrev" Type="nvarchar" Nullable="false" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="nvarchar" Nullable="false" MaxLength="72" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketPrice">
+          <Key>
+            <PropertyRef Name="TicketPriceId" />
+          </Key>
+          <Property Name="TicketPriceId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TeamId" Type="bigint" Nullable="false" />
+          <Property Name="ManagingMemberId" Type="bigint" Nullable="false" />
+          <Property Name="Price" Type="numeric" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_ApiAccess_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ApiAccess" Type="BananaSplitTables.Store.ApiAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="ApiAccess">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Managing_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="Invoice" Type="BananaSplitTables.Store.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="ManagingMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="Invoice" Type="BananaSplitTables.Store.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_State">
+          <End Role="State" Type="BananaSplitTables.Store.State" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Location" Type="BananaSplitTables.Store.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_MemberTypeId">
+          <End Role="MemberType" Type="BananaSplitTables.Store.MemberType" Multiplicity="1" />
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberType">
+              <PropertyRef Name="MemberTypeId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MemberTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Partnership">
+              <PropertyRef Name="ManagingMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_MemberId">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="PartnerTicket" Type="BananaSplitTables.Store.PartnerTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PartnerTicket">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_PartnershipId">
+          <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="1" />
+          <End Role="PartnerTicket" Type="BananaSplitTables.Store.PartnerTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership">
+              <PropertyRef Name="PartnershipId" />
+            </Principal>
+            <Dependent Role="PartnerTicket">
+              <PropertyRef Name="PartnerShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_TicketPrice">
+          <End Role="TicketPrice" Type="BananaSplitTables.Store.TicketPrice" Multiplicity="1" />
+          <End Role="PartnerTicket" Type="BananaSplitTables.Store.PartnerTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketPrice">
+              <PropertyRef Name="TicketPriceId" />
+            </Principal>
+            <Dependent Role="PartnerTicket">
+              <PropertyRef Name="TicketPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Location">
+          <End Role="Location" Type="BananaSplitTables.Store.Location" Multiplicity="1" />
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPrice_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="TicketPrice" Type="BananaSplitTables.Store.TicketPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="TicketPrice">
+              <PropertyRef Name="ManagingMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPrice_Team">
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="1" />
+          <End Role="TicketPrice" Type="BananaSplitTables.Store.TicketPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="TicketPrice">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BananaSplitTables" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="BananaSplitConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ApiAccesses" EntityType="BananaSplitTables.ApiAccess" />
+          <EntitySet Name="Invoices" EntityType="BananaSplitTables.Invoice" />
+          <EntitySet Name="Locations" EntityType="BananaSplitTables.Location" />
+          <EntitySet Name="Members" EntityType="BananaSplitTables.Member" />
+          <EntitySet Name="MemberTypes" EntityType="BananaSplitTables.MemberType" />
+          <EntitySet Name="Partnerships" EntityType="BananaSplitTables.Partnership" />
+          <EntitySet Name="PartnerTickets" EntityType="BananaSplitTables.PartnerTicket" />
+          <EntitySet Name="States" EntityType="BananaSplitTables.State" />
+          <EntitySet Name="Teams" EntityType="BananaSplitTables.Team" />
+          <EntitySet Name="TicketPrices" EntityType="BananaSplitTables.TicketPrice" />
+          <AssociationSet Name="FK_ApiAccess_Member" Association="BananaSplitTables.FK_ApiAccess_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="ApiAccess" EntitySet="ApiAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Managing_Member" Association="BananaSplitTables.FK_Invoice_Managing_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Member" Association="BananaSplitTables.FK_Invoice_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_State" Association="BananaSplitTables.FK_Location_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Location" Association="BananaSplitTables.FK_Team_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_MemberTypeId" Association="BananaSplitTables.FK_Member_MemberTypeId">
+            <End Role="MemberType" EntitySet="MemberTypes" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_Member" Association="BananaSplitTables.FK_PartnerTicket_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Partnership" EntitySet="Partnerships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_MemberId" Association="BananaSplitTables.FK_PartnerTicket_MemberId">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="PartnerTicket" EntitySet="PartnerTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPrice_Member" Association="BananaSplitTables.FK_TicketPrice_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="TicketPrice" EntitySet="TicketPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_PartnershipId" Association="BananaSplitTables.FK_PartnerTicket_PartnershipId">
+            <End Role="Partnership" EntitySet="Partnerships" />
+            <End Role="PartnerTicket" EntitySet="PartnerTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerTicket_TicketPrice" Association="BananaSplitTables.FK_PartnerTicket_TicketPrice">
+            <End Role="TicketPrice" EntitySet="TicketPrices" />
+            <End Role="PartnerTicket" EntitySet="PartnerTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPrice_Team" Association="BananaSplitTables.FK_TicketPrice_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TicketPrice" EntitySet="TicketPrices" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ApiAccess">
+          <Key>
+            <PropertyRef Name="ApiAccessId" />
+          </Key>
+          <Property Name="ApiAccessId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="84" Unicode="true" FixedLength="false" />
+          <Property Name="AppKey" Type="String" Nullable="false" MaxLength="24" Unicode="true" FixedLength="false" />
+          <Property Name="MemberId" Type="Int64" Nullable="false" />
+          <Property Name="SecretKey" Type="String" Nullable="false" MaxLength="24" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_ApiAccess_Member" FromRole="ApiAccess" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="InvoiceId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="ManagingMemberId" Type="Int64" Nullable="false" />
+          <Property Name="MemberId" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="DateSent" Type="DateTime" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_Invoice_Managing_Member" FromRole="Invoice" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="BananaSplitTables.FK_Invoice_Member" FromRole="Invoice" ToRole="Member" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="State" Relationship="BananaSplitTables.FK_Location_State" FromRole="Location" ToRole="State" />
+          <NavigationProperty Name="Teams" Relationship="BananaSplitTables.FK_Team_Location" FromRole="Location" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="IsVerfied" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="DateLastAccessed" Type="DateTime" Nullable="false" />
+          <Property Name="FacebookId" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="MemberTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="12" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ApiAccesses" Relationship="BananaSplitTables.FK_ApiAccess_Member" FromRole="Member" ToRole="ApiAccess" />
+          <NavigationProperty Name="Invoices" Relationship="BananaSplitTables.FK_Invoice_Managing_Member" FromRole="Member" ToRole="Invoice" />
+          <NavigationProperty Name="Invoices1" Relationship="BananaSplitTables.FK_Invoice_Member" FromRole="Member" ToRole="Invoice" />
+          <NavigationProperty Name="MemberType" Relationship="BananaSplitTables.FK_Member_MemberTypeId" FromRole="Member" ToRole="MemberType" />
+          <NavigationProperty Name="Partnerships" Relationship="BananaSplitTables.FK_PartnerTicket_Member" FromRole="Member" ToRole="Partnership" />
+          <NavigationProperty Name="PartnerTickets" Relationship="BananaSplitTables.FK_PartnerTicket_MemberId" FromRole="Member" ToRole="PartnerTicket" />
+          <NavigationProperty Name="TicketPrices" Relationship="BananaSplitTables.FK_TicketPrice_Member" FromRole="Member" ToRole="TicketPrice" />
+        </EntityType>
+        <EntityType Name="MemberType">
+          <Key>
+            <PropertyRef Name="MemberTypeId" />
+          </Key>
+          <Property Name="MemberTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberTypeName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Members" Relationship="BananaSplitTables.FK_Member_MemberTypeId" FromRole="MemberType" ToRole="Member" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partnership">
+          <Key>
+            <PropertyRef Name="PartnershipId" />
+          </Key>
+          <Property Name="PartnershipId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="MaxNumberOfTickets" Type="Int16" Nullable="false" />
+          <Property Name="ManagingMemberId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_PartnerTicket_Member" FromRole="Partnership" ToRole="Member" />
+          <NavigationProperty Name="PartnerTickets" Relationship="BananaSplitTables.FK_PartnerTicket_PartnershipId" FromRole="Partnership" ToRole="PartnerTicket" />
+        </EntityType>
+        <EntityType Name="PartnerTicket">
+          <Key>
+            <PropertyRef Name="PartnerTicketId" />
+          </Key>
+          <Property Name="PartnerTicketId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketPriceId" Type="Int64" Nullable="false" />
+          <Property Name="MemberId" Type="Int64" Nullable="false" />
+          <Property Name="DateESigned" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="PartnerShipId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_PartnerTicket_MemberId" FromRole="PartnerTicket" ToRole="Member" />
+          <NavigationProperty Name="Partnership" Relationship="BananaSplitTables.FK_PartnerTicket_PartnershipId" FromRole="PartnerTicket" ToRole="Partnership" />
+          <NavigationProperty Name="TicketPrice" Relationship="BananaSplitTables.FK_PartnerTicket_TicketPrice" FromRole="PartnerTicket" ToRole="TicketPrice" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
+          <Property Name="StateAbbrev" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Locations" Relationship="BananaSplitTables.FK_Location_State" FromRole="State" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="72" Unicode="true" FixedLength="false" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="BananaSplitTables.FK_Team_Location" FromRole="Team" ToRole="Location" />
+          <NavigationProperty Name="TicketPrices" Relationship="BananaSplitTables.FK_TicketPrice_Team" FromRole="Team" ToRole="TicketPrice" />
+        </EntityType>
+        <EntityType Name="TicketPrice">
+          <Key>
+            <PropertyRef Name="TicketPriceId" />
+          </Key>
+          <Property Name="TicketPriceId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamId" Type="Int64" Nullable="false" />
+          <Property Name="ManagingMemberId" Type="Int64" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_TicketPrice_Member" FromRole="TicketPrice" ToRole="Member" />
+          <NavigationProperty Name="PartnerTickets" Relationship="BananaSplitTables.FK_PartnerTicket_TicketPrice" FromRole="TicketPrice" ToRole="PartnerTicket" />
+          <NavigationProperty Name="Team" Relationship="BananaSplitTables.FK_TicketPrice_Team" FromRole="TicketPrice" ToRole="Team" />
+        </EntityType>
+        <Association Name="FK_ApiAccess_Member">
+          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ApiAccess" Type="BananaSplitTables.ApiAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="ApiAccess">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Managing_Member">
+          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
+          <End Role="Invoice" Type="BananaSplitTables.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="ManagingMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Member">
+          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
+          <End Role="Invoice" Type="BananaSplitTables.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_State">
+          <End Role="State" Type="BananaSplitTables.State" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Location" Type="BananaSplitTables.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Location">
+          <End Role="Location" Type="BananaSplitTables.Location" Multiplicity="1" />
+          <End Role="Team" Type="BananaSplitTables.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_MemberTypeId">
+          <End Role="MemberType" Type="BananaSplitTables.MemberType" Multiplicity="1" />
+          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberType">
+              <PropertyRef Name="MemberTypeId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MemberTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_Member">
+          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
+          <End Role="Partnership" Type="BananaSplitTables.Partnership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Partnership">
+              <PropertyRef Name="ManagingMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_MemberId">
+          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
+          <End Role="PartnerTicket" Type="BananaSplitTables.PartnerTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PartnerTicket">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPrice_Member">
+          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
+          <End Role="TicketPrice" Type="BananaSplitTables.TicketPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="TicketPrice">
+              <PropertyRef Name="ManagingMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_PartnershipId">
+          <End Role="Partnership" Type="BananaSplitTables.Partnership" Multiplicity="1" />
+          <End Role="PartnerTicket" Type="BananaSplitTables.PartnerTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership">
+              <PropertyRef Name="PartnershipId" />
+            </Principal>
+            <Dependent Role="PartnerTicket">
+              <PropertyRef Name="PartnerShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerTicket_TicketPrice">
+          <End Role="TicketPrice" Type="BananaSplitTables.TicketPrice" Multiplicity="1" />
+          <End Role="PartnerTicket" Type="BananaSplitTables.PartnerTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketPrice">
+              <PropertyRef Name="TicketPriceId" />
+            </Principal>
+            <Dependent Role="PartnerTicket">
+              <PropertyRef Name="TicketPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPrice_Team">
+          <End Role="Team" Type="BananaSplitTables.Team" Multiplicity="1" />
+          <End Role="TicketPrice" Type="BananaSplitTables.TicketPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="TicketPrice">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BananaSplitTablesStoreContainer" CdmEntityContainer="BananaSplitConnection">
+          <EntitySetMapping Name="ApiAccesses"><EntityTypeMapping TypeName="BananaSplitTables.ApiAccess"><MappingFragment StoreEntitySet="ApiAccess">
+            <ScalarProperty Name="ApiAccessId" ColumnName="ApiAccessId" />
+            <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+            <ScalarProperty Name="AppKey" ColumnName="AppKey" />
+            <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+            <ScalarProperty Name="SecretKey" ColumnName="SecretKey" />
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+            <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Invoices"><EntityTypeMapping TypeName="BananaSplitTables.Invoice"><MappingFragment StoreEntitySet="Invoice">
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+            <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+            <ScalarProperty Name="ManagingMemberId" ColumnName="ManagingMemberId" />
+            <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+            <ScalarProperty Name="Amount" ColumnName="Amount" />
+            <ScalarProperty Name="DateSent" ColumnName="DateSent" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Locations"><EntityTypeMapping TypeName="BananaSplitTables.Location"><MappingFragment StoreEntitySet="Location">
+            <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+            <ScalarProperty Name="City" ColumnName="City" />
+            <ScalarProperty Name="StateId" ColumnName="StateId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Members"><EntityTypeMapping TypeName="BananaSplitTables.Member"><MappingFragment StoreEntitySet="Member">
+            <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="IsVerfied" ColumnName="IsVerfied" />
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+            <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+            <ScalarProperty Name="DateLastAccessed" ColumnName="DateLastAccessed" />
+            <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+            <ScalarProperty Name="MemberTypeId" ColumnName="MemberTypeId" />
+            <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MemberTypes"><EntityTypeMapping TypeName="BananaSplitTables.MemberType"><MappingFragment StoreEntitySet="MemberType">
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MemberTypeId" ColumnName="MemberTypeId" />
+            <ScalarProperty Name="MemberTypeName" ColumnName="MemberTypeName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Partnerships"><EntityTypeMapping TypeName="BananaSplitTables.Partnership"><MappingFragment StoreEntitySet="Partnership">
+            <ScalarProperty Name="PartnershipId" ColumnName="PartnershipId" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+            <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+            <ScalarProperty Name="MaxNumberOfTickets" ColumnName="MaxNumberOfTickets" />
+            <ScalarProperty Name="ManagingMemberId" ColumnName="ManagingMemberId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PartnerTickets"><EntityTypeMapping TypeName="BananaSplitTables.PartnerTicket"><MappingFragment StoreEntitySet="PartnerTicket">
+            <ScalarProperty Name="PartnerTicketId" ColumnName="PartnerTicketId" />
+            <ScalarProperty Name="TicketPriceId" ColumnName="TicketPriceId" />
+            <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+            <ScalarProperty Name="DateESigned" ColumnName="DateESigned" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+            <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+            <ScalarProperty Name="PartnerShipId" ColumnName="PartnerShipId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="States"><EntityTypeMapping TypeName="BananaSplitTables.State"><MappingFragment StoreEntitySet="State">
+            <ScalarProperty Name="StateId" ColumnName="StateId" />
+            <ScalarProperty Name="StateName" ColumnName="StateName" />
+            <ScalarProperty Name="StateAbbrev" ColumnName="StateAbbrev" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Teams"><EntityTypeMapping TypeName="BananaSplitTables.Team"><MappingFragment StoreEntitySet="Team">
+            <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+            <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+            <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TicketPrices"><EntityTypeMapping TypeName="BananaSplitTables.TicketPrice"><MappingFragment StoreEntitySet="TicketPrice">
+            <ScalarProperty Name="TicketPriceId" ColumnName="TicketPriceId" />
+            <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+            <ScalarProperty Name="ManagingMemberId" ColumnName="ManagingMemberId" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+            <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="BananaSplitEntityModel">
+        <EntityTypeShape EntityType="BananaSplitTables.ApiAccess" Width="1.5" PointX="5.25" PointY="4.375" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.Invoice" Width="1.5" PointX="7.5" PointY="5.375" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.Location" Width="1.5" PointX="3.75" PointY="0.75" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.Member" Width="1.5" PointX="2.75" PointY="3.5" Height="4.6725065104166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.MemberType" Width="1.5" PointX="0.5" PointY="4" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.Partnership" Width="1.5" PointX="0.5" PointY="6" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.PartnerTicket" Width="1.5" PointX="10.5" PointY="2.375" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.State" Width="1.5" PointX="0.625" PointY="1" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.Team" Width="1.5" PointX="6" PointY="1" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.TicketPrice" Width="1.5" PointX="8.25" PointY="1.25" Height="2.9417936197916674" IsExpanded="true" />
+        <AssociationConnector Association="BananaSplitTables.FK_ApiAccess_Member" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="5.74974609375" />
+          <ConnectorPoint PointX="5.25" PointY="5.74974609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Invoice_Managing_Member" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="7.6557421875" />
+          <ConnectorPoint PointX="7.5" PointY="7.6557421875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Invoice_Member" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="7.3588671875" />
+          <ConnectorPoint PointX="7.5" PointY="7.3588671875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Location_State" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.125" PointY="1.8651432291666663" />
+          <ConnectorPoint PointX="3.75" PointY="1.8651432291666663" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Team_Location" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="1.8651432291666663" />
+          <ConnectorPoint PointX="6" PointY="1.8651432291666663" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Member_MemberTypeId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2" PointY="4.797841796875" />
+          <ConnectorPoint PointX="2.75" PointY="4.797841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_Member" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.75" PointY="7.0862532552083328" />
+          <ConnectorPoint PointX="2" PointY="7.0862532552083328" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_MemberId" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="4.2833968098958337" />
+          <ConnectorPoint PointX="10.5" PointY="4.2833968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_TicketPrice_Member" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="3.8458968098958337" />
+          <ConnectorPoint PointX="8.25" PointY="3.8458968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_PartnershipId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2" PointY="8.2999479166666674" />
+          <ConnectorPoint PointX="11.25" PointY="8.2999479166666674" />
+          <ConnectorPoint PointX="11.25" PointY="5.3167936197916674" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_TicketPrice" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="3.2833968098958337" />
+          <ConnectorPoint PointX="10.5" PointY="3.2833968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_TicketPrice_Team" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="2.1151432291666659" />
+          <ConnectorPoint PointX="8.25" PointY="2.1151432291666659" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
