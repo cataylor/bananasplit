@@ -76,7 +76,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Invoice.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
