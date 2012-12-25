@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit", "BananaSplit\BananaSplit.csproj", "{A7EFC1B7-6B4B-4366-8A7F-162CF0FE72D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit.Service", "BananaSplit.Service\BananaSplit.Service.csproj", "{4289D4BF-4B59-4F3B-A63A-3898FEB8D10D}"
@@ -11,7 +11,33 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit.Data", "BananaS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit.Core", "BananaSplit.Core\BananaSplit.Core.csproj", "{0A37ED15-358E-4C3F-89D6-84CB2591C628}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "BananaSplit.Azure", "BananaSplit.Azure\BananaSplit.Azure.ccproj", "{9236D395-9F55-4DAA-8FD0-6505F1229BED}"
+EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://bananasplit.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BananaSplit.Azure\\BananaSplit.Azure.ccproj
+		SccProjectName1 = BananaSplit.Azure
+		SccLocalPath1 = BananaSplit.Azure
+		SccProjectUniqueName2 = BananaSplit.Core\\BananaSplit.Core.csproj
+		SccProjectName2 = BananaSplit.Core
+		SccLocalPath2 = BananaSplit.Core
+		SccProjectUniqueName3 = BananaSplit.Data\\BananaSplit.Data.csproj
+		SccProjectName3 = BananaSplit.Data
+		SccLocalPath3 = BananaSplit.Data
+		SccProjectUniqueName4 = BananaSplit.Model\\BananaSplit.Model.csproj
+		SccProjectName4 = BananaSplit.Model
+		SccLocalPath4 = BananaSplit.Model
+		SccProjectUniqueName5 = BananaSplit.Service\\BananaSplit.Service.csproj
+		SccProjectName5 = BananaSplit.Service
+		SccLocalPath5 = BananaSplit.Service
+		SccProjectUniqueName6 = BananaSplit\\BananaSplit.csproj
+		SccProjectName6 = BananaSplit
+		SccLocalPath6 = BananaSplit
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -37,6 +63,10 @@ Global
 		{0A37ED15-358E-4C3F-89D6-84CB2591C628}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A37ED15-358E-4C3F-89D6-84CB2591C628}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A37ED15-358E-4C3F-89D6-84CB2591C628}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9236D395-9F55-4DAA-8FD0-6505F1229BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9236D395-9F55-4DAA-8FD0-6505F1229BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9236D395-9F55-4DAA-8FD0-6505F1229BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9236D395-9F55-4DAA-8FD0-6505F1229BED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
