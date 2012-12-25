@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="BananaSplit.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="2" osVersion="*" schemaVersion="2012-10.1.8">
+  <Role name="BananaSplit">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="administrator" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEH42rM3vD8a9SBlIXZWuj2UwDQYJKoZIhvcNAQEBBQAEggEAAE3ajUa0ZUNVgQ7wTukkd/UGdtLq6/UKBRdsIRT/z9gY35v2q96QQ0LlyfjJF3S84L4PzHgySDMHCPhCT/6Ci055wyeNa2Nd+8pBXaE2iPX3x3fVdgDDUWD+Kb5FiBmkqkf3w/1UZdcYWSzGbxZVnVXoaYSrU5pKI5ok8gsGmzlMLigokY4lvoX6m84lVp6GJnb9TqoijPf8OuiBLuPMrHg7q2yOvtf6G8lA2rHYm0TF5N3dzHRiO1EZ3NSa8DU6lUhXYcCXjGjcPZJIHFr4VkQX5OqFnx8iTpptNOaVrirUQGeXHiKL8YTS6Ez9PzbO0dWBNy+xcsfFRS8aKKUIIjAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECB2BzW1dH3H1gBCwtGd0APbPwlfSlWZhunLr" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-12-24T23:59:59.0000000-08:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8119AC3EB1B714A0D65AE4B46A733C12420FC797" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>
