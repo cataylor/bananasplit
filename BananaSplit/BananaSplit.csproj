@@ -108,6 +108,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Twilio.Api">
+      <HintPath>..\..\..\..\Downloads\DotNetLibraries\Twillio\twilio-twilio-csharp-3.2.3-47-g5606cc0\twilio-twilio-csharp-5606cc0\src\Twilio.Api\bin\Release\Twilio.Api.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
@@ -123,10 +126,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Filters\AuthenticateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Communication.cs" />
+    <Compile Include="Models\SmsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,7 +223,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
