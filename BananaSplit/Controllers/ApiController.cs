@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BananaSplit.Helpers;
+using BananaSplit.Data;
+using BananaSplit.Data.Models;
 
 namespace BananaSplit.Controllers
 {
-    public class ApiController : Controller
+    public class ApiController : BaseController
     {
         private const String AUTH_ITEM = "AuthenticateResult";
 
@@ -34,6 +37,22 @@ namespace BananaSplit.Controllers
         public ActionResult AuthenticateMember(string facebookKey)
         {
             return new ContentResult();
+        }
+
+
+        public ActionResult SendSms()
+        {
+            var member = new Member();
+            member.FirstName = "Joe";
+            member.LastName = "Rosenblum";
+
+            Communication.SendSmsLoginResponse(member);
+
+            var apiResult = new ApiResult();
+            apiResult.Success = true;
+            apiResult.Description = "";
+
+            return this.ToXml(apiResult);
         }
 
 

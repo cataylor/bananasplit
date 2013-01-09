@@ -6,12 +6,9 @@ using System.Xml.Serialization;
 
 namespace BananaSplit.Helpers
 {
+    [XmlRoot("Response")]
     public class SmsResponse
     {
-        [XmlRoot("Response")]
-        public class SmsResponse
-        {
-            public String Sms { get; set; }
-        }
+        public String Sms { get; set; }
     }
 }
