@@ -36,7 +36,7 @@ namespace BananaSplit.Controllers
 
         public ActionResult AuthenticateMember(string facebookKey)
         {
-            return new ContentResult(); 
+            return new ContentResult();    
         }
 
 
