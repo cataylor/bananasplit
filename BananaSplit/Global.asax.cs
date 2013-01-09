@@ -14,6 +14,39 @@ namespace BananaSplit
 
     public class MvcApplication : System.Web.HttpApplication
     {
+
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new HandleErrorAttribute());
+        }
+
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.IgnoreRoute("");
+
+            //routes.MapRoute(
+            //    "ApiSmsRoute", // Route name
+            //    "Api/SendSmS", // URL with parameters
+            //    new { controller = "Api", action = "SendSms" } // Parameter defaults
+            //);
+
+            routes.MapRoute(
+                "DefaultSms", // Route name
+                "{controller}/SendSms", // URL with parameters
+                new { controller = "Api", action = "SendSms", id = UrlParameter.Optional } // Parameter defaults
+            );
+            
+
+            routes.MapRoute(
+                "Default", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            );
+
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -22,6 +55,8 @@ namespace BananaSplit
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
     }
 }

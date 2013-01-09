@@ -45,6 +45,7 @@
         <div id="main_body">
             <div id="title_text">Banana Split Management Console</div>
             <a href=""><img src="Images/fb_login.png" alt="Login with Facebook" /></a>
+            <div id="sub_text ">Banana Split Management Console</div>
         </div>
     </div>
     </form>

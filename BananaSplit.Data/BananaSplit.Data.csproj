@@ -89,6 +89,8 @@
     <Compile Include="MemberType.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApiResult.cs" />
+    <Compile Include="Models\ApiResultCollection.cs" />
     <Compile Include="Partnership.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
