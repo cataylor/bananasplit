@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        
+        .metro_title {
+            font-family: "Open Sans", Segoe UI light, Tahoma,Helvetica,sans-serif;
+            font-size: 32px;
+        }
+        .metro_subtitle {
+            font-family: "Open Sans", Segoe UI light, Tahoma,Helvetica,sans-serif;
+            font-size: 16px;
+        }
+        #header_wrapper {
+            background-color: #333;
+            border-bottom: 1px #999 solid;
+            padding: 5px 0px 7px 0px;
+        }
+                
+        #header{ position:relative; max-width:1000px; padding-left:15px; margin:0 auto; overflow:hidden; } 
+        #header_titles{ position:relative; float:left; display:inline-block;width: 600px; }
+        #header_titles h1{ margin-top:0; margin-bottom:0;font-size: 32px;color: #fff;float: left; }
+        #header_titles h2{ margin:0 0 0 3px; z-index:12;font-size: 16px; color: #eee;clear:both; }
+        
+        #header_titles h1, #header_titles h2 {
+            color: #fff;
+            font-family: "Open Sans", Segoe UI light, Tahoma,Helvetica,sans-serif;
+        }        
+        
+        .navItem{ padding:0; margin:0; display:inline-block; z-index:6; -webkit-transition:background 100ms ease-in;  -moz-transition:background 100ms ease-in;   -o-transition:background 100ms ease-in; -ms-transition:background 100ms ease-in;   transition:background 100ms ease-in; } 
+        .navItem img{ border:none; }
+        .navItem{  height:70px; width:95px; background-color:#555; color:#FFF; font-size:14px; text-align:center;  border:1px solid #666; text-decoration:none; }
+        .navItem:hover{ color:#FFF; background-color:#888; } 
+        .navItem img{ margin:10px 10px 3px 10px; height:32px; } 
+        .navActive{ background-color:#F90; -moz-box-shadow:0 0 2px #fff; -webkit-box-shadow:0 0 2px #fff; box-shadow:0 0 2px #fff; } 
+        .navActive:hover{ background-color:#369; }  
+        #subNav a{  font-size:14px; color:#FFF; }
+        #subNav a:hover{ color:#FFF; } 
+        .subNavItemActive{ padding:3px 7px 2px 7px !important; border:1px #FFF solid; border-top:none; box-shadow:0px 2px 5px 2px #999 ; -o-box-shadow:0px 2px 5px 2px #999 ; -ms-box-shadow:0px 2px 5px 2px #999 ; -moz-box-shadow:0px 2px 5px 2px #999 ; -webkit-box-shadow:0px 2px 5px 2px #999 ; } 
+        
+        body {
+            margin: 0px;
+        }
+        
+        
+    </style>
+</head>
+    <body>
+        <div id="header_wrapper">
+            <div  id="header">
+                <div id="header_titles">
+                    <h1>BananaSplit Admin</h1>
+                    <h2>Management Console</h2>
+                </div>
+                <div id="nav" style="float:right;">
+                        <a id="home" class="navItem navActive" href="Home/Index"><br />Home</a>
+                    <a id="teams" class="navItem" href="Team/Index"><br />Teams</a>
+                    <a id="teams" class="navItem" href="Season/Index"><br />Seasons</a>
+                    <a id="teams" class="navItem" href="Contract/Index"><br />Contracts</a>
+                    </div>
+            </div>
+        </div>
+        <div>
+            @RenderBody()
+        </div>
+    </body>
+</html>

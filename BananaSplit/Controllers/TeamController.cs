@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BananaSplit.Data;
+using BananaSplit.Service;
 
 namespace BananaSplit.Controllers
 {
@@ -16,20 +18,14 @@ namespace BananaSplit.Controllers
             return View();
         }
 
-        //
-        // GET: /Team/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+        
         //
         // GET: /Team/Create
 
         public ActionResult Create()
         {
-            return View();
+            ViewBag.States = this.GetStates();
+            return View(new Team());
         }
 
         //
@@ -40,7 +36,22 @@ namespace BananaSplit.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                var team = new Team();
+                team.TeamName = collection.Get("TeamName");
+
+
+                var locationRepo = new LocationRepository();
+                var location = new Location();
+                location.City = collection.Get("City");
+                location.StateId = Convert.ToInt32(collection.Get("StateId"));
+
+                locationRepo.Add(location);
+
+                team.LocationId = location.LocationId;
+
+
+                var teamRepo = new TeamRepository();
+                teamRepo.Add(team);
 
                 return RedirectToAction("Index");
             }
@@ -100,6 +111,14 @@ namespace BananaSplit.Controllers
             {
                 return View();
             }
+        }
+
+
+        private List<State> GetStates()
+        {
+            var stateRepo = new StateRepository();
+            var states = stateRepo.GetAllStates();
+            return states;
         }
     }
 }
