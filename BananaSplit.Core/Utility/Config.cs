@@ -45,5 +45,20 @@ namespace BananaSplit.Core.Utility
         }
 
         #endregion
+
+
+        #region Facebook
+
+        public static String FacebookId
+        {
+            get { return GetAppSetting("FacebookId"); }
+        }
+
+        public static String FacebookSecret
+        {
+            get { return GetAppSetting("FacebookSecret"); }
+        }
+
+        #endregion
     }
 }
