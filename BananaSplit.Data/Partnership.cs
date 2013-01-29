@@ -25,18 +25,6 @@ namespace BananaSplit.Data
             set;
         }
     
-        public virtual System.DateTime DateCreated
-        {
-            get;
-            set;
-        }
-    
-        public virtual System.DateTime DateUpdated
-        {
-            get;
-            set;
-        }
-    
         public virtual short MaxNumberOfTickets
         {
             get;
@@ -59,6 +47,18 @@ namespace BananaSplit.Data
             }
         }
         private long _managingMemberId;
+    
+        public virtual System.DateTime DateCreated
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime DateUpdated
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties

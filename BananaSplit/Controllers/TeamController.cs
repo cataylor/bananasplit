@@ -8,8 +8,15 @@ using BananaSplit.Service;
 
 namespace BananaSplit.Controllers
 {
-    public class TeamController : Controller
+    
+    public class TeamController : BaseController
     {
+        private TeamRepository repo;
+
+        public TeamController()
+        {
+            this.repo = new TeamRepository();
+        }
         //
         // GET: /Team/
 
@@ -36,11 +43,10 @@ namespace BananaSplit.Controllers
         {
             try
             {
-                var team = new Team();
-                team.TeamName = collection.Get("TeamName");
-
+                var team = new Team {TeamName = collection.Get("TeamName")};
 
                 var locationRepo = new LocationRepository();
+                
                 var location = new Location();
                 location.City = collection.Get("City");
                 location.StateId = Convert.ToInt32(collection.Get("StateId"));
@@ -48,10 +54,8 @@ namespace BananaSplit.Controllers
                 locationRepo.Add(location);
 
                 team.LocationId = location.LocationId;
-
-
-                var teamRepo = new TeamRepository();
-                teamRepo.Add(team);
+                
+                this.repo.Add(team);
 
                 return RedirectToAction("Index");
             }
@@ -77,7 +81,28 @@ namespace BananaSplit.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                var team = this.repo.GetById(Convert.ToInt32("TeamId"));
+                team.TeamName = collection.Get("TeamName");
+
+                var locationRepo = new LocationRepository();
+
+                var city = collection.Get("City");
+                var stateId = Convert.ToInt32(collection.Get("StateId"));
+
+                var location = locationRepo.GetByCityStateId(city, stateId);
+
+                if (null == location)
+                {
+                    location = new Location();
+                    location.City = city;
+                    location.StateId = stateId;
+                }
+                locationRepo.Save(location);
+
+                team.LocationId = location.LocationId;
+
+
+                this.repo.Add(team);
 
                 return RedirectToAction("Index");
             }
@@ -85,33 +110,24 @@ namespace BananaSplit.Controllers
             {
                 return View();
             }
-        }
-
-        //
-        // GET: /Team/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         //
         // POST: /Team/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var team = this.repo.GetById(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (null != team)
             {
-                return View();
+                this.repo.Remove(team);
             }
+
+            return RedirectToAction("Index");
         }
+        
 
 
         private List<State> GetStates()

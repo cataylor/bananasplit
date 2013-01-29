@@ -4,24 +4,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using BananaSplit.Service;
+using BananaSplit.Data;
+
 namespace BananaSplit.Controllers
 {
     public class PartnerController : Controller
     {
-        //
-        // GET: /Partner/
+        private MemberRepository repo;
+
+        public PartnerController()
+        {
+            this.repo = new MemberRepository();
+        }
 
         public ActionResult Index()
         {
-            return View();
-        }
+            var qPartners = this.repo.GetAll();
+            List<Member> partners = null;
+            if (qPartners != null && qPartners.Count() > 0)
+            {
+                partners = qPartners.ToList();
+            }
 
-        //
-        // GET: /Partner/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
+            return View(partners);
         }
 
         //
@@ -78,7 +84,7 @@ namespace BananaSplit.Controllers
 
         //
         // GET: /Partner/Delete/5
-
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             return View();

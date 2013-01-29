@@ -43,31 +43,13 @@ namespace BananaSplit.Data
             set;
         }
     
-        public virtual bool IsVerfied
+        public virtual bool IsVerified
         {
             get;
             set;
         }
     
         public virtual bool IsActive
-        {
-            get;
-            set;
-        }
-    
-        public virtual System.DateTime DateCreated
-        {
-            get;
-            set;
-        }
-    
-        public virtual System.DateTime DateUpdated
-        {
-            get;
-            set;
-        }
-    
-        public virtual System.DateTime DateLastAccessed
         {
             get;
             set;
@@ -97,6 +79,24 @@ namespace BananaSplit.Data
         private int _memberTypeId;
     
         public virtual string PhoneNumber
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime DateCreated
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime DateUpdated
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime DateLastAccessed
         {
             get;
             set;

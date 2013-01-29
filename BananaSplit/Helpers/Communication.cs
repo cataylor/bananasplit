@@ -13,8 +13,8 @@ namespace BananaSplit.Helpers
         {
             // set our AccountSid and AuthToken
             var AccountSid = "AC8bc41784ae75963713052f18956296bd";
-            var AuthToken = "da0459307590d485c0e810b49f951de";
-            var fromNumber = "646-783-2676";
+            var AuthToken = "da0459307590d485c0e810b49f951de0";
+            var fromNumber = "646-783-2676"; 
 
             // instantiate a new Twilio Rest Client
             var client = new TwilioRestClient(AccountSid, AuthToken);
@@ -33,5 +33,21 @@ namespace BananaSplit.Helpers
                 );
             }
         }
+
+        //If they don't use SMS go to push notification
+
+        //instructions to manually setup Quartz service
+        //Latest GitHub
+        //Dlls that I've used
+        //
+
+        //smtpout.secureserver.net - info@bananasplit.us - reply-to: welcome@bananasplit.us
+
+
+        //When a team you've been in a partnership on has a new season added - SMS or notify
+
+        //SETUP HMAILSERVER 
+        
+        
     }
 }

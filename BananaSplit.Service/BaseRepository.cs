@@ -27,7 +27,7 @@ namespace BananaSplit.Service
         /// 
         public BaseRepository()
         {
-            this.context = new BananaSplitConnection();
+            this.context = new BananaSplitEntityModels();
             objectSet = context.CreateObjectSet<TEntity>();
         }
 

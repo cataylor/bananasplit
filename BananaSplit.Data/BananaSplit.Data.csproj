@@ -108,18 +108,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bananasplit.sdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="BananaSplitEntityModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BananaSplitEntityModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="BananaSplitEntityModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BananaSplitEntityModels.Context.cs</LastGenOutput>

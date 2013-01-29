@@ -47,6 +47,18 @@ namespace BananaSplit.Data
             }
         }
         private int _locationId;
+    
+        public virtual System.DateTime DateCreated
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime DateUpdated
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties

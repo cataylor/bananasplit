@@ -77,7 +77,7 @@ namespace BananaSplit.Data
             set;
         }
     
-        public virtual string DateUpdated
+        public virtual System.DateTime DateUpdated
         {
             get;
             set;

@@ -59,11 +59,28 @@ namespace BananaSplit.Data
         }
         private long _memberId;
     
-        public virtual Nullable<long> DateESigned
+        public virtual Nullable<System.DateTime> DateESigned
         {
             get;
             set;
         }
+    
+        public virtual long PartnershipId
+        {
+            get { return _partnershipId; }
+            set
+            {
+                if (_partnershipId != value)
+                {
+                    if (Partnership != null && Partnership.PartnershipId != value)
+                    {
+                        Partnership = null;
+                    }
+                    _partnershipId = value;
+                }
+            }
+        }
+        private long _partnershipId;
     
         public virtual System.DateTime DateCreated
         {
@@ -76,23 +93,6 @@ namespace BananaSplit.Data
             get;
             set;
         }
-    
-        public virtual long PartnerShipId
-        {
-            get { return _partnerShipId; }
-            set
-            {
-                if (_partnerShipId != value)
-                {
-                    if (Partnership != null && Partnership.PartnershipId != value)
-                    {
-                        Partnership = null;
-                    }
-                    _partnerShipId = value;
-                }
-            }
-        }
-        private long _partnerShipId;
 
         #endregion
         #region Navigation Properties
@@ -178,9 +178,9 @@ namespace BananaSplit.Data
                 {
                     Partnership.PartnerTickets.Add(this);
                 }
-                if (PartnerShipId != Partnership.PartnershipId)
+                if (PartnershipId != Partnership.PartnershipId)
                 {
-                    PartnerShipId = Partnership.PartnershipId;
+                    PartnershipId = Partnership.PartnershipId;
                 }
             }
         }

@@ -14,7 +14,7 @@
         body        
         {
             background-image:url("Images/background.png");
-            background-repeat:repeat-y;
+            background-repeat:repeat;
             margin:0px;
         }
         
@@ -34,6 +34,17 @@
             padding-bottom:8px;
         }
         
+        #sub_text
+        {
+            font-family:Arial, Tahoma;
+            font-weight:bold;
+            font-size:11px;
+            font-weight:bold;
+            padding-bottom:8px;
+            text-align: right;
+            padding-right: 14px;
+        }
+        
     </style>
 </head>
 <body>
@@ -44,8 +55,8 @@
         </div>
         <div id="main_body">
             <div id="title_text">Banana Split Management Console</div>
-            <a href=""><img src="Images/fb_login.png" alt="Login with Facebook" /></a>
-            <div id="sub_text ">Banana Split Management Console</div>
+            <a href="Authentication/FacebookLogin"><img src="Images/fb_login.png" alt="Login with Facebook" /></a>
+            <div id="sub_text">Copyright BananaSplit &copy; 2013</div>
         </div>
     </div>
     </form>

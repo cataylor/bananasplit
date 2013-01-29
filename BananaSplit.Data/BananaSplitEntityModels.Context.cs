@@ -13,26 +13,26 @@ using System.Data.EntityClient;
 
 namespace BananaSplit.Data
 {
-    public partial class BananaSplitConnection : ObjectContext
+    public partial class BananaSplitEntityModels : ObjectContext
     {
-        public const string ConnectionString = "name=BananaSplitConnection";
-        public const string ContainerName = "BananaSplitConnection";
+        public const string ConnectionString = "name=BananaSplitEntityModels";
+        public const string ContainerName = "BananaSplitEntityModels";
     
         #region Constructors
     
-        public BananaSplitConnection()
+        public BananaSplitEntityModels()
             : base(ConnectionString, ContainerName)
         {
             this.ContextOptions.LazyLoadingEnabled = true;
         }
     
-        public BananaSplitConnection(string connectionString)
+        public BananaSplitEntityModels(string connectionString)
             : base(connectionString, ContainerName)
         {
             this.ContextOptions.LazyLoadingEnabled = true;
         }
     
-        public BananaSplitConnection(EntityConnection connection)
+        public BananaSplitEntityModels(EntityConnection connection)
             : base(connection, ContainerName)
         {
             this.ContextOptions.LazyLoadingEnabled = true;

@@ -25,18 +25,6 @@ namespace BananaSplit.Data
             set;
         }
     
-        public virtual System.DateTime DateCreated
-        {
-            get;
-            set;
-        }
-    
-        public virtual System.DateTime DateUpdated
-        {
-            get;
-            set;
-        }
-    
         public virtual long ManagingMemberId
         {
             get { return _managingMemberId; }
@@ -84,6 +72,18 @@ namespace BananaSplit.Data
         }
     
         public virtual bool IsActive
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime DateCreated
+        {
+            get;
+            set;
+        }
+    
+        public virtual System.DateTime DateUpdated
         {
             get;
             set;

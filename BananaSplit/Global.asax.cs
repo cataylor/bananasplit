@@ -34,16 +34,16 @@ namespace BananaSplit
 
             routes.MapRoute(
                 "DefaultSms", // Route name
-                "{controller}/SendSms", // URL with parameters
+                "{controller}/SendSms/{id}", // URL with parameters
                 new { controller = "Api", action = "SendSms", id = UrlParameter.Optional } // Parameter defaults
             );
             
 
-            routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
+            //routes.MapRoute(
+            //    "Default", // Route name
+            //    "{controller}/{action}/{id}", // URL with parameters
+            //    new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            //);
 
         }
 
@@ -51,10 +51,10 @@ namespace BananaSplit
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
