@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Drawing;
+using System.Text;
+using System.IO;
+using System.Configuration;
+using Kaliko.ImageLibrary;
 
 namespace BananaSplit.Helpers
 {
