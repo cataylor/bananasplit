@@ -14,6 +14,10 @@ namespace BananaSplit.Service
             return GetAll().SingleOrDefault(u => u.LocationId == id);
         }
 
+        public Location GetByCityStateId(string city, int stateId){
+            return GetAll().SingleOrDefault(u => u.City.Equals(city, StringComparison.OrdinalIgnoreCase) && u.StateId == stateId);
+        }
+
         /// <summary>
         /// 
         /// </summary>
