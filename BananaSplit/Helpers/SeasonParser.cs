@@ -7,7 +7,7 @@ using HtmlAgilityPack;
 
 namespace BananaSplit.Helpers
 {
-    public static class SeasonParser
+    public static class NbaSeasonParser
     {
 
         private static void ParseNBASeason(int year)
@@ -28,9 +28,10 @@ namespace BananaSplit.Helpers
                         var bold = tr.SelectSingleNode(".//b");
                         var partialDate = bold.InnerHtml;
                         var fullDate = parseSeasonDate(partialDate, year);
+                        //Pull Team
                         //Pull Date <td><font class=verdana size=1><b>Oct. 31</b></font></td>
                         //Pull Oppponent <td><font class=verdana size=1>at Detroit</font></td>
-                        //Pull Time <td align=right><font class=verdana size=1>7:30</font></td>
+                        //Pull Time <td align=right><font class=verdana size=1>7:30</font></td>                        
                     }
                 }
 
