@@ -39,7 +39,7 @@ namespace BananaSplit.Helpers
 
             var dateFolder = splitPath[splitPath.Length - 2];
 
-            origImg.GetThumbnailImage(thumbSize, thumbSize, ThumbnailMethod.Crop).SavePNG(newThumbPath, imgQuality);
+            origImg.GetThumbnailImage(thumbSize, thumbSize, ThumbnailMethod.Crop).SavePng(newThumbPath, imgQuality);
             //var webAddress = String.Concat(ConfigurationManager.AppSettings["BaseDomain"], unixStyleFolderPortion.ToString(), newThumbName);
             //var webAddress = String.Concat(ConfigurationManager.AppSettings["BaseDomain"], "Uploads/", dateFolder, slash, newThumbName);
             var webAddress = String.Concat(ConfigurationManager.AppSettings["BaseDomain"], "Uploads/", newThumbName);
