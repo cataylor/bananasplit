@@ -3,17 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BananaSplit.Data;
+using BananaSplit.Data.Models;
+using BananaSplit.Service;
 
 namespace BananaSplit.Controllers
 {
-    public class SeasonController : Controller
+    public class SeasonController : BaseController
     {
+        
         //
         // GET: /Season/
 
         public ActionResult Index()
         {
-            return View();
+            ViewBag.Teams = this.GetAllTeams();
+            return View(this.GetAllSeasonData());
+        }
+
+        private List<Team> GetAllTeams()
+        {
+            var teamRepo = new TeamRepository();
+            return teamRepo.GetAllTeams();
+        }
+
+        private List<Season> GetAllSeasonData()
+        {
+            var seasonRepo = new SeasonRepository();
+            return seasonRepo.GetAllSeasons();
         }
 
         //
@@ -78,10 +95,30 @@ namespace BananaSplit.Controllers
 
         //
         // GET: /Season/Delete/5
-
-        public ActionResult Delete(int id)
+        [HttpPost]
+        public ActionResult Delete(int seasonId)
         {
-            return View();
+            var seasonRepo = new SeasonRepository();
+            var result = new ApiResult();
+
+            try
+            {
+                var season = seasonRepo.GetAll().SingleOrDefault(sr => sr.SeasonId == seasonId);
+                if (null != season)
+                {
+                    season.IsActive = false;
+                    seasonRepo.Save(season);
+                }
+                result.Description = "Season successfully deleted!";
+                result.Success = true;
+            }
+            catch (Exception e)
+            {
+                result.Description = "Failed to delete season";
+                result.Success = false;
+            }
+
+            return this.ToJson(result);
         }
 
         //

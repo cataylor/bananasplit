@@ -25,9 +25,56 @@ namespace BananaSplit.Helpers
                     HtmlNodeCollection allTRTags = tableNode.SelectNodes(".//tr");
                     foreach (var tr in allTRTags)
                     {
+
+                        var time = String.Empty;
+                        var opponent = String.Empty;
+                        var counter = 0;
+                        foreach (var td in tr.SelectNodes(".//td"))
+                        {
+                            ++counter;
+                            if (counter == 1)
+                            {
+                                continue; //already got date
+                            }
+                            else if (counter == 2)
+                            {
+                                var opponentText = td.SelectSingleNode(".//font");
+                                opponent = opponentText.InnerHtml;
+
+                            }
+                            else if (counter == 3)
+                            {
+                                var timeText = td.SelectSingleNode(".//font");
+                                time = timeText.InnerHtml;
+                            }
+                        }
+
                         var bold = tr.SelectSingleNode(".//b");
                         var partialDate = bold.InnerHtml;
-                        var fullDate = parseSeasonDate(partialDate, year);
+                        var fullDate = parseSeasonDate(partialDate, time, year);
+
+                        /*
+                        
+    <tr>
+        <td><font class=verdana size=2><b> Date </b></font></td>
+
+        <td><font class=verdana size=2><b> Opponent </b></font></td>
+
+        <td><font class=verdana size=2><b> Time</b></font></td>
+
+    </tr>
+
+<tr>
+
+        <td><font class=verdana size=1><b>Oct. 31</b></font></td>
+     
+        <td><font class=verdana size=1>at Detroit</font></td>
+        
+        <td align=right><font class=verdana size=1>7:30</font></td>
+</tr>
+
+                        */
+
                         //Pull Team
                         //Pull Date <td><font class=verdana size=1><b>Oct. 31</b></font></td>
                         //Pull Oppponent <td><font class=verdana size=1>at Detroit</font></td>
@@ -35,12 +82,12 @@ namespace BananaSplit.Helpers
                     }
                 }
 
-                
+
             }
 
         }
 
-        private static DateTime parseSeasonDate(string monthDay, int baseYear=2013)
+        private static DateTime parseSeasonDate(string monthDay, string time, int baseYear = 2013)
         {
             var monthDaySplit = monthDay.Split(" ".ToCharArray());
             var month = monthDaySplit[0];
@@ -49,8 +96,9 @@ namespace BananaSplit.Helpers
 
             if (month.Equals("Oct.", StringComparison.OrdinalIgnoreCase)
                 || month.Equals("Nov.", StringComparison.OrdinalIgnoreCase)
-                || month.Equals("Dec.", StringComparison.OrdinalIgnoreCase)){
-                    year = baseYear - 1;
+                || month.Equals("Dec.", StringComparison.OrdinalIgnoreCase))
+            {
+                year = baseYear - 1;
             }
 
             var monthString = ConvertMonthToString(month);
@@ -144,7 +192,7 @@ namespace BananaSplit.Helpers
             return teamLinks;
         }
     }
-    
+
 }
 
 

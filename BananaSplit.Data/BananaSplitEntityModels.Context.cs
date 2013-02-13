@@ -101,6 +101,24 @@ namespace BananaSplit.Data
             get { return _ticketPrices  ?? (_ticketPrices = CreateObjectSet<TicketPrice>("TicketPrices")); }
         }
         private ObjectSet<TicketPrice> _ticketPrices;
+    
+        public ObjectSet<Season> Seasons
+        {
+            get { return _seasons  ?? (_seasons = CreateObjectSet<Season>("Seasons")); }
+        }
+        private ObjectSet<Season> _seasons;
+    
+        public ObjectSet<TeamType> TeamTypes
+        {
+            get { return _teamTypes  ?? (_teamTypes = CreateObjectSet<TeamType>("TeamTypes")); }
+        }
+        private ObjectSet<TeamType> _teamTypes;
+    
+        public ObjectSet<SeasonYear> SeasonYears
+        {
+            get { return _seasonYears  ?? (_seasonYears = CreateObjectSet<SeasonYear>("SeasonYears")); }
+        }
+        private ObjectSet<SeasonYear> _seasonYears;
 
         #endregion
     }

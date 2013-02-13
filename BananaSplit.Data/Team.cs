@@ -59,6 +59,29 @@ namespace BananaSplit.Data
             get;
             set;
         }
+    
+        public virtual int TeamTypeId
+        {
+            get { return _teamTypeId; }
+            set
+            {
+                if (_teamTypeId != value)
+                {
+                    if (TeamType != null && TeamType.TeamTypeId != value)
+                    {
+                        TeamType = null;
+                    }
+                    _teamTypeId = value;
+                }
+            }
+        }
+        private int _teamTypeId;
+    
+        public virtual bool IsActive
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
@@ -109,6 +132,53 @@ namespace BananaSplit.Data
             }
         }
         private ICollection<TicketPrice> _ticketPrices;
+    
+        public virtual ICollection<Season> Seasons
+        {
+            get
+            {
+                if (_seasons == null)
+                {
+                    var newCollection = new FixupCollection<Season>();
+                    newCollection.CollectionChanged += FixupSeasons;
+                    _seasons = newCollection;
+                }
+                return _seasons;
+            }
+            set
+            {
+                if (!ReferenceEquals(_seasons, value))
+                {
+                    var previousValue = _seasons as FixupCollection<Season>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupSeasons;
+                    }
+                    _seasons = value;
+                    var newValue = value as FixupCollection<Season>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupSeasons;
+                    }
+                }
+            }
+        }
+        private ICollection<Season> _seasons;
+    
+        public virtual TeamType TeamType
+        {
+            get { return _teamType; }
+            set
+            {
+                if (!ReferenceEquals(_teamType, value))
+                {
+                    var previousValue = _teamType;
+                    _teamType = value;
+                    FixupTeamType(previousValue);
+                }
+            }
+        }
+        private TeamType _teamType;
 
         #endregion
         #region Association Fixup
@@ -133,6 +203,26 @@ namespace BananaSplit.Data
             }
         }
     
+        private void FixupTeamType(TeamType previousValue)
+        {
+            if (previousValue != null && previousValue.Teams.Contains(this))
+            {
+                previousValue.Teams.Remove(this);
+            }
+    
+            if (TeamType != null)
+            {
+                if (!TeamType.Teams.Contains(this))
+                {
+                    TeamType.Teams.Add(this);
+                }
+                if (TeamTypeId != TeamType.TeamTypeId)
+                {
+                    TeamTypeId = TeamType.TeamTypeId;
+                }
+            }
+        }
+    
         private void FixupTicketPrices(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -146,6 +236,28 @@ namespace BananaSplit.Data
             if (e.OldItems != null)
             {
                 foreach (TicketPrice item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Team, this))
+                    {
+                        item.Team = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupSeasons(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Season item in e.NewItems)
+                {
+                    item.Team = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Season item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Team, this))
                     {

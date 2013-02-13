@@ -97,10 +97,19 @@
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Season.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeasonYear.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="State.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Team.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeamType.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="TicketPrice.cs">

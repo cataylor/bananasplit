@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BananaSplitTables.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="BananaSplitTables.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="BananaSplitTablesStoreContainer">
           <EntitySet Name="ApiAccess" EntityType="BananaSplitTables.Store.ApiAccess" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Invoice" EntityType="BananaSplitTables.Store.Invoice" store:Type="Tables" Schema="dbo" />
@@ -13,8 +13,11 @@
           <EntitySet Name="MemberType" EntityType="BananaSplitTables.Store.MemberType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Partnership" EntityType="BananaSplitTables.Store.Partnership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PartnerTicket" EntityType="BananaSplitTables.Store.PartnerTicket" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Season" EntityType="BananaSplitTables.Store.Season" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SeasonYears" EntityType="BananaSplitTables.Store.SeasonYears" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="State" EntityType="BananaSplitTables.Store.State" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Team" EntityType="BananaSplitTables.Store.Team" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TeamType" EntityType="BananaSplitTables.Store.TeamType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TicketPrice" EntityType="BananaSplitTables.Store.TicketPrice" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_ApiAccess_Member" Association="BananaSplitTables.Store.FK_ApiAccess_Member">
             <End Role="Member" EntitySet="Member" />
@@ -52,8 +55,20 @@
             <End Role="TicketPrice" EntitySet="TicketPrice" />
             <End Role="PartnerTicket" EntitySet="PartnerTicket" />
           </AssociationSet>
+          <AssociationSet Name="FK_Season_SeasonYears" Association="BananaSplitTables.Store.FK_Season_SeasonYears">
+            <End Role="SeasonYears" EntitySet="SeasonYears" />
+            <End Role="Season" EntitySet="Season" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Season_Team" Association="BananaSplitTables.Store.FK_Season_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Season" EntitySet="Season" />
+          </AssociationSet>
           <AssociationSet Name="FK_Team_Location" Association="BananaSplitTables.Store.FK_Team_Location">
             <End Role="Location" EntitySet="Location" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_TeamType" Association="BananaSplitTables.Store.FK_Team_TeamType">
+            <End Role="TeamType" EntitySet="TeamType" />
             <End Role="Team" EntitySet="Team" />
           </AssociationSet>
           <AssociationSet Name="FK_TicketPrice_Member" Association="BananaSplitTables.Store.FK_TicketPrice_Member">
@@ -146,6 +161,30 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Name="SeasonId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TeamId" Type="bigint" Nullable="false" />
+          <Property Name="EventStartDate" Type="datetime" Nullable="false" />
+          <Property Name="Opponent" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="TimeZone" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="EventLocation" Type="varchar" MaxLength="100" />
+          <Property Name="EventEndDate" Type="datetime" Nullable="false" />
+          <Property Name="IsArchived" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="SeasonYearsId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SeasonYears">
+          <Key>
+            <PropertyRef Name="SeasonYearsId" />
+          </Key>
+          <Property Name="SeasonYearsId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Years" Type="varchar" Nullable="false" MaxLength="24" />
+        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateId" />
@@ -163,6 +202,16 @@
           <Property Name="LocationId" Type="int" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="TeamTypeId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamType">
+          <Key>
+            <PropertyRef Name="TeamTypeId" />
+          </Key>
+          <Property Name="TeamTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TeamTypeName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TeamAbbrev" Type="char" Nullable="false" MaxLength="3" />
         </EntityType>
         <EntityType Name="TicketPrice">
           <Key>
@@ -284,6 +333,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Season_SeasonYears">
+          <End Role="SeasonYears" Type="BananaSplitTables.Store.SeasonYears" Multiplicity="1" />
+          <End Role="Season" Type="BananaSplitTables.Store.Season" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeasonYears">
+              <PropertyRef Name="SeasonYearsId" />
+            </Principal>
+            <Dependent Role="Season">
+              <PropertyRef Name="SeasonYearsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Season_Team">
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="1" />
+          <End Role="Season" Type="BananaSplitTables.Store.Season" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Season">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Team_Location">
           <End Role="Location" Type="BananaSplitTables.Store.Location" Multiplicity="1" />
           <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="*" />
@@ -293,6 +366,18 @@
             </Principal>
             <Dependent Role="Team">
               <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_TeamType">
+          <End Role="TeamType" Type="BananaSplitTables.Store.TeamType" Multiplicity="1" />
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamType">
+              <PropertyRef Name="TeamTypeId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="TeamTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -320,8 +405,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BananaSplitTables" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -383,6 +467,21 @@
           <AssociationSet Name="FK_TicketPrice_Team" Association="BananaSplitTables.FK_TicketPrice_Team">
             <End Role="Team" EntitySet="Teams" />
             <End Role="TicketPrice" EntitySet="TicketPrices" />
+          </AssociationSet>
+          <EntitySet Name="Seasons" EntityType="BananaSplitTables.Season" />
+          <EntitySet Name="TeamTypes" EntityType="BananaSplitTables.TeamType" />
+          <AssociationSet Name="FK_Season_Team" Association="BananaSplitTables.FK_Season_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Season" EntitySet="Seasons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_TeamType" Association="BananaSplitTables.FK_Team_TeamType">
+            <End Role="TeamType" EntitySet="TeamTypes" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <EntitySet Name="SeasonYears" EntityType="BananaSplitTables.SeasonYear" />
+          <AssociationSet Name="FK_Season_SeasonYears" Association="BananaSplitTables.FK_Season_SeasonYears">
+            <End Role="SeasonYear" EntitySet="SeasonYears" />
+            <End Role="Season" EntitySet="Seasons" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ApiAccess">
@@ -504,6 +603,10 @@
           <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Location" Relationship="BananaSplitTables.FK_Team_Location" FromRole="Team" ToRole="Location" />
           <NavigationProperty Name="TicketPrices" Relationship="BananaSplitTables.FK_TicketPrice_Team" FromRole="Team" ToRole="TicketPrice" />
+          <Property Type="Int32" Name="TeamTypeId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Seasons" Relationship="BananaSplitTables.FK_Season_Team" FromRole="Team" ToRole="Season" />
+          <NavigationProperty Name="TeamType" Relationship="BananaSplitTables.FK_Team_TeamType" FromRole="Team" ToRole="TeamType" />
         </EntityType>
         <EntityType Name="TicketPrice">
           <Key>
@@ -664,6 +767,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Type="Int64" Name="SeasonId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="TeamId" Nullable="false" />
+          <Property Type="DateTime" Name="EventStartDate" Nullable="false" />
+          <Property Type="String" Name="Opponent" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TimeZone" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EventLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="EventEndDate" Nullable="false" />
+          <Property Type="Boolean" Name="IsArchived" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+          <Property Type="DateTime" Name="DateUpdated" Nullable="false" />
+          <NavigationProperty Name="Team" Relationship="BananaSplitTables.FK_Season_Team" FromRole="Season" ToRole="Team" />
+          <Property Type="Int32" Name="SeasonYearsId" Nullable="false" />
+          <NavigationProperty Name="SeasonYear" Relationship="BananaSplitTables.FK_Season_SeasonYears" FromRole="Season" ToRole="SeasonYear" />
+        </EntityType>
+        <EntityType Name="TeamType">
+          <Key>
+            <PropertyRef Name="TeamTypeId" />
+          </Key>
+          <Property Type="Int32" Name="TeamTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TeamTypeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TeamAbbrev" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Teams" Relationship="BananaSplitTables.FK_Team_TeamType" FromRole="TeamType" ToRole="Team" />
+        </EntityType>
+        <Association Name="FK_Season_Team">
+          <End Type="BananaSplitTables.Team" Role="Team" Multiplicity="1" />
+          <End Type="BananaSplitTables.Season" Role="Season" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Season">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_TeamType">
+          <End Type="BananaSplitTables.TeamType" Role="TeamType" Multiplicity="1" />
+          <End Type="BananaSplitTables.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamType">
+              <PropertyRef Name="TeamTypeId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="TeamTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SeasonYear">
+          <Key>
+            <PropertyRef Name="SeasonYearsId" />
+          </Key>
+          <Property Type="Int32" Name="SeasonYearsId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Years" Nullable="false" MaxLength="24" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Seasons" Relationship="BananaSplitTables.FK_Season_SeasonYears" FromRole="SeasonYear" ToRole="Season" />
+        </EntityType>
+        <Association Name="FK_Season_SeasonYears">
+          <End Type="BananaSplitTables.SeasonYear" Role="SeasonYear" Multiplicity="1" />
+          <End Type="BananaSplitTables.Season" Role="Season" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeasonYear">
+              <PropertyRef Name="SeasonYearsId" />
+            </Principal>
+            <Dependent Role="Season">
+              <PropertyRef Name="SeasonYearsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -770,6 +945,8 @@
           <EntitySetMapping Name="Teams">
             <EntityTypeMapping TypeName="BananaSplitTables.Team">
               <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TeamTypeId" ColumnName="TeamTypeId" />
                 <ScalarProperty Name="TeamId" ColumnName="TeamId" />
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
@@ -788,6 +965,41 @@
                 <ScalarProperty Name="EventDate" ColumnName="EventDate" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seasons">
+            <EntityTypeMapping TypeName="BananaSplitTables.Season">
+              <MappingFragment StoreEntitySet="Season">
+                <ScalarProperty Name="SeasonYearsId" ColumnName="SeasonYearsId" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="EventEndDate" ColumnName="EventEndDate" />
+                <ScalarProperty Name="EventLocation" ColumnName="EventLocation" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="Opponent" ColumnName="Opponent" />
+                <ScalarProperty Name="EventStartDate" ColumnName="EventStartDate" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamTypes">
+            <EntityTypeMapping TypeName="BananaSplitTables.TeamType">
+              <MappingFragment StoreEntitySet="TeamType">
+                <ScalarProperty Name="TeamAbbrev" ColumnName="TeamAbbrev" />
+                <ScalarProperty Name="TeamTypeName" ColumnName="TeamTypeName" />
+                <ScalarProperty Name="TeamTypeId" ColumnName="TeamTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeasonYears">
+            <EntityTypeMapping TypeName="BananaSplitTables.SeasonYear">
+              <MappingFragment StoreEntitySet="SeasonYears">
+                <ScalarProperty Name="Years" ColumnName="Years" />
+                <ScalarProperty Name="SeasonYearsId" ColumnName="SeasonYearsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -855,14 +1067,20 @@
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_Member" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="11.025900065104166" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="11.025900065104166" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="11.025900065104166" />
           <ConnectorPoint PointX="7.5" PointY="11.025900065104166" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_TicketPrice_Member" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="7.2518929036458335" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="7.2518929036458326" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="7.2518929036458335" />
           <ConnectorPoint PointX="8.25" PointY="7.2518929036458335" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_Partnership" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="11.533396809895834" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="11.533396809895834" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="11.533396809895834" />
           <ConnectorPoint PointX="7.5" PointY="11.533396809895834" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_TicketPrice" ManuallyRouted="false">
@@ -870,9 +1088,28 @@
           <ConnectorPoint PointX="8.625" PointY="8.75" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_TicketPrice_Team" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.15625" PointY="3.2398893229166674" />
-          <ConnectorPoint PointX="7.15625" PointY="7.1256900455729157" />
-          <ConnectorPoint PointX="8.25" PointY="7.1256900455729157" />
+          <ConnectorPoint PointX="7.5" PointY="2.4420475260416663" />
+          <ConnectorPoint PointX="9" PointY="2.4420475260416663" />
+          <ConnectorPoint PointX="9" PointY="4.5" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BananaSplitTables.Season" Width="1.5" PointX="8.25" PointY="12.75" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="BananaSplitTables.TeamType" Width="1.5" PointX="10.375" PointY="1.75" Height="1.7879850260416745" />
+        <AssociationConnector Association="BananaSplitTables.FK_Season_Team" >
+          <ConnectorPoint PointX="7.125" PointY="4.0090950520833326" />
+          <ConnectorPoint PointX="7.125" PointY="15.131694335937501" />
+          <ConnectorPoint PointX="8.25" PointY="15.131694335937501" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Team_TeamType" >
+          <ConnectorPoint PointX="10.375" PointY="3.05251627604167" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="3.0525162760416698" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="3.05251627604167" />
+          <ConnectorPoint PointX="7.5" PointY="3.05251627604167" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BananaSplitTables.SeasonYear" Width="1.5" PointX="10.375" PointY="4.875" Height="1.5956835937500031" />
+        <AssociationConnector Association="BananaSplitTables.FK_Season_SeasonYears" >
+          <ConnectorPoint PointX="11.125" PointY="6.4706835937500031" />
+          <ConnectorPoint PointX="11.125" PointY="14.605499674479168" />
+          <ConnectorPoint PointX="9.75" PointY="14.605499674479168" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
