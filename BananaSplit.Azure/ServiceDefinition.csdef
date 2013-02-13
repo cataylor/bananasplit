@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="BananaSplit.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2012-10.1.8">
   <WebRole name="BananaSplit" vmsize="Small">
+    <!--<Startup>-->
+      <!-- foreground ensures that the role never recycles in Azure -->
+      <!-- <Task commandLine="BananaSplit.Scheduler.exe" executionContext="limited" taskType="foreground"></Task>-->
+    <!--</Startup>-->
     <Sites>
       <Site name="Web">
         <Bindings>

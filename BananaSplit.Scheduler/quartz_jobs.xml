@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<quartz xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 				version="1.0"
+				overwrite-existing-jobs="true">
+
+  <job>
+    <job-detail>
+      <name>RetryMediaEncodingJob</name>
+      <group>MediaEncodingRetryGroup</group>
+      <description>Sends failed encoding jobs back to try again</description>
+      <job-type>Scheduler.Library.Jobs.RetryMediaEncodingQueueWatcher, Scheduler.Library</job-type>
+      <volatile>false</volatile>
+      <durable>true</durable>
+      <recover>false</recover>
+      <job-data-map>
+        <entry>
+          <key>CanTimeOut</key>
+          <value>true</value>
+        </entry>        
+      </job-data-map>      
+    </job-detail>
+
+    <trigger>
+      <cron>
+        <name>RetryMediaEncodingTrigger</name>
+        <group>mediaEncodingRetryTriggerGroup</group>
+        <description>Trigger fires failed encoding queue check</description>
+          <job-name>RetryMediaEncodingJob</job-name>
+          <job-group>MediaEncodingRetryGroup</job-group>
+          <cron-expression>0 60 0 * * ?</cron-expression>
+        </cron>
+    </trigger>
+  </job>
+
+
+  <job>
+    <job-detail>
+      <name>TestJob</name>
+      <group>TestJobGroup</group>
+      <description>Dummy Test Job</description>
+      <job-type>Scheduler.Library.Jobs.WriteFileJob, Scheduler.Library</job-type>
+      <volatile>false</volatile>
+      <durable>true</durable>
+      <recover>false</recover>
+      <job-data-map>
+        <entry>
+          <key>HowManyWrenches</key>
+          <value>5</value>
+        </entry>
+      </job-data-map>
+    </job-detail>
+
+    <trigger>
+      <cron>
+        <name>TestJobTrigger</name>
+        <group>TestJobTriggerGroup</group>
+        <description>Simple trigger to simply fire sample job</description>
+        <job-name>TestJob</job-name>
+        <job-group>TestJobGroup</job-group>
+        <cron-expression>0 0/1 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </job>
+  
+  
+</quartz>
+
