@@ -20,9 +20,11 @@ namespace BananaSplit.Controllers
         //
         // GET: /Team/
 
-        public ActionResult Index()
+        public ActionResult Index(int teamTypeId = 1)
         {
-            return View();
+            ViewBag.TeamTypes = this.GetTeamTypes();
+            ViewBag.SelectedTeamType = this.GetTeamType(teamTypeId);
+            return View(this.repo.GetAllTeams());
         }
 
         
@@ -127,7 +129,19 @@ namespace BananaSplit.Controllers
 
             return RedirectToAction("Index");
         }
-        
+
+
+        private List<TeamType> GetTeamTypes()
+        {
+            var teamTypeRepo = new TeamTypeRepository();
+            return teamTypeRepo.GetAllTeamTypes();
+        }
+
+        private TeamType GetTeamType(int id)
+        {
+            var teamTypeRepo = new TeamTypeRepository();
+            return teamTypeRepo.GetById(id);
+        }
 
 
         private List<State> GetStates()

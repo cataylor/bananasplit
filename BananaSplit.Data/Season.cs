@@ -30,13 +30,21 @@ namespace BananaSplit.Data
             get { return _teamId; }
             set
             {
-                if (_teamId != value)
+                try
                 {
-                    if (Team != null && Team.TeamId != value)
+                    _settingFK = true;
+                    if (_teamId != value)
                     {
-                        Team = null;
+                        if (Team != null && Team.TeamId != value)
+                        {
+                            Team = null;
+                        }
+                        _teamId = value;
                     }
-                    _teamId = value;
+                }
+                finally
+                {
+                    _settingFK = false;
                 }
             }
         }
@@ -101,17 +109,50 @@ namespace BananaSplit.Data
             get { return _seasonYearsId; }
             set
             {
-                if (_seasonYearsId != value)
+                try
                 {
-                    if (SeasonYear != null && SeasonYear.SeasonYearsId != value)
+                    _settingFK = true;
+                    if (_seasonYearsId != value)
                     {
-                        SeasonYear = null;
+                        if (SeasonYear != null && SeasonYear.SeasonYearsId != value)
+                        {
+                            SeasonYear = null;
+                        }
+                        _seasonYearsId = value;
                     }
-                    _seasonYearsId = value;
+                }
+                finally
+                {
+                    _settingFK = false;
                 }
             }
         }
         private int _seasonYearsId;
+    
+        public virtual Nullable<int> SeasonTypeId
+        {
+            get { return _seasonTypeId; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_seasonTypeId != value)
+                    {
+                        if (SeasonType != null && SeasonType.SeasonTypeId != value)
+                        {
+                            SeasonType = null;
+                        }
+                        _seasonTypeId = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
+        }
+        private Nullable<int> _seasonTypeId;
 
         #endregion
         #region Navigation Properties
@@ -145,9 +186,26 @@ namespace BananaSplit.Data
             }
         }
         private SeasonYear _seasonYear;
+    
+        public virtual SeasonType SeasonType
+        {
+            get { return _seasonType; }
+            set
+            {
+                if (!ReferenceEquals(_seasonType, value))
+                {
+                    var previousValue = _seasonType;
+                    _seasonType = value;
+                    FixupSeasonType(previousValue);
+                }
+            }
+        }
+        private SeasonType _seasonType;
 
         #endregion
         #region Association Fixup
+    
+        private bool _settingFK = false;
     
         private void FixupTeam(Team previousValue)
         {
@@ -186,6 +244,30 @@ namespace BananaSplit.Data
                 {
                     SeasonYearsId = SeasonYear.SeasonYearsId;
                 }
+            }
+        }
+    
+        private void FixupSeasonType(SeasonType previousValue)
+        {
+            if (previousValue != null && previousValue.Seasons.Contains(this))
+            {
+                previousValue.Seasons.Remove(this);
+            }
+    
+            if (SeasonType != null)
+            {
+                if (!SeasonType.Seasons.Contains(this))
+                {
+                    SeasonType.Seasons.Add(this);
+                }
+                if (SeasonTypeId != SeasonType.SeasonTypeId)
+                {
+                    SeasonTypeId = SeasonType.SeasonTypeId;
+                }
+            }
+            else if (!_settingFK)
+            {
+                SeasonTypeId = null;
             }
         }
 

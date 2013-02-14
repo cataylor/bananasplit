@@ -11,7 +11,11 @@ namespace BananaSplit.Controllers
 {
     public class SeasonController : BaseController
     {
-        
+        private SeasonRepository seasonRepo;
+        public SeasonController()
+        {
+            this.seasonRepo = new SeasonRepository();
+        }
         //
         // GET: /Season/
 
@@ -29,24 +33,17 @@ namespace BananaSplit.Controllers
 
         private List<Season> GetAllSeasonData()
         {
-            var seasonRepo = new SeasonRepository();
-            return seasonRepo.GetAllSeasons();
+            return this.seasonRepo.GetAll().Where(s => s.IsActive).ToList();
         }
-
-        //
-        // GET: /Season/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+        
         //
         // GET: /Season/Create
 
         public ActionResult Create()
         {
-            return View();
+            ViewBag.TeamTypes = this.GetTeamTypes();
+            ViewBag.SeasonTypes = this.GetTeamTypes();
+            return View(new Season());
         }
 
         //
@@ -55,16 +52,52 @@ namespace BananaSplit.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            var season = new Season();
             try
             {
-                // TODO: Add insert logic here
+                var now = DateTime.Now;
+
+                season.EventStartDate = Convert.ToDateTime(collection.Get("EventStartDate"));
+                season.EventEndDate = Convert.ToDateTime(collection.Get("EventEndDate"));
+                season.EventLocation = collection.Get("EventLocation");
+                season.IsActive = true;
+                season.IsArchived = false;
+                season.Opponent = collection.Get("Opponent");
+                season.SeasonTypeId = Convert.ToInt32(collection.Get("SeasonTypeId"));
+                season.TeamId = Convert.ToInt64(collection.Get("TeamId"));
+                season.TimeZone = collection.Get("TimeZone");
+                season.SeasonYearsId = this.GetSeasonYearsId(collection.Get("SeasonYearsId"));
+                season.DateCreated = now;
+                season.DateUpdated = now;
+
+                this.seasonRepo.Save(season);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                ViewBag.TeamTypes = this.GetTeamTypes();
+                ViewBag.SeasonTypes = this.GetTeamTypes();
+                return View(season);
             }
+        }
+
+        private int GetSeasonYearsId(string seasonYears)
+        {
+            var seasonYearsRepo = new SeasonYearsRepository();
+
+            int existingYears = seasonYearsRepo.GetSeasonYearsBySeasonString(seasonYears);
+
+            if (existingYears == 0)
+            {
+                var seasonYear = new SeasonYear();
+                seasonYear.Years = seasonYears;
+                seasonYearsRepo.Save(seasonYear);
+                existingYears = seasonYear.SeasonYearsId;
+            }
+
+            return existingYears;
+
         }
 
         //
@@ -72,24 +105,48 @@ namespace BananaSplit.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            ViewBag.TeamTypes = this.GetTeamTypes();
+            ViewBag.SeasonTypes = this.GetTeamTypes();
+            var season = this.seasonRepo.GetById(id);
+            return View(season);
         }
 
         //
         // POST: /Season/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(FormCollection collection)
         {
+            var seasonId = Convert.ToInt64(collection.Get("SeasonId"));
+            var season = new Season();
             try
             {
-                // TODO: Add update logic here
+                var now = DateTime.Now;
+
+                season = this.seasonRepo.GetById(seasonId);
+                
+                season.EventStartDate = Convert.ToDateTime(collection.Get("EventStartDate"));
+                season.EventEndDate = Convert.ToDateTime(collection.Get("EventEndDate"));
+                season.EventLocation = collection.Get("EventLocation");
+                season.IsActive = true;
+                season.IsArchived = false;
+                season.Opponent = collection.Get("Opponent");
+                season.SeasonTypeId = Convert.ToInt32(collection.Get("SeasonTypeId"));
+                season.TeamId = Convert.ToInt64(collection.Get("TeamId"));
+                season.TimeZone = collection.Get("TimeZone");
+                season.SeasonYearsId = this.GetSeasonYearsId(collection.Get("SeasonYearsId"));
+                season.DateCreated = now;
+                season.DateUpdated = now;
+
+                this.seasonRepo.Save(season);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                ViewBag.TeamTypes = this.GetTeamTypes();
+                ViewBag.SeasonTypes = this.GetTeamTypes();
+                return View(season);
             }
         }
 
@@ -121,22 +178,16 @@ namespace BananaSplit.Controllers
             return this.ToJson(result);
         }
 
-        //
-        // POST: /Season/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        private List<TeamType> GetTeamTypes()
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var teamTypeRepo = new TeamTypeRepository();
+            return teamTypeRepo.GetAllTeamTypes();
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        private List<SeasonType> GetSeasonTypes()
+        {
+            var seasonTypeRepo = new SeasonTypeRepository();
+            return seasonTypeRepo.GetAllSeasonTypes();
         }
     }
 }

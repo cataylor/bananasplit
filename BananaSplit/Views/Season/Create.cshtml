@@ -1,0 +1,158 @@
+﻿@model BananaSplit.Data.Season
+
+@{
+    ViewBag.Title = "Create New Season Entry";
+    Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
+}
+
+<script language="javascript" type="text/javascript">
+    $('#SportTypeId').change(function () {
+        //alert('Value change to ' + $(this).attr('value'));
+        var teamUrl = "Season/GetTeamsForSportType/" + $(this).attr("id");
+
+        /*
+        $.getJSON(teamUrl, function (json) {
+            //alert("JSON Data: " + json.users[3].name);
+        });
+        */
+
+        $.getJSON("/Season/GetTeamsForSportType/", { sportId: $(this).attr("id"), ajax: 'true' }, function (json) {
+            var options = '';
+            var len = json.length;
+            for (var i = 0; i < len; i++) {
+                options += '<option value="' + json[i].optionValue + '">' + json[i].optionDisplay + '</option>';
+            }
+            $('#TeamId').empty();
+            $("#TeamId").html(options);
+        });
+
+    });
+
+</script>
+
+<h2>Create Game Season Entry</h2>
+
+ @helper SetSeasonYears()
+     {
+         var now = DateTime.Now.Year;
+         var nextYear = DateTime.Now.AddYears(1).Year;
+         @String.Format("{0} - {1}", now, nextYear);
+           
+      }
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Game Entry</legend>
+        
+        <div class="editor-label">
+            Sport Type
+        </div>
+        <div class="editor-field">
+            <select id="SportTypeId">
+                @foreach (var item in ViewBag.TeamTypes)
+                {
+                    <option value='@item.TeamTypeId'>@item.TeamTypeName</option>
+                }
+            </select>
+        </div>
+        
+        <div class="editor-label">
+            Season Type
+        </div>
+        <div class="editor-field">
+            <select id="SeasonTypeId">
+                @foreach (var item in ViewBag.SeasonTypes)
+                {
+                    <option value='@item.SeasonTypeId'>@item.SeasonTypeName</option>
+                }
+            </select>
+        </div>
+
+        <div class="editor-label">
+            Teams
+        </div>
+        <div class="editor-field">
+            <select id="TeamId"></select>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventStartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventStartDate)
+            @Html.ValidationMessageFor(model => model.EventStartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Opponent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Opponent)
+            @Html.ValidationMessageFor(model => model.Opponent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeZone)
+        </div>
+        <div class="editor-field">
+            <select id="TimeZone">
+                <option value="CST">CST</option>
+                <option value="EST">EST</option>
+                <option value="MST">MST</option>
+                <option value="PST">PST</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.TimeZone)
+        </div>
+
+        <div class="editor-label">
+            Event Location
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventLocation)
+            @Html.ValidationMessageFor(model => model.EventLocation)
+
+        
+            @*<input type="text" id="City" name="City" />
+            <select id="StateId">
+                @foreach (var item in ViewBag.States)
+                {
+                    <option value='@item.StateId'>@item.StateName</option>
+                }
+            </select>*@
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventEndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventEndDate)
+            @Html.ValidationMessageFor(model => model.EventEndDate)
+        </div>
+
+        <input type="hidden" id="IsArchived" value="False"/>
+        <input type="hidden" id="IsActive" value="True"/>
+        
+
+        <div class="editor-label">
+            Season Year(s)
+        </div>
+        <div class="editor-field">
+            <input type="text" value="@SetSeasonYears()" id="SeasonYearsId" name="SeasonYearsId" />
+            @Html.ValidationMessageFor(model => model.SeasonYearsId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit", "BananaSplit\BananaSplit.csproj", "{A7EFC1B7-6B4B-4366-8A7F-162CF0FE72D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit.Service", "BananaSplit.Service\BananaSplit.Service.csproj", "{4289D4BF-4B59-4F3B-A63A-3898FEB8D10D}"
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit.Core", "BananaSplit.Core\BananaSplit.Core.csproj", "{0A37ED15-358E-4C3F-89D6-84CB2591C628}"
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "BananaSplit.Azure", "BananaSplit.Azure\BananaSplit.Azure.ccproj", "{BC09FCF0-044D-4E8E-8B61-D7080E99848C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaSplit.Scheduler", "BananaSplit.Scheduler\BananaSplit.Scheduler.csproj", "{45B59C1E-F0F8-4F95-90BA-ACF6134BFD17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +43,6 @@ Global
 		{BC09FCF0-044D-4E8E-8B61-D7080E99848C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC09FCF0-044D-4E8E-8B61-D7080E99848C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC09FCF0-044D-4E8E-8B61-D7080E99848C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45B59C1E-F0F8-4F95-90BA-ACF6134BFD17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45B59C1E-F0F8-4F95-90BA-ACF6134BFD17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45B59C1E-F0F8-4F95-90BA-ACF6134BFD17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45B59C1E-F0F8-4F95-90BA-ACF6134BFD17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
