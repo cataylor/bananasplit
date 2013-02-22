@@ -17,7 +17,7 @@
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
     fieldset { padding:0; border:0; margin-top:25px; }
     h1 { font-size: 1.2em; margin: .6em 0; }
-    div#users-contain { width: 750px;margin: 20px 0px 0px 60px; }
+    div#users-contain { width: 850px;margin: 20px 0px 0px 60px; }
     div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
     div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
     .ui-dialog .ui-state-error { padding: .3em; }
@@ -25,26 +25,27 @@
     
 </style>
 <script language="javascript">
-    function editSeason(seasonId) {
-        window.location = "/Season/Edit/" + seasonId;
-    }
-
+    
     function editSeason(seasonId) {
         window.location = "/Season/Edit/" + seasonId;
     }
 
     function deleteSeason(theSeasonId) {
         if (window.confirm("Are you sure you want to delete this entry?")) {
-            $.post('@Url.Action("Delete", "Season")', { seasonId: theSeasonId }, function(data) {
+            $.post('@Url.Action("Delete", "Season")', { seasonId: theSeasonId }, function (data) {
                 //alert(data.Description);
-                window.location.reload();
+                if (data.Success) {
+                    window.location.reload();
+                } else {
+                    alert("Failed to delete entry");
+                }
             });
         }
     }
 
 </script>
 
-<div style="margin:0px auto;width:800px;">
+<div style="margin:0px auto;width:880px;">
 <div id="dialog-form" style="display:none;" title="Create New Team Season Entry">
     <p class="validateTips">All form fields are required.</p>
 
@@ -61,7 +62,7 @@
 </div>
 
 
-<div style="margin:40px 0px 5px 65px;border-bottom:1px solid #ccc;width:750px;padding:5px 5px 5px 5px;text-align:right;">
+<div style="margin:40px 0px 5px 65px;border-bottom:1px solid #ccc;width:840px;padding:5px 5px 5px 5px;text-align:right;">
     <button id="create-user" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Create New Team Season Entry</span></button>
 </div>
 
@@ -82,6 +83,7 @@
             <table id="users" class="ui-widget ui-widget-content">
                 <thead>
                     <tr class="ui-widget-header ">
+                        <th>Season</th>
                         <th>Season Year(s)</th>
                         <th>Date</th>
                         <th>Opponent</th>
@@ -93,6 +95,7 @@
                     @foreach (var season in Model.Where(s => s.TeamId == team.TeamId))
                     {
                         <tr>
+                            <td>@season.SeasonType.SeasonTypeName</td>
                             <td>@season.SeasonYear.Years</td>
                             <td>@season.EventStartDate.ToShortDateString() @season.EventStartDate.ToShortTimeString()</td>
                             <td>@season.Opponent</td>

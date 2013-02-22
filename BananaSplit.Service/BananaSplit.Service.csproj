@@ -51,8 +51,11 @@
     <Compile Include="PartnerTicketRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeasonRepository.cs" />
+    <Compile Include="SeasonTypeRepository.cs" />
+    <Compile Include="SeasonYearsRepository.cs" />
     <Compile Include="StateRepository.cs" />
     <Compile Include="TeamRepository.cs" />
+    <Compile Include="TeamTypeRepository.cs" />
     <Compile Include="TicketPriceRepository.cs" />
   </ItemGroup>
   <ItemGroup>

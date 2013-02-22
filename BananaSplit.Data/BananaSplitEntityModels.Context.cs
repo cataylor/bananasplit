@@ -119,6 +119,12 @@ namespace BananaSplit.Data
             get { return _seasonYears  ?? (_seasonYears = CreateObjectSet<SeasonYear>("SeasonYears")); }
         }
         private ObjectSet<SeasonYear> _seasonYears;
+    
+        public ObjectSet<SeasonType> SeasonTypes
+        {
+            get { return _seasonTypes  ?? (_seasonTypes = CreateObjectSet<SeasonType>("SeasonTypes")); }
+        }
+        private ObjectSet<SeasonType> _seasonTypes;
 
         #endregion
     }

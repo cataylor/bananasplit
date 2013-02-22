@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "BananaSplit: Edit Team";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
 }
 
-<h2 class="insettext">Add Team Information</h2>
+<h2 class="insettext">Edit Team Information</h2>
 
 <link rel="stylesheet" href="@Url.Content("~/Content/jquery-ui.css")" type="text/css"/>
 <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
@@ -115,18 +115,26 @@
                 <label>City <span class="redreq">*</span></label>
             </div>
             <div class="editor-field">                
-                @Html.TextBox("City", "", new { style = "width:350px;", @class = "validate[required] text-input" })            
+                @Html.TextBoxFor(model => model.Location.City, new { style = "width:350px;", @class = "validate[required] text-input" })                          
             </div>
 
             <div class="editor-label">
                 <label>State <span class="redreq">*</span></label>
             </div>
             <div class="editor-field">
-                <select name="StateId" id="StateId" class="validate[required]">
-                    @foreach (var item in ViewBag.States)
+                <select name="StateId" id="StateId" class="validate[required]">                    
+
+                     @foreach (var item in ViewBag.States)
+                {
+                    if (Model.Location.StateId == @item.StateId)
                     {
-                        <option value='@item.StateId'>@item.StateName</option>
+                        <option value='@item.StateId' selected="selected">@item.StateName</option>                               
                     }
+                    else
+                    {
+                        <option value='@item.StateId'>@item.StateName</option>                               
+                    }
+                }
                 </select>
             </div>
 
