@@ -4,6 +4,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
     <style type="text/css">
         
         .metro_title {
@@ -56,10 +58,10 @@
                     <h2>Management Console</h2>
                 </div>
                 <div id="nav" style="float:right;">
-                        <a id="home" class="navItem navActive" href="Home/Index"><br />Home</a>
-                    <a id="teams" class="navItem" href="Team/Index"><br />Teams</a>
-                    <a id="teams" class="navItem" href="Season/Index"><br />Seasons</a>
-                    <a id="teams" class="navItem" href="Contract/Index"><br />Contracts</a>
+                        <a id="home" class="navItem navActive" href="/Home/Index"><br />Home</a>
+                    <a id="teams" class="navItem" href="/Team/Index"><br />Teams</a>
+                    <a id="teams" class="navItem" href="/Season/Index"><br />Seasons</a>
+                    <a id="teams" class="navItem" href="/Contract/Index"><br />Contracts</a>
                     </div>
             </div>
         </div>

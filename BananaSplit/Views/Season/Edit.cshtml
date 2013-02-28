@@ -1,0 +1,162 @@
+﻿@model BananaSplit.Data.Season
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
+}
+
+<h2>Edit Game Entry</h2>
+
+ @helper IsTimeZoneSelected(string timeZone, string savedTimeZone)
+     {
+            if (timeZone.Equals(savedTimeZone, StringComparison.OrdinalIgnoreCase))
+            {
+                @String.Format("{0}", "selected='selected'");
+            }
+            else
+            {
+                @String.Empty;
+            }
+      }
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Game Entry</legend>
+        
+        <div class="editor-label">
+            Sport Type
+        </div>
+        <div class="editor-field">
+            <select id="TeamTypeId">
+                @foreach (var item in ViewBag.TeamTypes)
+                {
+                    if (Model.Team.TeamTypeId == item.TeamTypeId)
+                    {
+                        <option value='@item.TeamTypeId' selected='selected'>@item.TeamTypeName</option>
+                    }else
+                    {
+                        <option value='@item.TeamTypeId'>@item.TeamTypeName</option>
+                    }
+                }
+            </select> 
+        </div>
+        
+        <div class="editor-label">
+            Season Type
+        </div>
+        <div class="editor-field">
+            <select id="SeasonTypeId">
+                @foreach (var item in ViewBag.SeasonTypes)
+                {
+                    if (Model.SeasonTypeId == item.SeasonTypeId)
+                    {
+                          <option value='@item.SeasonTypeId' selected='selected'>@item.SeasonTypeName</option>  
+                    }
+                    else
+                    {
+                        <option value='@item.SeasonTypeId'>@item.SeasonTypeName</option>
+                    }
+                }
+            </select>
+        </div>
+
+        @Html.HiddenFor(model => model.SeasonId)
+
+        <div class="editor-label">
+            Teams
+        </div>
+        <div class="editor-field">
+            <select id="TeamId">
+                @foreach (var item in ViewBag.Teams)
+                {
+                    if (Model.TeamId == item.TeamId)
+                    {
+                        <option value='@item.TeamId' selected='selected'>@item.TeamName</option>
+                    }
+                    else
+                    {
+                        <option value='@item.TeamId'>@item.TeamName</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.TeamId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventStartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventStartDate)
+            @Html.ValidationMessageFor(model => model.EventStartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Opponent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Opponent)
+            @Html.ValidationMessageFor(model => model.Opponent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeZone)
+        </div>
+        <div class="editor-field">
+            <select id="TimeZone">
+                <option value="CST" @IsTimeZoneSelected("CST", Model.TimeZone)>CST</option>
+                <option value="EST" @IsTimeZoneSelected("EST", Model.TimeZone)>EST</option>
+                <option value="MST" @IsTimeZoneSelected("MST", Model.TimeZone)>MST</option>
+                <option value="PST" @IsTimeZoneSelected("PST", Model.TimeZone)>PST</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.TimeZone)
+        </div>
+
+        <div class="editor-label">
+            Event Location
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventLocation)
+            @Html.ValidationMessageFor(model => model.EventLocation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventEndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventEndDate)
+            @Html.ValidationMessageFor(model => model.EventEndDate)
+        </div>
+
+        <div class="editor-label">
+            Archive?
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.IsArchived);
+            @Html.ValidationMessageFor(model => model.IsArchived)
+        </div>
+
+        <div class="editor-label">
+            Season Year(s)
+        </div>
+        <div class="editor-field">
+            <input type="text" value="@Model.SeasonYear.Seasons" id="SeasonYearsId" name="SeasonYearsId" />
+            @Html.ValidationMessageFor(model => model.SeasonYearsId)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

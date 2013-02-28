@@ -25,29 +25,6 @@ namespace BananaSplit.Data
             set;
         }
     
-        public virtual short MaxNumberOfTickets
-        {
-            get;
-            set;
-        }
-    
-        public virtual long ManagingMemberId
-        {
-            get { return _managingMemberId; }
-            set
-            {
-                if (_managingMemberId != value)
-                {
-                    if (Member != null && Member.MemberId != value)
-                    {
-                        Member = null;
-                    }
-                    _managingMemberId = value;
-                }
-            }
-        }
-        private long _managingMemberId;
-    
         public virtual System.DateTime DateCreated
         {
             get;
@@ -59,85 +36,230 @@ namespace BananaSplit.Data
             get;
             set;
         }
+    
+        public virtual short TotalSeats
+        {
+            get;
+            set;
+        }
+    
+        public virtual string PartnershipName
+        {
+            get;
+            set;
+        }
+    
+        public virtual long TeamId
+        {
+            get { return _teamId; }
+            set
+            {
+                if (_teamId != value)
+                {
+                    if (Team != null && Team.TeamId != value)
+                    {
+                        Team = null;
+                    }
+                    _teamId = value;
+                }
+            }
+        }
+        private long _teamId;
+    
+        public virtual long SeasonId
+        {
+            get { return _seasonId; }
+            set
+            {
+                if (_seasonId != value)
+                {
+                    if (Season != null && Season.SeasonId != value)
+                    {
+                        Season = null;
+                    }
+                    _seasonId = value;
+                }
+            }
+        }
+        private long _seasonId;
 
         #endregion
         #region Navigation Properties
     
-        public virtual Member Member
-        {
-            get { return _member; }
-            set
-            {
-                if (!ReferenceEquals(_member, value))
-                {
-                    var previousValue = _member;
-                    _member = value;
-                    FixupMember(previousValue);
-                }
-            }
-        }
-        private Member _member;
-    
-        public virtual ICollection<PartnerTicket> PartnerTickets
+        public virtual ICollection<Lottery> Lotteries
         {
             get
             {
-                if (_partnerTickets == null)
+                if (_lotteries == null)
                 {
-                    var newCollection = new FixupCollection<PartnerTicket>();
-                    newCollection.CollectionChanged += FixupPartnerTickets;
-                    _partnerTickets = newCollection;
+                    var newCollection = new FixupCollection<Lottery>();
+                    newCollection.CollectionChanged += FixupLotteries;
+                    _lotteries = newCollection;
                 }
-                return _partnerTickets;
+                return _lotteries;
             }
             set
             {
-                if (!ReferenceEquals(_partnerTickets, value))
+                if (!ReferenceEquals(_lotteries, value))
                 {
-                    var previousValue = _partnerTickets as FixupCollection<PartnerTicket>;
+                    var previousValue = _lotteries as FixupCollection<Lottery>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupPartnerTickets;
+                        previousValue.CollectionChanged -= FixupLotteries;
                     }
-                    _partnerTickets = value;
-                    var newValue = value as FixupCollection<PartnerTicket>;
+                    _lotteries = value;
+                    var newValue = value as FixupCollection<Lottery>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupPartnerTickets;
+                        newValue.CollectionChanged += FixupLotteries;
                     }
                 }
             }
         }
-        private ICollection<PartnerTicket> _partnerTickets;
+        private ICollection<Lottery> _lotteries;
+    
+        public virtual ICollection<MemberPartnership> MemberPartnerships
+        {
+            get
+            {
+                if (_memberPartnerships == null)
+                {
+                    var newCollection = new FixupCollection<MemberPartnership>();
+                    newCollection.CollectionChanged += FixupMemberPartnerships;
+                    _memberPartnerships = newCollection;
+                }
+                return _memberPartnerships;
+            }
+            set
+            {
+                if (!ReferenceEquals(_memberPartnerships, value))
+                {
+                    var previousValue = _memberPartnerships as FixupCollection<MemberPartnership>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupMemberPartnerships;
+                    }
+                    _memberPartnerships = value;
+                    var newValue = value as FixupCollection<MemberPartnership>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupMemberPartnerships;
+                    }
+                }
+            }
+        }
+        private ICollection<MemberPartnership> _memberPartnerships;
+    
+        public virtual Season Season
+        {
+            get { return _season; }
+            set
+            {
+                if (!ReferenceEquals(_season, value))
+                {
+                    var previousValue = _season;
+                    _season = value;
+                    FixupSeason(previousValue);
+                }
+            }
+        }
+        private Season _season;
+    
+        public virtual Team Team
+        {
+            get { return _team; }
+            set
+            {
+                if (!ReferenceEquals(_team, value))
+                {
+                    var previousValue = _team;
+                    _team = value;
+                    FixupTeam(previousValue);
+                }
+            }
+        }
+        private Team _team;
+    
+        public virtual ICollection<PartnershipGame> PartnershipGames
+        {
+            get
+            {
+                if (_partnershipGames == null)
+                {
+                    var newCollection = new FixupCollection<PartnershipGame>();
+                    newCollection.CollectionChanged += FixupPartnershipGames;
+                    _partnershipGames = newCollection;
+                }
+                return _partnershipGames;
+            }
+            set
+            {
+                if (!ReferenceEquals(_partnershipGames, value))
+                {
+                    var previousValue = _partnershipGames as FixupCollection<PartnershipGame>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupPartnershipGames;
+                    }
+                    _partnershipGames = value;
+                    var newValue = value as FixupCollection<PartnershipGame>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupPartnershipGames;
+                    }
+                }
+            }
+        }
+        private ICollection<PartnershipGame> _partnershipGames;
 
         #endregion
         #region Association Fixup
     
-        private void FixupMember(Member previousValue)
+        private void FixupSeason(Season previousValue)
         {
             if (previousValue != null && previousValue.Partnerships.Contains(this))
             {
                 previousValue.Partnerships.Remove(this);
             }
     
-            if (Member != null)
+            if (Season != null)
             {
-                if (!Member.Partnerships.Contains(this))
+                if (!Season.Partnerships.Contains(this))
                 {
-                    Member.Partnerships.Add(this);
+                    Season.Partnerships.Add(this);
                 }
-                if (ManagingMemberId != Member.MemberId)
+                if (SeasonId != Season.SeasonId)
                 {
-                    ManagingMemberId = Member.MemberId;
+                    SeasonId = Season.SeasonId;
                 }
             }
         }
     
-        private void FixupPartnerTickets(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupTeam(Team previousValue)
+        {
+            if (previousValue != null && previousValue.Partnerships.Contains(this))
+            {
+                previousValue.Partnerships.Remove(this);
+            }
+    
+            if (Team != null)
+            {
+                if (!Team.Partnerships.Contains(this))
+                {
+                    Team.Partnerships.Add(this);
+                }
+                if (TeamId != Team.TeamId)
+                {
+                    TeamId = Team.TeamId;
+                }
+            }
+        }
+    
+        private void FixupLotteries(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
-                foreach (PartnerTicket item in e.NewItems)
+                foreach (Lottery item in e.NewItems)
                 {
                     item.Partnership = this;
                 }
@@ -145,7 +267,51 @@ namespace BananaSplit.Data
     
             if (e.OldItems != null)
             {
-                foreach (PartnerTicket item in e.OldItems)
+                foreach (Lottery item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Partnership, this))
+                    {
+                        item.Partnership = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupMemberPartnerships(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (MemberPartnership item in e.NewItems)
+                {
+                    item.Partnership = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (MemberPartnership item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Partnership, this))
+                    {
+                        item.Partnership = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupPartnershipGames(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (PartnershipGame item in e.NewItems)
+                {
+                    item.Partnership = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (PartnershipGame item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Partnership, this))
                     {

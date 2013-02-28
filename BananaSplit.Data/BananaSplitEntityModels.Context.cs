@@ -78,12 +78,6 @@ namespace BananaSplit.Data
         }
         private ObjectSet<Partnership> _partnerships;
     
-        public ObjectSet<PartnerTicket> PartnerTickets
-        {
-            get { return _partnerTickets  ?? (_partnerTickets = CreateObjectSet<PartnerTicket>("PartnerTickets")); }
-        }
-        private ObjectSet<PartnerTicket> _partnerTickets;
-    
         public ObjectSet<State> States
         {
             get { return _states  ?? (_states = CreateObjectSet<State>("States")); }
@@ -95,12 +89,6 @@ namespace BananaSplit.Data
             get { return _teams  ?? (_teams = CreateObjectSet<Team>("Teams")); }
         }
         private ObjectSet<Team> _teams;
-    
-        public ObjectSet<TicketPrice> TicketPrices
-        {
-            get { return _ticketPrices  ?? (_ticketPrices = CreateObjectSet<TicketPrice>("TicketPrices")); }
-        }
-        private ObjectSet<TicketPrice> _ticketPrices;
     
         public ObjectSet<Season> Seasons
         {
@@ -119,6 +107,72 @@ namespace BananaSplit.Data
             get { return _seasonYears  ?? (_seasonYears = CreateObjectSet<SeasonYear>("SeasonYears")); }
         }
         private ObjectSet<SeasonYear> _seasonYears;
+    
+        public ObjectSet<SeasonType> SeasonTypes
+        {
+            get { return _seasonTypes  ?? (_seasonTypes = CreateObjectSet<SeasonType>("SeasonTypes")); }
+        }
+        private ObjectSet<SeasonType> _seasonTypes;
+    
+        public ObjectSet<Game> Games
+        {
+            get { return _games  ?? (_games = CreateObjectSet<Game>("Games")); }
+        }
+        private ObjectSet<Game> _games;
+    
+        public ObjectSet<GamePrice> GamePrices
+        {
+            get { return _gamePrices  ?? (_gamePrices = CreateObjectSet<GamePrice>("GamePrices")); }
+        }
+        private ObjectSet<GamePrice> _gamePrices;
+    
+        public ObjectSet<Lottery> Lotteries
+        {
+            get { return _lotteries  ?? (_lotteries = CreateObjectSet<Lottery>("Lotteries")); }
+        }
+        private ObjectSet<Lottery> _lotteries;
+    
+        public ObjectSet<LotteryOrder> LotteryOrders
+        {
+            get { return _lotteryOrders  ?? (_lotteryOrders = CreateObjectSet<LotteryOrder>("LotteryOrders")); }
+        }
+        private ObjectSet<LotteryOrder> _lotteryOrders;
+    
+        public ObjectSet<MemberPartnership> MemberPartnerships
+        {
+            get { return _memberPartnerships  ?? (_memberPartnerships = CreateObjectSet<MemberPartnership>("MemberPartnerships")); }
+        }
+        private ObjectSet<MemberPartnership> _memberPartnerships;
+    
+        public ObjectSet<PartnershipGame> PartnershipGames
+        {
+            get { return _partnershipGames  ?? (_partnershipGames = CreateObjectSet<PartnershipGame>("PartnershipGames")); }
+        }
+        private ObjectSet<PartnershipGame> _partnershipGames;
+    
+        public ObjectSet<Photo> Photos
+        {
+            get { return _photos  ?? (_photos = CreateObjectSet<Photo>("Photos")); }
+        }
+        private ObjectSet<Photo> _photos;
+    
+        public ObjectSet<PreLotteryOrder> PreLotteryOrders
+        {
+            get { return _preLotteryOrders  ?? (_preLotteryOrders = CreateObjectSet<PreLotteryOrder>("PreLotteryOrders")); }
+        }
+        private ObjectSet<PreLotteryOrder> _preLotteryOrders;
+    
+        public ObjectSet<PriceLevel> PriceLevels
+        {
+            get { return _priceLevels  ?? (_priceLevels = CreateObjectSet<PriceLevel>("PriceLevels")); }
+        }
+        private ObjectSet<PriceLevel> _priceLevels;
+    
+        public ObjectSet<Table> Tables
+        {
+            get { return _tables  ?? (_tables = CreateObjectSet<Table>("Tables")); }
+        }
+        private ObjectSet<Table> _tables;
 
         #endregion
     }

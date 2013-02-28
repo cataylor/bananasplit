@@ -6,23 +6,18 @@ using BananaSplit.Data;
 
 namespace BananaSplit.Service
 {
-    public class SeasonRepository : BaseRepository<Season>
+    public class PhotoRepository : BaseRepository<Photo>
     {
-        public Season GetById(long seasonId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// 
+        public Photo GetById(long id)
         {
-            return GetAll().SingleOrDefault(s => s.SeasonId == seasonId);
+            return this.GetAll().SingleOrDefault(p => p.PhotoId == id);
         }
-
-        public List<Season> GetSeasonByTeamId(long teamId)
-        {
-            return GetAll().Where(t => t.TeamId == teamId && t.IsActive == true).ToList();
-        }
-
-        public List<Season> GetAllSeasons()
-        {
-            return GetAll().Where(s => s.IsActive).ToList();
-        }
-
 
         /// <summary>
         /// 
@@ -30,9 +25,9 @@ namespace BananaSplit.Service
         /// <param name="entity"></param>
         /// <returns></returns>
         /// 
-        public Boolean Save(Season entity)
+        public Boolean Save(Photo entity)
         {
-            if (entity.SeasonId == 0)
+            if (entity.PhotoId == 0)
             {
                 //Insert
                 return Add(entity);
@@ -44,7 +39,13 @@ namespace BananaSplit.Service
             }
         }
 
-        public Boolean Remove(Season entity)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        /// 
+        public Boolean Remove(Photo entity)
         {
             entity.IsActive = false;
             return Update(entity);

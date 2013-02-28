@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
+}
+
+<script language="javascript">
+    function deletePriceLevelRow(id) {
+
+    }
+
+    var startId = 1000;
+    function addPriceLevelRow() {
+        startId++;
+        var currentId = '_' + startId + '_a'; //The "a" is to make sure it doesn't conflict with any real ids
+
+        var newDiv = '<div class="price_level_row' + currentId + '">';
+        newDiv += '       <div style="float:left;width:50%;">';
+        newDiv += '          <div class="editor-label">';
+        newDiv += '             <label>Name <span class="redreq">*</span></label>';
+        newDiv += '          </div>';
+        newDiv += '          <div class="editor-field">';
+        newDiv += '              <input type="text" style="width:130px;" name="game_price_name' + currentId + '" id="game_price_name' + currentId + '" class="" />';
+        newDiv += '          </div>';
+        newDiv += '        </div>';
+        newDiv += '       <div style="float:left;width:50%;">';
+        newDiv += '         <div class="editor-label">';
+        newDiv += '           <label>Price <span class="redreq">*</span></label>';
+        newDiv += '         </div>';
+        newDiv += '         <div class="editor-field">';
+        newDiv += '           <input type="text" style="width:130px;" class="currencyField" name="game_price' + currentId + '" id="game_price' + currentId + '"/>';
+        newDiv += '         </div>';
+        newDiv += '       </div>';
+        newDiv += '  </div>';
+
+        $(newDiv).insertBefore("#addtickettier");
+    }
+
+</script>
+
+<div class="curvedborders">
+    
+    <button>Add New Price Level</button>
+
+    @using (Html.BeginForm("Create", "GamePrice", FormMethod.Post, new { id = "myForm" }))
+    {
+        
+        @*<div class="price_level_row">
+            <div style="float:left;width:50%;">
+                <div class="editor-label">
+                    <label>Name <span class="redreq">*</span></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" style="width:130px;" name="game_price_name" id="game_price_name" class="" />
+                </div>
+            </div>
+                
+            <div style="float:left;width:50%;">
+                <div class="editor-label">
+                    <label>Price <span class="redreq">*</span></label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" style="width:130px;" class="currencyField" name="game_price" id="game_price"/>
+                </div>
+            </div>
+        </div>*@
+        
+        <p style="padding-top:35px;clear:both;">
+                <input type="submit" value="   Save Price Level(s)  " />
+            </p>
+
+
+    }
+</div>

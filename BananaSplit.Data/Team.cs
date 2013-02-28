@@ -36,13 +36,21 @@ namespace BananaSplit.Data
             get { return _locationId; }
             set
             {
-                if (_locationId != value)
+                try
                 {
-                    if (Location != null && Location.LocationId != value)
+                    _settingFK = true;
+                    if (_locationId != value)
                     {
-                        Location = null;
+                        if (Location != null && Location.LocationId != value)
+                        {
+                            Location = null;
+                        }
+                        _locationId = value;
                     }
-                    _locationId = value;
+                }
+                finally
+                {
+                    _settingFK = false;
                 }
             }
         }
@@ -65,13 +73,21 @@ namespace BananaSplit.Data
             get { return _teamTypeId; }
             set
             {
-                if (_teamTypeId != value)
+                try
                 {
-                    if (TeamType != null && TeamType.TeamTypeId != value)
+                    _settingFK = true;
+                    if (_teamTypeId != value)
                     {
-                        TeamType = null;
+                        if (TeamType != null && TeamType.TeamTypeId != value)
+                        {
+                            TeamType = null;
+                        }
+                        _teamTypeId = value;
                     }
-                    _teamTypeId = value;
+                }
+                finally
+                {
+                    _settingFK = false;
                 }
             }
         }
@@ -82,6 +98,31 @@ namespace BananaSplit.Data
             get;
             set;
         }
+    
+        public virtual Nullable<long> PhotoId
+        {
+            get { return _photoId; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_photoId != value)
+                    {
+                        if (Photo != null && Photo.PhotoId != value)
+                        {
+                            Photo = null;
+                        }
+                        _photoId = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
+        }
+        private Nullable<long> _photoId;
 
         #endregion
         #region Navigation Properties
@@ -100,38 +141,6 @@ namespace BananaSplit.Data
             }
         }
         private Location _location;
-    
-        public virtual ICollection<TicketPrice> TicketPrices
-        {
-            get
-            {
-                if (_ticketPrices == null)
-                {
-                    var newCollection = new FixupCollection<TicketPrice>();
-                    newCollection.CollectionChanged += FixupTicketPrices;
-                    _ticketPrices = newCollection;
-                }
-                return _ticketPrices;
-            }
-            set
-            {
-                if (!ReferenceEquals(_ticketPrices, value))
-                {
-                    var previousValue = _ticketPrices as FixupCollection<TicketPrice>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupTicketPrices;
-                    }
-                    _ticketPrices = value;
-                    var newValue = value as FixupCollection<TicketPrice>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupTicketPrices;
-                    }
-                }
-            }
-        }
-        private ICollection<TicketPrice> _ticketPrices;
     
         public virtual ICollection<Season> Seasons
         {
@@ -179,9 +188,154 @@ namespace BananaSplit.Data
             }
         }
         private TeamType _teamType;
+    
+        public virtual ICollection<Game> Games
+        {
+            get
+            {
+                if (_games == null)
+                {
+                    var newCollection = new FixupCollection<Game>();
+                    newCollection.CollectionChanged += FixupGames;
+                    _games = newCollection;
+                }
+                return _games;
+            }
+            set
+            {
+                if (!ReferenceEquals(_games, value))
+                {
+                    var previousValue = _games as FixupCollection<Game>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupGames;
+                    }
+                    _games = value;
+                    var newValue = value as FixupCollection<Game>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupGames;
+                    }
+                }
+            }
+        }
+        private ICollection<Game> _games;
+    
+        public virtual ICollection<Game> Games1
+        {
+            get
+            {
+                if (_games1 == null)
+                {
+                    var newCollection = new FixupCollection<Game>();
+                    newCollection.CollectionChanged += FixupGames1;
+                    _games1 = newCollection;
+                }
+                return _games1;
+            }
+            set
+            {
+                if (!ReferenceEquals(_games1, value))
+                {
+                    var previousValue = _games1 as FixupCollection<Game>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupGames1;
+                    }
+                    _games1 = value;
+                    var newValue = value as FixupCollection<Game>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupGames1;
+                    }
+                }
+            }
+        }
+        private ICollection<Game> _games1;
+    
+        public virtual ICollection<Partnership> Partnerships
+        {
+            get
+            {
+                if (_partnerships == null)
+                {
+                    var newCollection = new FixupCollection<Partnership>();
+                    newCollection.CollectionChanged += FixupPartnerships;
+                    _partnerships = newCollection;
+                }
+                return _partnerships;
+            }
+            set
+            {
+                if (!ReferenceEquals(_partnerships, value))
+                {
+                    var previousValue = _partnerships as FixupCollection<Partnership>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupPartnerships;
+                    }
+                    _partnerships = value;
+                    var newValue = value as FixupCollection<Partnership>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupPartnerships;
+                    }
+                }
+            }
+        }
+        private ICollection<Partnership> _partnerships;
+    
+        public virtual ICollection<PriceLevel> PriceLevels
+        {
+            get
+            {
+                if (_priceLevels == null)
+                {
+                    var newCollection = new FixupCollection<PriceLevel>();
+                    newCollection.CollectionChanged += FixupPriceLevels;
+                    _priceLevels = newCollection;
+                }
+                return _priceLevels;
+            }
+            set
+            {
+                if (!ReferenceEquals(_priceLevels, value))
+                {
+                    var previousValue = _priceLevels as FixupCollection<PriceLevel>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupPriceLevels;
+                    }
+                    _priceLevels = value;
+                    var newValue = value as FixupCollection<PriceLevel>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupPriceLevels;
+                    }
+                }
+            }
+        }
+        private ICollection<PriceLevel> _priceLevels;
+    
+        public virtual Photo Photo
+        {
+            get { return _photo; }
+            set
+            {
+                if (!ReferenceEquals(_photo, value))
+                {
+                    var previousValue = _photo;
+                    _photo = value;
+                    FixupPhoto(previousValue);
+                }
+            }
+        }
+        private Photo _photo;
 
         #endregion
         #region Association Fixup
+    
+        private bool _settingFK = false;
     
         private void FixupLocation(Location previousValue)
         {
@@ -223,25 +377,27 @@ namespace BananaSplit.Data
             }
         }
     
-        private void FixupTicketPrices(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupPhoto(Photo previousValue)
         {
-            if (e.NewItems != null)
+            if (previousValue != null && previousValue.Teams.Contains(this))
             {
-                foreach (TicketPrice item in e.NewItems)
-                {
-                    item.Team = this;
-                }
+                previousValue.Teams.Remove(this);
             }
     
-            if (e.OldItems != null)
+            if (Photo != null)
             {
-                foreach (TicketPrice item in e.OldItems)
+                if (!Photo.Teams.Contains(this))
                 {
-                    if (ReferenceEquals(item.Team, this))
-                    {
-                        item.Team = null;
-                    }
+                    Photo.Teams.Add(this);
                 }
+                if (PhotoId != Photo.PhotoId)
+                {
+                    PhotoId = Photo.PhotoId;
+                }
+            }
+            else if (!_settingFK)
+            {
+                PhotoId = null;
             }
         }
     
@@ -258,6 +414,94 @@ namespace BananaSplit.Data
             if (e.OldItems != null)
             {
                 foreach (Season item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Team, this))
+                    {
+                        item.Team = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupGames(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Game item in e.NewItems)
+                {
+                    item.Team = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Game item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Team, this))
+                    {
+                        item.Team = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupGames1(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Game item in e.NewItems)
+                {
+                    item.Team1 = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Game item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Team1, this))
+                    {
+                        item.Team1 = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupPartnerships(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Partnership item in e.NewItems)
+                {
+                    item.Team = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Partnership item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Team, this))
+                    {
+                        item.Team = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupPriceLevels(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (PriceLevel item in e.NewItems)
+                {
+                    item.Team = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (PriceLevel item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Team, this))
                     {
