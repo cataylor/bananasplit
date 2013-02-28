@@ -202,6 +202,7 @@ namespace BananaSplit.Controllers
             return RedirectToAction("Index");
         }
 
+
         [HttpPost]
         //[SessionAuthenticate]
         public ActionResult DeletePhoto(long photoId)
@@ -221,6 +222,7 @@ namespace BananaSplit.Controllers
             }
             return Json(new { Status = "OK", Description = "" });
         }
+
 
 
         private List<TeamType> GetTeamTypes()
