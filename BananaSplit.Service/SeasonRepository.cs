@@ -8,6 +8,10 @@ namespace BananaSplit.Service
 {
     public class SeasonRepository : BaseRepository<Season>
     {
+        public Season GetById(long seasonId)
+        {
+            return GetAll().SingleOrDefault(s => s.SeasonId == seasonId);
+        }
 
         public List<Season> GetSeasonByTeamId(long teamId)
         {

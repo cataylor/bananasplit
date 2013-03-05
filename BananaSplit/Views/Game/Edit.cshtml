@@ -1,0 +1,110 @@
+﻿@model BananaSplit.Data.Game
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Game</legend>
+
+        @Html.HiddenFor(model => model.GameId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SeasonId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SeasonId)
+            @Html.ValidationMessageFor(model => model.SeasonId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TeamId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TeamId)
+            @Html.ValidationMessageFor(model => model.TeamId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VisitingTeamId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VisitingTeamId)
+            @Html.ValidationMessageFor(model => model.VisitingTeamId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventLocation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventLocation)
+            @Html.ValidationMessageFor(model => model.EventLocation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeZone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TimeZone)
+            @Html.ValidationMessageFor(model => model.TimeZone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventStartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventStartDate)
+            @Html.ValidationMessageFor(model => model.EventStartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventEndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventEndDate)
+            @Html.ValidationMessageFor(model => model.EventEndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateCreated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateCreated)
+            @Html.ValidationMessageFor(model => model.DateCreated)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateUpdated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateUpdated)
+            @Html.ValidationMessageFor(model => model.DateUpdated)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsActive)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

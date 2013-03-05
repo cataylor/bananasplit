@@ -49,6 +49,7 @@ namespace BananaSplit.Data
         private int _stateId;
 
         #endregion
+
         #region Navigation Properties
     
         public virtual State State
@@ -99,6 +100,7 @@ namespace BananaSplit.Data
         private ICollection<Team> _teams;
 
         #endregion
+
         #region Association Fixup
     
         private void FixupState(State previousValue)
@@ -144,5 +146,6 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
     }
 }

@@ -61,6 +61,41 @@ namespace BananaSplit.Service
 
 
         /// <summary>
+        /// Logs a member and returns authentication token
+        /// </summary>
+        /// <param name="apiMember"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        /// 
+        public Authentication GetAuthenticatedMemberLoginToken(ApiAccess apiMember, Member member)
+        {
+            Authentication auth = null;
+            try
+            {
+                if (null == member || !member.IsActive)
+                {
+                    return GetBadAuthentication("Member not found or is inactive");
+                }
+
+                const string hoursAhead = "1000";
+                var sessionEnds = DateTime.Now.AddHours(Convert.ToDouble(hoursAhead)).Ticks;
+
+                var plainAuthKey = String.Concat(Convert.ToString(member.MemberId), doubleUC,
+                                                 Convert.ToString(sessionEnds), doubleUC, apiMember.AppKey);
+                var generatedAuthKey = plainAuthKey.EncryptSymmetric<RijndaelManaged>(encryptPass, encryptSalt);
+                auth = new Authentication { Reason = String.Empty, Success = true, AuthKey = generatedAuthKey };
+            }
+            catch (Exception e)
+            {
+                auth = GetBadAuthentication("Invalid facebook key and/or member not found");
+            }
+
+            return auth;
+        }
+
+
+
+        /// <summary>
         /// This method decrypts and breaks apart the BananaSplit API 3rd Party Company's Auth Key into 
         /// it's relevant data and fills the ApiUserAuthenticationKey with that data.
         /// Use this anytime you need to get at the user's details to validate this user

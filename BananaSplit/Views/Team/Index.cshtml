@@ -1,18 +1,31 @@
 ﻿@model List<BananaSplit.Data.Team>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Banana Split: Team List";
+    Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
 }
 
 <script language="javascript" type="text/javascript">
-    $("#create-team")
+
+    $(document).ready(function () {
+        $("#create-team")
 			.button()
 			.click(function () {
 			    window.location.href = "/Team/Create";
 			});
 
-			function editTeam(teamId) {
+        $('#SportTypeId').change(function () {
+            var teamVal = $(this).val();
+            if (teamVal == "") {
+                window.location.href = "/Team/Index";
+            } else {
+                window.location.href = "/Team/Index?teamTypeId=" + teamVal;
+            }
+        });
+
+    });     //end document ready
+
+            function editTeam(teamId) {
 			    window.location = "/Team/Edit/" + teamId;
 			}
 
@@ -36,24 +49,40 @@
 
 <button id="create-team">Create new Team</button>
 
+<select id="SportTypeId" name="SportTypeId">
+    <option value="">Select a Team</option>
+    @foreach (var sport in ViewBag.TeamTypes)
+    {
+        if (ViewBag.SelectedTeamType.TeamTypeId == sport.TeamTypeId)
+        {
+            <option value="@sport.TeamTypeId" selected="selected">@sport.TeamTypeName</option>   
+        }
+        else
+        {
+            <option value="@sport.TeamTypeId">@sport.TeamTypeName</option>
+        }
+    }
+</select>
+
 <div id="users-contain" class="ui-widget">
-	<table id="users" class="ui-widget ui-widget-content">
-		<thead>
-			<tr class="ui-widget-header ">
-				<th>Name</th>
-				<th>City</th>
-				<th>State</th>
-			</tr>
-		</thead>
-		<tbody>
-            @foreach (var team in Model.ToList())
-                    {
-                        <tr onclick=" editTeam(@team.TeamId);">
-                            <td>@team.TeamName</td>
-                            <td>@team.Location.City</td>
-                            <td>@team.Location.State.StateAbbrev</td>                            
-                        </tr>
-                    }
-		</tbody>
-	</table>
+    
+   <table id="users" class="ui-widget ui-widget-content">
+        <thead>
+            <tr class="ui-widget-header ">
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var team in Model.Where(t => t.TeamTypeId == ViewBag.SelectedTeamType.TeamTypeId))
+            {
+                <tr onclick=" editTeam(@team.TeamId);">
+                    <td>@team.TeamName</td>
+                    <td>@team.Location.City</td>
+                    <td>@team.Location.State.StateAbbrev</td>                            
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

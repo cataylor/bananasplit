@@ -103,6 +103,7 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
         #region Navigation Properties
     
         public virtual ICollection<ApiAccess> ApiAccesses
@@ -216,103 +217,136 @@ namespace BananaSplit.Data
         }
         private MemberType _memberType;
     
-        public virtual ICollection<Partnership> Partnerships
+        public virtual ICollection<LotteryOrder> LotteryOrders
         {
             get
             {
-                if (_partnerships == null)
+                if (_lotteryOrders == null)
                 {
-                    var newCollection = new FixupCollection<Partnership>();
-                    newCollection.CollectionChanged += FixupPartnerships;
-                    _partnerships = newCollection;
+                    var newCollection = new FixupCollection<LotteryOrder>();
+                    newCollection.CollectionChanged += FixupLotteryOrders;
+                    _lotteryOrders = newCollection;
                 }
-                return _partnerships;
+                return _lotteryOrders;
             }
             set
             {
-                if (!ReferenceEquals(_partnerships, value))
+                if (!ReferenceEquals(_lotteryOrders, value))
                 {
-                    var previousValue = _partnerships as FixupCollection<Partnership>;
+                    var previousValue = _lotteryOrders as FixupCollection<LotteryOrder>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupPartnerships;
+                        previousValue.CollectionChanged -= FixupLotteryOrders;
                     }
-                    _partnerships = value;
-                    var newValue = value as FixupCollection<Partnership>;
+                    _lotteryOrders = value;
+                    var newValue = value as FixupCollection<LotteryOrder>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupPartnerships;
+                        newValue.CollectionChanged += FixupLotteryOrders;
                     }
                 }
             }
         }
-        private ICollection<Partnership> _partnerships;
+        private ICollection<LotteryOrder> _lotteryOrders;
     
-        public virtual ICollection<PartnerTicket> PartnerTickets
+        public virtual ICollection<MemberPartnership> MemberPartnerships
         {
             get
             {
-                if (_partnerTickets == null)
+                if (_memberPartnerships == null)
                 {
-                    var newCollection = new FixupCollection<PartnerTicket>();
-                    newCollection.CollectionChanged += FixupPartnerTickets;
-                    _partnerTickets = newCollection;
+                    var newCollection = new FixupCollection<MemberPartnership>();
+                    newCollection.CollectionChanged += FixupMemberPartnerships;
+                    _memberPartnerships = newCollection;
                 }
-                return _partnerTickets;
+                return _memberPartnerships;
             }
             set
             {
-                if (!ReferenceEquals(_partnerTickets, value))
+                if (!ReferenceEquals(_memberPartnerships, value))
                 {
-                    var previousValue = _partnerTickets as FixupCollection<PartnerTicket>;
+                    var previousValue = _memberPartnerships as FixupCollection<MemberPartnership>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupPartnerTickets;
+                        previousValue.CollectionChanged -= FixupMemberPartnerships;
                     }
-                    _partnerTickets = value;
-                    var newValue = value as FixupCollection<PartnerTicket>;
+                    _memberPartnerships = value;
+                    var newValue = value as FixupCollection<MemberPartnership>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupPartnerTickets;
+                        newValue.CollectionChanged += FixupMemberPartnerships;
                     }
                 }
             }
         }
-        private ICollection<PartnerTicket> _partnerTickets;
+        private ICollection<MemberPartnership> _memberPartnerships;
     
-        public virtual ICollection<TicketPrice> TicketPrices
+        public virtual ICollection<PartnershipGame> PartnershipGames
         {
             get
             {
-                if (_ticketPrices == null)
+                if (_partnershipGames == null)
                 {
-                    var newCollection = new FixupCollection<TicketPrice>();
-                    newCollection.CollectionChanged += FixupTicketPrices;
-                    _ticketPrices = newCollection;
+                    var newCollection = new FixupCollection<PartnershipGame>();
+                    newCollection.CollectionChanged += FixupPartnershipGames;
+                    _partnershipGames = newCollection;
                 }
-                return _ticketPrices;
+                return _partnershipGames;
             }
             set
             {
-                if (!ReferenceEquals(_ticketPrices, value))
+                if (!ReferenceEquals(_partnershipGames, value))
                 {
-                    var previousValue = _ticketPrices as FixupCollection<TicketPrice>;
+                    var previousValue = _partnershipGames as FixupCollection<PartnershipGame>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupTicketPrices;
+                        previousValue.CollectionChanged -= FixupPartnershipGames;
                     }
-                    _ticketPrices = value;
-                    var newValue = value as FixupCollection<TicketPrice>;
+                    _partnershipGames = value;
+                    var newValue = value as FixupCollection<PartnershipGame>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupTicketPrices;
+                        newValue.CollectionChanged += FixupPartnershipGames;
                     }
                 }
             }
         }
-        private ICollection<TicketPrice> _ticketPrices;
+        private ICollection<PartnershipGame> _partnershipGames;
+    
+        public virtual ICollection<PreLotteryOrder> PreLotteryOrders
+        {
+            get
+            {
+                if (_preLotteryOrders == null)
+                {
+                    var newCollection = new FixupCollection<PreLotteryOrder>();
+                    newCollection.CollectionChanged += FixupPreLotteryOrders;
+                    _preLotteryOrders = newCollection;
+                }
+                return _preLotteryOrders;
+            }
+            set
+            {
+                if (!ReferenceEquals(_preLotteryOrders, value))
+                {
+                    var previousValue = _preLotteryOrders as FixupCollection<PreLotteryOrder>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupPreLotteryOrders;
+                    }
+                    _preLotteryOrders = value;
+                    var newValue = value as FixupCollection<PreLotteryOrder>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupPreLotteryOrders;
+                    }
+                }
+            }
+        }
+        private ICollection<PreLotteryOrder> _preLotteryOrders;
 
         #endregion
+
         #region Association Fixup
     
         private void FixupMemberType(MemberType previousValue)
@@ -401,11 +435,11 @@ namespace BananaSplit.Data
             }
         }
     
-        private void FixupPartnerships(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupLotteryOrders(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
-                foreach (Partnership item in e.NewItems)
+                foreach (LotteryOrder item in e.NewItems)
                 {
                     item.Member = this;
                 }
@@ -413,7 +447,7 @@ namespace BananaSplit.Data
     
             if (e.OldItems != null)
             {
-                foreach (Partnership item in e.OldItems)
+                foreach (LotteryOrder item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Member, this))
                     {
@@ -423,11 +457,11 @@ namespace BananaSplit.Data
             }
         }
     
-        private void FixupPartnerTickets(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupMemberPartnerships(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
-                foreach (PartnerTicket item in e.NewItems)
+                foreach (MemberPartnership item in e.NewItems)
                 {
                     item.Member = this;
                 }
@@ -435,7 +469,7 @@ namespace BananaSplit.Data
     
             if (e.OldItems != null)
             {
-                foreach (PartnerTicket item in e.OldItems)
+                foreach (MemberPartnership item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Member, this))
                     {
@@ -445,11 +479,11 @@ namespace BananaSplit.Data
             }
         }
     
-        private void FixupTicketPrices(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupPartnershipGames(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
-                foreach (TicketPrice item in e.NewItems)
+                foreach (PartnershipGame item in e.NewItems)
                 {
                     item.Member = this;
                 }
@@ -457,7 +491,29 @@ namespace BananaSplit.Data
     
             if (e.OldItems != null)
             {
-                foreach (TicketPrice item in e.OldItems)
+                foreach (PartnershipGame item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Member, this))
+                    {
+                        item.Member = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupPreLotteryOrders(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (PreLotteryOrder item in e.NewItems)
+                {
+                    item.Member = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (PreLotteryOrder item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Member, this))
                     {
@@ -468,5 +524,6 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
     }
 }

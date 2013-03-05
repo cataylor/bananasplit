@@ -32,6 +32,7 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
         #region Navigation Properties
     
         public virtual ICollection<Season> Seasons
@@ -67,6 +68,7 @@ namespace BananaSplit.Data
         private ICollection<Season> _seasons;
 
         #endregion
+
         #region Association Fixup
     
         private void FixupSeasons(object sender, NotifyCollectionChangedEventArgs e)
@@ -92,5 +94,6 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
     }
 }

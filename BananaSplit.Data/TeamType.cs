@@ -38,6 +38,7 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
         #region Navigation Properties
     
         public virtual ICollection<Team> Teams
@@ -73,6 +74,7 @@ namespace BananaSplit.Data
         private ICollection<Team> _teams;
 
         #endregion
+
         #region Association Fixup
     
         private void FixupTeams(object sender, NotifyCollectionChangedEventArgs e)
@@ -98,5 +100,6 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
     }
 }

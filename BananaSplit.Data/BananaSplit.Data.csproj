@@ -76,28 +76,56 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Game.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GamePrice.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Invoice.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Location.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Lottery.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LotteryOrder.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Member.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MemberPartnership.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="MemberType.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApiAuthResult.cs" />
     <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\ApiResultCollection.cs" />
     <Compile Include="Partnership.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="PartnerTicket.cs">
+    <Compile Include="PartnershipGame.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Photo.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PreLotteryOrder.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PriceLevel.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Season.cs">
+      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeasonType.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="SeasonYear.cs">
@@ -110,9 +138,6 @@
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
     <Compile Include="TeamType.cs">
-      <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TicketPrice.cs">
       <DependentUpon>BananaSplitEntityModels.tt</DependentUpon>
     </Compile>
   </ItemGroup>

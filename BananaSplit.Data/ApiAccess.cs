@@ -79,6 +79,7 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
         #region Navigation Properties
     
         public virtual Member Member
@@ -97,6 +98,7 @@ namespace BananaSplit.Data
         private Member _member;
 
         #endregion
+
         #region Association Fixup
     
         private void FixupMember(Member previousValue)
@@ -120,5 +122,6 @@ namespace BananaSplit.Data
         }
 
         #endregion
+
     }
 }

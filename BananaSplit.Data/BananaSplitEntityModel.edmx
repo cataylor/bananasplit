@@ -7,21 +7,45 @@
     <Schema Namespace="BananaSplitTables.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="BananaSplitTablesStoreContainer">
           <EntitySet Name="ApiAccess" EntityType="BananaSplitTables.Store.ApiAccess" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Game" EntityType="BananaSplitTables.Store.Game" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GamePrice" EntityType="BananaSplitTables.Store.GamePrice" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Invoice" EntityType="BananaSplitTables.Store.Invoice" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Location" EntityType="BananaSplitTables.Store.Location" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Lottery" EntityType="BananaSplitTables.Store.Lottery" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LotteryOrder" EntityType="BananaSplitTables.Store.LotteryOrder" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Member" EntityType="BananaSplitTables.Store.Member" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MemberPartnership" EntityType="BananaSplitTables.Store.MemberPartnership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MemberType" EntityType="BananaSplitTables.Store.MemberType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Partnership" EntityType="BananaSplitTables.Store.Partnership" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PartnerTicket" EntityType="BananaSplitTables.Store.PartnerTicket" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PartnershipGame" EntityType="BananaSplitTables.Store.PartnershipGame" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Photo" EntityType="BananaSplitTables.Store.Photo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PreLotteryOrder" EntityType="BananaSplitTables.Store.PreLotteryOrder" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PriceLevel" EntityType="BananaSplitTables.Store.PriceLevel" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Season" EntityType="BananaSplitTables.Store.Season" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SeasonType" EntityType="BananaSplitTables.Store.SeasonType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SeasonYears" EntityType="BananaSplitTables.Store.SeasonYears" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="State" EntityType="BananaSplitTables.Store.State" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Team" EntityType="BananaSplitTables.Store.Team" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TeamType" EntityType="BananaSplitTables.Store.TeamType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TicketPrice" EntityType="BananaSplitTables.Store.TicketPrice" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_ApiAccess_Member" Association="BananaSplitTables.Store.FK_ApiAccess_Member">
             <End Role="Member" EntitySet="Member" />
             <End Role="ApiAccess" EntitySet="ApiAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Season" Association="BananaSplitTables.Store.FK_Game_Season">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Team" Association="BananaSplitTables.Store.FK_Game_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_TeamVisiting" Association="BananaSplitTables.Store.FK_Game_TeamVisiting">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GamePrice_Game" Association="BananaSplitTables.Store.FK_GamePrice_Game">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="GamePrice" EntitySet="GamePrice" />
           </AssociationSet>
           <AssociationSet Name="FK_Invoice_ManagingMember" Association="BananaSplitTables.Store.FK_Invoice_ManagingMember">
             <End Role="Member" EntitySet="Member" />
@@ -35,25 +59,69 @@
             <End Role="State" EntitySet="State" />
             <End Role="Location" EntitySet="Location" />
           </AssociationSet>
+          <AssociationSet Name="FK_Lottery_Partnership" Association="BananaSplitTables.Store.FK_Lottery_Partnership">
+            <End Role="Partnership" EntitySet="Partnership" />
+            <End Role="Lottery" EntitySet="Lottery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LotteryOrder_Lottery" Association="BananaSplitTables.Store.FK_LotteryOrder_Lottery">
+            <End Role="Lottery" EntitySet="Lottery" />
+            <End Role="LotteryOrder" EntitySet="LotteryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LotteryOrder_Member" Association="BananaSplitTables.Store.FK_LotteryOrder_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="LotteryOrder" EntitySet="LotteryOrder" />
+          </AssociationSet>
           <AssociationSet Name="FK_Member_MemberType" Association="BananaSplitTables.Store.FK_Member_MemberType">
             <End Role="MemberType" EntitySet="MemberType" />
             <End Role="Member" EntitySet="Member" />
           </AssociationSet>
-          <AssociationSet Name="FK_Partnership_Member" Association="BananaSplitTables.Store.FK_Partnership_Member">
+          <AssociationSet Name="FK_MemberPartnership_Member" Association="BananaSplitTables.Store.FK_MemberPartnership_Member">
             <End Role="Member" EntitySet="Member" />
+            <End Role="MemberPartnership" EntitySet="MemberPartnership" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberPartnership_Partnership" Association="BananaSplitTables.Store.FK_MemberPartnership_Partnership">
+            <End Role="Partnership" EntitySet="Partnership" />
+            <End Role="MemberPartnership" EntitySet="MemberPartnership" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partnership_Season" Association="BananaSplitTables.Store.FK_Partnership_Season">
+            <End Role="Season" EntitySet="Season" />
             <End Role="Partnership" EntitySet="Partnership" />
           </AssociationSet>
-          <AssociationSet Name="FK_PartnerTicket_Member" Association="BananaSplitTables.Store.FK_PartnerTicket_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="PartnerTicket" EntitySet="PartnerTicket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PartnerTicket_Partnership" Association="BananaSplitTables.Store.FK_PartnerTicket_Partnership">
+          <AssociationSet Name="FK_Partnership_Team" Association="BananaSplitTables.Store.FK_Partnership_Team">
+            <End Role="Team" EntitySet="Team" />
             <End Role="Partnership" EntitySet="Partnership" />
-            <End Role="PartnerTicket" EntitySet="PartnerTicket" />
           </AssociationSet>
-          <AssociationSet Name="FK_PartnerTicket_TicketPrice" Association="BananaSplitTables.Store.FK_PartnerTicket_TicketPrice">
-            <End Role="TicketPrice" EntitySet="TicketPrice" />
-            <End Role="PartnerTicket" EntitySet="PartnerTicket" />
+          <AssociationSet Name="FK_PartnershipGame_Game" Association="BananaSplitTables.Store.FK_PartnershipGame_Game">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="PartnershipGame" EntitySet="PartnershipGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnershipGame_Member" Association="BananaSplitTables.Store.FK_PartnershipGame_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="PartnershipGame" EntitySet="PartnershipGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnershipGame_Partnership" Association="BananaSplitTables.Store.FK_PartnershipGame_Partnership">
+            <End Role="Partnership" EntitySet="Partnership" />
+            <End Role="PartnershipGame" EntitySet="PartnershipGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreLotteryOrder_Lottery" Association="BananaSplitTables.Store.FK_PreLotteryOrder_Lottery">
+            <End Role="Lottery" EntitySet="Lottery" />
+            <End Role="PreLotteryOrder" EntitySet="PreLotteryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreLotteryOrder_Member" Association="BananaSplitTables.Store.FK_PreLotteryOrder_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="PreLotteryOrder" EntitySet="PreLotteryOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLevel_Season" Association="BananaSplitTables.Store.FK_PriceLevel_Season">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="PriceLevel" EntitySet="PriceLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLevel_Team" Association="BananaSplitTables.Store.FK_PriceLevel_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="PriceLevel" EntitySet="PriceLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Season_SeasonType" Association="BananaSplitTables.Store.FK_Season_SeasonType">
+            <End Role="SeasonType" EntitySet="SeasonType" />
+            <End Role="Season" EntitySet="Season" />
           </AssociationSet>
           <AssociationSet Name="FK_Season_SeasonYears" Association="BananaSplitTables.Store.FK_Season_SeasonYears">
             <End Role="SeasonYears" EntitySet="SeasonYears" />
@@ -67,17 +135,13 @@
             <End Role="Location" EntitySet="Location" />
             <End Role="Team" EntitySet="Team" />
           </AssociationSet>
+          <AssociationSet Name="FK_Team_Photo" Association="BananaSplitTables.Store.FK_Team_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
           <AssociationSet Name="FK_Team_TeamType" Association="BananaSplitTables.Store.FK_Team_TeamType">
             <End Role="TeamType" EntitySet="TeamType" />
             <End Role="Team" EntitySet="Team" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketPrice_Member" Association="BananaSplitTables.Store.FK_TicketPrice_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="TicketPrice" EntitySet="TicketPrice" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketPrice_Team" Association="BananaSplitTables.Store.FK_TicketPrice_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="TicketPrice" EntitySet="TicketPrice" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ApiAccess">
@@ -92,6 +156,31 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SeasonId" Type="bigint" Nullable="false" />
+          <Property Name="TeamId" Type="bigint" Nullable="false" />
+          <Property Name="VisitingTeamId" Type="bigint" Nullable="false" />
+          <Property Name="EventLocation" Type="varchar" MaxLength="100" />
+          <Property Name="TimeZone" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="EventStartDate" Type="datetime" Nullable="false" />
+          <Property Name="EventEndDate" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GamePrice">
+          <Key>
+            <PropertyRef Name="GamePriceId" />
+          </Key>
+          <Property Name="GamePriceId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="PartnershipId" Type="bigint" Nullable="false" />
+          <Property Name="Price" Type="numeric" Nullable="false" Precision="9" Scale="2" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -114,6 +203,23 @@
           <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="StateId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Lottery">
+          <Key>
+            <PropertyRef Name="LotteryId" />
+          </Key>
+          <Property Name="LotteryId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PartnershipId" Type="bigint" Nullable="false" />
+          <Property Name="NumberOfParticipants" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LotteryOrder">
+          <Key>
+            <PropertyRef Name="LotteryOrderId" />
+          </Key>
+          <Property Name="LotteryOrderId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LotteryId" Type="bigint" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="OrderOfLottery" Type="smallint" Nullable="false" />
+        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="MemberId" />
@@ -131,6 +237,19 @@
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
           <Property Name="DateLastAccessed" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="MemberPartnership">
+          <Key>
+            <PropertyRef Name="MemberPartnershipId" />
+          </Key>
+          <Property Name="MemberPartnershipId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PartnershipId" Type="bigint" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="IsManagingMember" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="HasESigned" Type="bigint" Nullable="false" />
+          <Property Name="DateESigned" Type="datetime" />
+        </EntityType>
         <EntityType Name="MemberType">
           <Key>
             <PropertyRef Name="MemberTypeId" />
@@ -144,22 +263,60 @@
             <PropertyRef Name="PartnershipId" />
           </Key>
           <Property Name="PartnershipId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="MaxNumberOfTickets" Type="smallint" Nullable="false" />
-          <Property Name="ManagingMemberId" Type="bigint" Nullable="false" />
+          <Property Name="TotalSeats" Type="smallint" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+          <Property Name="PartnershipName" Type="varchar" MaxLength="128" />
+          <Property Name="TeamId" Type="bigint" Nullable="false" />
+          <Property Name="SeasonId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ContractUrl" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="PartnershipGame">
+          <Key>
+            <PropertyRef Name="PartnershipGameId" />
+          </Key>
+          <Property Name="PartnershipGameId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PartnershipId" Type="bigint" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="IsAvailable" Type="bit" Nullable="false" />
+          <Property Name="IsPreLottery" Type="bit" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="PartnerTicket">
+        <EntityType Name="Photo">
           <Key>
-            <PropertyRef Name="PartnerTicketId" />
+            <PropertyRef Name="PhotoId" />
           </Key>
-          <Property Name="PartnerTicketId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TicketPriceId" Type="bigint" Nullable="false" />
-          <Property Name="MemberId" Type="bigint" Nullable="false" />
-          <Property Name="DateESigned" Type="datetime" />
-          <Property Name="PartnershipId" Type="bigint" Nullable="false" />
+          <Property Name="PhotoId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoUrl" Type="varchar" Nullable="false" MaxLength="76" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="76" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreLotteryOrder">
+          <Key>
+            <PropertyRef Name="PreLotteryOrderId" />
+          </Key>
+          <Property Name="PreLotteryOrderId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LotteryId" Type="bigint" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="PreLotteryOrder" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PriceLevel">
+          <Key>
+            <PropertyRef Name="PriceLevelId" />
+          </Key>
+          <Property Name="PriceLevelId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PriceLevelName" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="PriceLevelDescription" Type="varchar" MaxLength="600" />
+          <Property Name="TeamId" Type="bigint" Nullable="false" />
+          <Property Name="SeasonId" Type="bigint" Nullable="false" />
+          <Property Name="Price" Type="numeric" Nullable="false" Precision="9" Scale="2" />
         </EntityType>
         <EntityType Name="Season">
           <Key>
@@ -177,6 +334,14 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
           <Property Name="SeasonYearsId" Type="int" Nullable="false" />
+          <Property Name="SeasonTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="SeasonType">
+          <Key>
+            <PropertyRef Name="SeasonTypeId" />
+          </Key>
+          <Property Name="SeasonTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SeasonTypeName" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="SeasonYears">
           <Key>
@@ -204,6 +369,7 @@
           <Property Name="DateUpdated" Type="datetime" Nullable="false" />
           <Property Name="TeamTypeId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="PhotoId" Type="bigint" />
         </EntityType>
         <EntityType Name="TeamType">
           <Key>
@@ -212,18 +378,6 @@
           <Property Name="TeamTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TeamTypeName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="TeamAbbrev" Type="char" Nullable="false" MaxLength="3" />
-        </EntityType>
-        <EntityType Name="TicketPrice">
-          <Key>
-            <PropertyRef Name="TicketPriceId" />
-          </Key>
-          <Property Name="TicketPriceId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TeamId" Type="bigint" Nullable="false" />
-          <Property Name="ManagingMemberId" Type="bigint" Nullable="false" />
-          <Property Name="Price" Type="numeric" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="EventDate" Type="datetime" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_ApiAccess_Member">
           <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
@@ -234,6 +388,54 @@
             </Principal>
             <Dependent Role="ApiAccess">
               <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Season">
+          <End Role="Season" Type="BananaSplitTables.Store.Season" Multiplicity="1" />
+          <End Role="Game" Type="BananaSplitTables.Store.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Team">
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="1" />
+          <End Role="Game" Type="BananaSplitTables.Store.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_TeamVisiting">
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="1" />
+          <End Role="Game" Type="BananaSplitTables.Store.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GamePrice_Game">
+          <End Role="Game" Type="BananaSplitTables.Store.Game" Multiplicity="1" />
+          <End Role="GamePrice" Type="BananaSplitTables.Store.GamePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="GamePrice">
+              <PropertyRef Name="GameId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,6 +475,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Lottery_Partnership">
+          <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="1" />
+          <End Role="Lottery" Type="BananaSplitTables.Store.Lottery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership">
+              <PropertyRef Name="PartnershipId" />
+            </Principal>
+            <Dependent Role="Lottery">
+              <PropertyRef Name="PartnershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LotteryOrder_Lottery">
+          <End Role="Lottery" Type="BananaSplitTables.Store.Lottery" Multiplicity="1" />
+          <End Role="LotteryOrder" Type="BananaSplitTables.Store.LotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lottery">
+              <PropertyRef Name="LotteryId" />
+            </Principal>
+            <Dependent Role="LotteryOrder">
+              <PropertyRef Name="LotteryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LotteryOrder_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="LotteryOrder" Type="BananaSplitTables.Store.LotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="LotteryOrder">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Member_MemberType">
           <End Role="MemberType" Type="BananaSplitTables.Store.MemberType" Multiplicity="1" />
           <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="*" />
@@ -285,51 +523,147 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Partnership_Member">
+        <Association Name="FK_MemberPartnership_Member">
           <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
-          <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="*" />
+          <End Role="MemberPartnership" Type="BananaSplitTables.Store.MemberPartnership" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
               <PropertyRef Name="MemberId" />
             </Principal>
-            <Dependent Role="Partnership">
-              <PropertyRef Name="ManagingMemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PartnerTicket_Member">
-          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
-          <End Role="PartnerTicket" Type="BananaSplitTables.Store.PartnerTicket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="PartnerTicket">
+            <Dependent Role="MemberPartnership">
               <PropertyRef Name="MemberId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PartnerTicket_Partnership">
+        <Association Name="FK_MemberPartnership_Partnership">
           <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="1" />
-          <End Role="PartnerTicket" Type="BananaSplitTables.Store.PartnerTicket" Multiplicity="*" />
+          <End Role="MemberPartnership" Type="BananaSplitTables.Store.MemberPartnership" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Partnership">
               <PropertyRef Name="PartnershipId" />
             </Principal>
-            <Dependent Role="PartnerTicket">
+            <Dependent Role="MemberPartnership">
               <PropertyRef Name="PartnershipId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PartnerTicket_TicketPrice">
-          <End Role="TicketPrice" Type="BananaSplitTables.Store.TicketPrice" Multiplicity="1" />
-          <End Role="PartnerTicket" Type="BananaSplitTables.Store.PartnerTicket" Multiplicity="*" />
+        <Association Name="FK_Partnership_Season">
+          <End Role="Season" Type="BananaSplitTables.Store.Season" Multiplicity="1" />
+          <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TicketPrice">
-              <PropertyRef Name="TicketPriceId" />
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
             </Principal>
-            <Dependent Role="PartnerTicket">
-              <PropertyRef Name="TicketPriceId" />
+            <Dependent Role="Partnership">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partnership_Team">
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="1" />
+          <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Partnership">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnershipGame_Game">
+          <End Role="Game" Type="BananaSplitTables.Store.Game" Multiplicity="1" />
+          <End Role="PartnershipGame" Type="BananaSplitTables.Store.PartnershipGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="PartnershipGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnershipGame_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="PartnershipGame" Type="BananaSplitTables.Store.PartnershipGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PartnershipGame">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnershipGame_Partnership">
+          <End Role="Partnership" Type="BananaSplitTables.Store.Partnership" Multiplicity="1" />
+          <End Role="PartnershipGame" Type="BananaSplitTables.Store.PartnershipGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership">
+              <PropertyRef Name="PartnershipId" />
+            </Principal>
+            <Dependent Role="PartnershipGame">
+              <PropertyRef Name="PartnershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreLotteryOrder_Lottery">
+          <End Role="Lottery" Type="BananaSplitTables.Store.Lottery" Multiplicity="1" />
+          <End Role="PreLotteryOrder" Type="BananaSplitTables.Store.PreLotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lottery">
+              <PropertyRef Name="LotteryId" />
+            </Principal>
+            <Dependent Role="PreLotteryOrder">
+              <PropertyRef Name="LotteryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreLotteryOrder_Member">
+          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
+          <End Role="PreLotteryOrder" Type="BananaSplitTables.Store.PreLotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PreLotteryOrder">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLevel_Season">
+          <End Role="Season" Type="BananaSplitTables.Store.Season" Multiplicity="1" />
+          <End Role="PriceLevel" Type="BananaSplitTables.Store.PriceLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="PriceLevel">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLevel_Team">
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="1" />
+          <End Role="PriceLevel" Type="BananaSplitTables.Store.PriceLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="PriceLevel">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Season_SeasonType">
+          <End Role="SeasonType" Type="BananaSplitTables.Store.SeasonType" Multiplicity="0..1" />
+          <End Role="Season" Type="BananaSplitTables.Store.Season" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeasonType">
+              <PropertyRef Name="SeasonTypeId" />
+            </Principal>
+            <Dependent Role="Season">
+              <PropertyRef Name="SeasonTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -369,6 +703,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Team_Photo">
+          <End Role="Photo" Type="BananaSplitTables.Store.Photo" Multiplicity="0..1" />
+          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Team_TeamType">
           <End Role="TeamType" Type="BananaSplitTables.Store.TeamType" Multiplicity="1" />
           <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="*" />
@@ -378,30 +724,6 @@
             </Principal>
             <Dependent Role="Team">
               <PropertyRef Name="TeamTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketPrice_Member">
-          <End Role="Member" Type="BananaSplitTables.Store.Member" Multiplicity="1" />
-          <End Role="TicketPrice" Type="BananaSplitTables.Store.TicketPrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="TicketPrice">
-              <PropertyRef Name="ManagingMemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketPrice_Team">
-          <End Role="Team" Type="BananaSplitTables.Store.Team" Multiplicity="1" />
-          <End Role="TicketPrice" Type="BananaSplitTables.Store.TicketPrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="TeamId" />
-            </Principal>
-            <Dependent Role="TicketPrice">
-              <PropertyRef Name="TeamId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -416,10 +738,8 @@
           <EntitySet Name="Members" EntityType="BananaSplitTables.Member" />
           <EntitySet Name="MemberTypes" EntityType="BananaSplitTables.MemberType" />
           <EntitySet Name="Partnerships" EntityType="BananaSplitTables.Partnership" />
-          <EntitySet Name="PartnerTickets" EntityType="BananaSplitTables.PartnerTicket" />
           <EntitySet Name="States" EntityType="BananaSplitTables.State" />
           <EntitySet Name="Teams" EntityType="BananaSplitTables.Team" />
-          <EntitySet Name="TicketPrices" EntityType="BananaSplitTables.TicketPrice" />
           <AssociationSet Name="FK_ApiAccess_Member" Association="BananaSplitTables.FK_ApiAccess_Member">
             <End Role="Member" EntitySet="Members" />
             <End Role="ApiAccess" EntitySet="ApiAccesses" />
@@ -443,31 +763,7 @@
           <AssociationSet Name="FK_Member_MemberType" Association="BananaSplitTables.FK_Member_MemberType">
             <End Role="MemberType" EntitySet="MemberTypes" />
             <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Partnership_Member" Association="BananaSplitTables.FK_Partnership_Member">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Partnership" EntitySet="Partnerships" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PartnerTicket_Member" Association="BananaSplitTables.FK_PartnerTicket_Member">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="PartnerTicket" EntitySet="PartnerTickets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketPrice_Member" Association="BananaSplitTables.FK_TicketPrice_Member">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="TicketPrice" EntitySet="TicketPrices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PartnerTicket_Partnership" Association="BananaSplitTables.FK_PartnerTicket_Partnership">
-            <End Role="Partnership" EntitySet="Partnerships" />
-            <End Role="PartnerTicket" EntitySet="PartnerTickets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PartnerTicket_TicketPrice" Association="BananaSplitTables.FK_PartnerTicket_TicketPrice">
-            <End Role="TicketPrice" EntitySet="TicketPrices" />
-            <End Role="PartnerTicket" EntitySet="PartnerTickets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketPrice_Team" Association="BananaSplitTables.FK_TicketPrice_Team">
-            <End Role="Team" EntitySet="Teams" />
-            <End Role="TicketPrice" EntitySet="TicketPrices" />
-          </AssociationSet>
+          </AssociationSet>          
           <EntitySet Name="Seasons" EntityType="BananaSplitTables.Season" />
           <EntitySet Name="TeamTypes" EntityType="BananaSplitTables.TeamType" />
           <AssociationSet Name="FK_Season_Team" Association="BananaSplitTables.FK_Season_Team">
@@ -483,6 +779,96 @@
             <End Role="SeasonYear" EntitySet="SeasonYears" />
             <End Role="Season" EntitySet="Seasons" />
           </AssociationSet>
+          <EntitySet Name="SeasonTypes" EntityType="BananaSplitTables.SeasonType" />
+          <AssociationSet Name="FK_Season_SeasonType" Association="BananaSplitTables.FK_Season_SeasonType">
+            <End Role="SeasonType" EntitySet="SeasonTypes" />
+            <End Role="Season" EntitySet="Seasons" />
+          </AssociationSet>
+          <EntitySet Name="Games" EntityType="BananaSplitTables.Game" />
+          <EntitySet Name="GamePrices" EntityType="BananaSplitTables.GamePrice" />
+          <EntitySet Name="Lotteries" EntityType="BananaSplitTables.Lottery" />
+          <EntitySet Name="LotteryOrders" EntityType="BananaSplitTables.LotteryOrder" />
+          <EntitySet Name="MemberPartnerships" EntityType="BananaSplitTables.MemberPartnership" />
+          <EntitySet Name="PartnershipGames" EntityType="BananaSplitTables.PartnershipGame" />
+          <EntitySet Name="Photos" EntityType="BananaSplitTables.Photo" />
+          <EntitySet Name="PreLotteryOrders" EntityType="BananaSplitTables.PreLotteryOrder" />
+          <EntitySet Name="PriceLevels" EntityType="BananaSplitTables.PriceLevel" />
+          <AssociationSet Name="FK_Game_Season" Association="BananaSplitTables.FK_Game_Season">
+            <End Role="Season" EntitySet="Seasons" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Team" Association="BananaSplitTables.FK_Game_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_TeamVisiting" Association="BananaSplitTables.FK_Game_TeamVisiting">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GamePrice_Game" Association="BananaSplitTables.FK_GamePrice_Game">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="GamePrice" EntitySet="GamePrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnershipGame_Game" Association="BananaSplitTables.FK_PartnershipGame_Game">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="PartnershipGame" EntitySet="PartnershipGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lottery_Partnership" Association="BananaSplitTables.FK_Lottery_Partnership">
+            <End Role="Partnership" EntitySet="Partnerships" />
+            <End Role="Lottery" EntitySet="Lotteries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LotteryOrder_Lottery" Association="BananaSplitTables.FK_LotteryOrder_Lottery">
+            <End Role="Lottery" EntitySet="Lotteries" />
+            <End Role="LotteryOrder" EntitySet="LotteryOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreLotteryOrder_Lottery" Association="BananaSplitTables.FK_PreLotteryOrder_Lottery">
+            <End Role="Lottery" EntitySet="Lotteries" />
+            <End Role="PreLotteryOrder" EntitySet="PreLotteryOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LotteryOrder_Member" Association="BananaSplitTables.FK_LotteryOrder_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="LotteryOrder" EntitySet="LotteryOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberPartnership_Member" Association="BananaSplitTables.FK_MemberPartnership_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="MemberPartnership" EntitySet="MemberPartnerships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnershipGame_Member" Association="BananaSplitTables.FK_PartnershipGame_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="PartnershipGame" EntitySet="PartnershipGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreLotteryOrder_Member" Association="BananaSplitTables.FK_PreLotteryOrder_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="PreLotteryOrder" EntitySet="PreLotteryOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberPartnership_Partnership" Association="BananaSplitTables.FK_MemberPartnership_Partnership">
+            <End Role="Partnership" EntitySet="Partnerships" />
+            <End Role="MemberPartnership" EntitySet="MemberPartnerships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partnership_Season" Association="BananaSplitTables.FK_Partnership_Season">
+            <End Role="Season" EntitySet="Seasons" />
+            <End Role="Partnership" EntitySet="Partnerships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partnership_Team" Association="BananaSplitTables.FK_Partnership_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Partnership" EntitySet="Partnerships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnershipGame_Partnership" Association="BananaSplitTables.FK_PartnershipGame_Partnership">
+            <End Role="Partnership" EntitySet="Partnerships" />
+            <End Role="PartnershipGame" EntitySet="PartnershipGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLevel_Season" Association="BananaSplitTables.FK_PriceLevel_Season">
+            <End Role="Season" EntitySet="Seasons" />
+            <End Role="PriceLevel" EntitySet="PriceLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLevel_Team" Association="BananaSplitTables.FK_PriceLevel_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="PriceLevel" EntitySet="PriceLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Photo" Association="BananaSplitTables.FK_Team_Photo">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ApiAccess">
           <Key>
@@ -494,8 +880,8 @@
           <Property Name="MemberId" Type="Int64" Nullable="false" />
           <Property Name="SecretKey" Type="String" Nullable="false" MaxLength="24" Unicode="true" FixedLength="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_ApiAccess_Member" FromRole="ApiAccess" ToRole="Member" />
         </EntityType>
         <EntityType Name="Invoice">
@@ -506,10 +892,10 @@
           <Property Name="ManagingMemberId" Type="Int64" Nullable="false" />
           <Property Name="MemberId" Type="Int64" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="DateSent" Type="DateTime" />
+          <Property Name="DateSent" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_Invoice_ManagingMember" FromRole="Invoice" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="BananaSplitTables.FK_Invoice_Member" FromRole="Invoice" ToRole="Member" />
         </EntityType>
@@ -536,16 +922,17 @@
           <Property Name="FacebookId" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="MemberTypeId" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
-          <Property Name="DateLastAccessed" Type="DateTime" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateLastAccessed" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ApiAccesses" Relationship="BananaSplitTables.FK_ApiAccess_Member" FromRole="Member" ToRole="ApiAccess" />
           <NavigationProperty Name="Invoices" Relationship="BananaSplitTables.FK_Invoice_ManagingMember" FromRole="Member" ToRole="Invoice" />
           <NavigationProperty Name="Invoices1" Relationship="BananaSplitTables.FK_Invoice_Member" FromRole="Member" ToRole="Invoice" />
-          <NavigationProperty Name="MemberType" Relationship="BananaSplitTables.FK_Member_MemberType" FromRole="Member" ToRole="MemberType" />
-          <NavigationProperty Name="Partnerships" Relationship="BananaSplitTables.FK_Partnership_Member" FromRole="Member" ToRole="Partnership" />
-          <NavigationProperty Name="PartnerTickets" Relationship="BananaSplitTables.FK_PartnerTicket_Member" FromRole="Member" ToRole="PartnerTicket" />
-          <NavigationProperty Name="TicketPrices" Relationship="BananaSplitTables.FK_TicketPrice_Member" FromRole="Member" ToRole="TicketPrice" />
+          <NavigationProperty Name="MemberType" Relationship="BananaSplitTables.FK_Member_MemberType" FromRole="Member" ToRole="MemberType" />          
+          <NavigationProperty Name="LotteryOrders" Relationship="BananaSplitTables.FK_LotteryOrder_Member" FromRole="Member" ToRole="LotteryOrder" />
+          <NavigationProperty Name="MemberPartnerships" Relationship="BananaSplitTables.FK_MemberPartnership_Member" FromRole="Member" ToRole="MemberPartnership" />
+          <NavigationProperty Name="PartnershipGames" Relationship="BananaSplitTables.FK_PartnershipGame_Member" FromRole="Member" ToRole="PartnershipGame" />
+          <NavigationProperty Name="PreLotteryOrders" Relationship="BananaSplitTables.FK_PreLotteryOrder_Member" FromRole="Member" ToRole="PreLotteryOrder" />
         </EntityType>
         <EntityType Name="MemberType">
           <Key>
@@ -561,27 +948,19 @@
             <PropertyRef Name="PartnershipId" />
           </Key>
           <Property Name="PartnershipId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaxNumberOfTickets" Type="Int16" Nullable="false" />
-          <Property Name="ManagingMemberId" Type="Int64" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_Partnership_Member" FromRole="Partnership" ToRole="Member" />
-          <NavigationProperty Name="PartnerTickets" Relationship="BananaSplitTables.FK_PartnerTicket_Partnership" FromRole="Partnership" ToRole="PartnerTicket" />
-        </EntityType>
-        <EntityType Name="PartnerTicket">
-          <Key>
-            <PropertyRef Name="PartnerTicketId" />
-          </Key>
-          <Property Name="PartnerTicketId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TicketPriceId" Type="Int64" Nullable="false" />
-          <Property Name="MemberId" Type="Int64" Nullable="false" />
-          <Property Name="DateESigned" Type="DateTime" />
-          <Property Name="PartnershipId" Type="Int64" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_PartnerTicket_Member" FromRole="PartnerTicket" ToRole="Member" />
-          <NavigationProperty Name="Partnership" Relationship="BananaSplitTables.FK_PartnerTicket_Partnership" FromRole="PartnerTicket" ToRole="Partnership" />
-          <NavigationProperty Name="TicketPrice" Relationship="BananaSplitTables.FK_PartnerTicket_TicketPrice" FromRole="PartnerTicket" ToRole="TicketPrice" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />          
+          <Property Type="Int16" Name="TotalSeats" Nullable="false" />
+          <Property Type="String" Name="PartnershipName" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="TeamId" Nullable="false" />
+          <Property Type="Int64" Name="SeasonId" Nullable="false" />
+          <NavigationProperty Name="Lotteries" Relationship="BananaSplitTables.FK_Lottery_Partnership" FromRole="Partnership" ToRole="Lottery" />
+          <NavigationProperty Name="MemberPartnerships" Relationship="BananaSplitTables.FK_MemberPartnership_Partnership" FromRole="Partnership" ToRole="MemberPartnership" />
+          <NavigationProperty Name="Season" Relationship="BananaSplitTables.FK_Partnership_Season" FromRole="Partnership" ToRole="Season" />
+          <NavigationProperty Name="Team" Relationship="BananaSplitTables.FK_Partnership_Team" FromRole="Partnership" ToRole="Team" />
+          <NavigationProperty Name="PartnershipGames" Relationship="BananaSplitTables.FK_PartnershipGame_Partnership" FromRole="Partnership" ToRole="PartnershipGame" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="ContractUrl" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -599,29 +978,19 @@
           <Property Name="TeamId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TeamName" Type="String" Nullable="false" MaxLength="72" Unicode="true" FixedLength="false" />
           <Property Name="LocationId" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Location" Relationship="BananaSplitTables.FK_Team_Location" FromRole="Team" ToRole="Location" />
-          <NavigationProperty Name="TicketPrices" Relationship="BananaSplitTables.FK_TicketPrice_Team" FromRole="Team" ToRole="TicketPrice" />
           <Property Type="Int32" Name="TeamTypeId" Nullable="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <NavigationProperty Name="Seasons" Relationship="BananaSplitTables.FK_Season_Team" FromRole="Team" ToRole="Season" />
           <NavigationProperty Name="TeamType" Relationship="BananaSplitTables.FK_Team_TeamType" FromRole="Team" ToRole="TeamType" />
-        </EntityType>
-        <EntityType Name="TicketPrice">
-          <Key>
-            <PropertyRef Name="TicketPriceId" />
-          </Key>
-          <Property Name="TicketPriceId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TeamId" Type="Int64" Nullable="false" />
-          <Property Name="ManagingMemberId" Type="Int64" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="EventDate" Type="DateTime" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
-          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_TicketPrice_Member" FromRole="TicketPrice" ToRole="Member" />
-          <NavigationProperty Name="PartnerTickets" Relationship="BananaSplitTables.FK_PartnerTicket_TicketPrice" FromRole="TicketPrice" ToRole="PartnerTicket" />
-          <NavigationProperty Name="Team" Relationship="BananaSplitTables.FK_TicketPrice_Team" FromRole="TicketPrice" ToRole="Team" />
+          <Property Type="Int64" Name="PhotoId" />
+          <NavigationProperty Name="Games" Relationship="BananaSplitTables.FK_Game_Team" FromRole="Team" ToRole="Game" />
+          <NavigationProperty Name="Games1" Relationship="BananaSplitTables.FK_Game_TeamVisiting" FromRole="Team" ToRole="Game" />
+          <NavigationProperty Name="Partnerships" Relationship="BananaSplitTables.FK_Partnership_Team" FromRole="Team" ToRole="Partnership" />
+          <NavigationProperty Name="PriceLevels" Relationship="BananaSplitTables.FK_PriceLevel_Team" FromRole="Team" ToRole="PriceLevel" />
+          <NavigationProperty Name="Photo" Relationship="BananaSplitTables.FK_Team_Photo" FromRole="Team" ToRole="Photo" />
         </EntityType>
         <Association Name="FK_ApiAccess_Member">
           <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
@@ -694,97 +1063,30 @@
               <PropertyRef Name="MemberTypeId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Partnership_Member">
-          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
-          <End Role="Partnership" Type="BananaSplitTables.Partnership" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="Partnership">
-              <PropertyRef Name="ManagingMemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PartnerTicket_Member">
-          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
-          <End Role="PartnerTicket" Type="BananaSplitTables.PartnerTicket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="PartnerTicket">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketPrice_Member">
-          <End Role="Member" Type="BananaSplitTables.Member" Multiplicity="1" />
-          <End Role="TicketPrice" Type="BananaSplitTables.TicketPrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="TicketPrice">
-              <PropertyRef Name="ManagingMemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PartnerTicket_Partnership">
-          <End Role="Partnership" Type="BananaSplitTables.Partnership" Multiplicity="1" />
-          <End Role="PartnerTicket" Type="BananaSplitTables.PartnerTicket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Partnership">
-              <PropertyRef Name="PartnershipId" />
-            </Principal>
-            <Dependent Role="PartnerTicket">
-              <PropertyRef Name="PartnershipId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PartnerTicket_TicketPrice">
-          <End Role="TicketPrice" Type="BananaSplitTables.TicketPrice" Multiplicity="1" />
-          <End Role="PartnerTicket" Type="BananaSplitTables.PartnerTicket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TicketPrice">
-              <PropertyRef Name="TicketPriceId" />
-            </Principal>
-            <Dependent Role="PartnerTicket">
-              <PropertyRef Name="TicketPriceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketPrice_Team">
-          <End Role="Team" Type="BananaSplitTables.Team" Multiplicity="1" />
-          <End Role="TicketPrice" Type="BananaSplitTables.TicketPrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="TeamId" />
-            </Principal>
-            <Dependent Role="TicketPrice">
-              <PropertyRef Name="TeamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        </Association>        
         <EntityType Name="Season">
           <Key>
             <PropertyRef Name="SeasonId" />
           </Key>
           <Property Type="Int64" Name="SeasonId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int64" Name="TeamId" Nullable="false" />
-          <Property Type="DateTime" Name="EventStartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EventStartDate" Nullable="false" Precision="3" />
           <Property Type="String" Name="Opponent" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="TimeZone" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="EventLocation" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="EventEndDate" Nullable="false" />
+          <Property Type="DateTime" Name="EventEndDate" Nullable="false" Precision="3" />
           <Property Type="Boolean" Name="IsArchived" Nullable="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
-          <Property Type="DateTime" Name="DateUpdated" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateUpdated" Nullable="false" Precision="3" />
           <NavigationProperty Name="Team" Relationship="BananaSplitTables.FK_Season_Team" FromRole="Season" ToRole="Team" />
           <Property Type="Int32" Name="SeasonYearsId" Nullable="false" />
           <NavigationProperty Name="SeasonYear" Relationship="BananaSplitTables.FK_Season_SeasonYears" FromRole="Season" ToRole="SeasonYear" />
+          <Property Type="Int32" Name="SeasonTypeId" />
+          <NavigationProperty Name="SeasonType" Relationship="BananaSplitTables.FK_Season_SeasonType" FromRole="Season" ToRole="SeasonType" />
+          <NavigationProperty Name="Games" Relationship="BananaSplitTables.FK_Game_Season" FromRole="Season" ToRole="Game" />
+          <NavigationProperty Name="Partnerships" Relationship="BananaSplitTables.FK_Partnership_Season" FromRole="Season" ToRole="Partnership" />
+          <NavigationProperty Name="PriceLevels" Relationship="BananaSplitTables.FK_PriceLevel_Season" FromRole="Season" ToRole="PriceLevel" />
         </EntityType>
         <EntityType Name="TeamType">
           <Key>
@@ -836,6 +1138,376 @@
             </Principal>
             <Dependent Role="Season">
               <PropertyRef Name="SeasonYearsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SeasonType">
+          <Key>
+            <PropertyRef Name="SeasonTypeId" />
+          </Key>
+          <Property Type="Int32" Name="SeasonTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SeasonTypeName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Seasons" Relationship="BananaSplitTables.FK_Season_SeasonType" FromRole="SeasonType" ToRole="Season" />
+        </EntityType>
+        <Association Name="FK_Season_SeasonType">
+          <End Type="BananaSplitTables.SeasonType" Role="SeasonType" Multiplicity="0..1" />
+          <End Type="BananaSplitTables.Season" Role="Season" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeasonType">
+              <PropertyRef Name="SeasonTypeId" />
+            </Principal>
+            <Dependent Role="Season">
+              <PropertyRef Name="SeasonTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Type="Int32" Name="GameId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="SeasonId" Nullable="false" />
+          <Property Type="Int64" Name="TeamId" Nullable="false" />
+          <Property Type="Int64" Name="VisitingTeamId" Nullable="false" />
+          <Property Type="String" Name="EventLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TimeZone" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="EventStartDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="EventEndDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateUpdated" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Season" Relationship="BananaSplitTables.FK_Game_Season" FromRole="Game" ToRole="Season" />
+          <NavigationProperty Name="Team" Relationship="BananaSplitTables.FK_Game_Team" FromRole="Game" ToRole="Team" />
+          <NavigationProperty Name="Team1" Relationship="BananaSplitTables.FK_Game_TeamVisiting" FromRole="Game" ToRole="Team" />
+          <NavigationProperty Name="GamePrices" Relationship="BananaSplitTables.FK_GamePrice_Game" FromRole="Game" ToRole="GamePrice" />
+          <NavigationProperty Name="PartnershipGames" Relationship="BananaSplitTables.FK_PartnershipGame_Game" FromRole="Game" ToRole="PartnershipGame" />
+        </EntityType>
+        <EntityType Name="GamePrice">
+          <Key>
+            <PropertyRef Name="GamePriceId" />
+          </Key>
+          <Property Type="Int64" Name="GamePriceId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Int64" Name="PartnershipId" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="9" Scale="2" />
+          <NavigationProperty Name="Game" Relationship="BananaSplitTables.FK_GamePrice_Game" FromRole="GamePrice" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Lottery">
+          <Key>
+            <PropertyRef Name="LotteryId" />
+          </Key>
+          <Property Type="Int64" Name="LotteryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="PartnershipId" Nullable="false" />
+          <Property Type="Byte" Name="NumberOfParticipants" Nullable="false" />
+          <NavigationProperty Name="Partnership" Relationship="BananaSplitTables.FK_Lottery_Partnership" FromRole="Lottery" ToRole="Partnership" />
+          <NavigationProperty Name="LotteryOrders" Relationship="BananaSplitTables.FK_LotteryOrder_Lottery" FromRole="Lottery" ToRole="LotteryOrder" />
+          <NavigationProperty Name="PreLotteryOrders" Relationship="BananaSplitTables.FK_PreLotteryOrder_Lottery" FromRole="Lottery" ToRole="PreLotteryOrder" />
+        </EntityType>
+        <EntityType Name="LotteryOrder">
+          <Key>
+            <PropertyRef Name="LotteryOrderId" />
+          </Key>
+          <Property Type="Int64" Name="LotteryOrderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="LotteryId" Nullable="false" />
+          <Property Type="Int64" Name="MemberId" Nullable="false" />
+          <Property Type="Int16" Name="OrderOfLottery" Nullable="false" />
+          <NavigationProperty Name="Lottery" Relationship="BananaSplitTables.FK_LotteryOrder_Lottery" FromRole="LotteryOrder" ToRole="Lottery" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_LotteryOrder_Member" FromRole="LotteryOrder" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="MemberPartnership">
+          <Key>
+            <PropertyRef Name="MemberPartnershipId" />
+          </Key>
+          <Property Type="Int64" Name="MemberPartnershipId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="PartnershipId" Nullable="false" />
+          <Property Type="Int64" Name="MemberId" Nullable="false" />
+          <Property Type="Boolean" Name="IsManagingMember" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateUpdated" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_MemberPartnership_Member" FromRole="MemberPartnership" ToRole="Member" />
+          <NavigationProperty Name="Partnership" Relationship="BananaSplitTables.FK_MemberPartnership_Partnership" FromRole="MemberPartnership" ToRole="Partnership" />
+          <Property Type="Int64" Name="HasESigned" Nullable="false" />
+          <Property Type="DateTime" Name="DateESigned" Precision="3" />
+        </EntityType>
+        <EntityType Name="PartnershipGame">
+          <Key>
+            <PropertyRef Name="PartnershipGameId" />
+          </Key>
+          <Property Type="Int64" Name="PartnershipGameId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="PartnershipId" Nullable="false" />
+          <Property Type="Int64" Name="MemberId" Nullable="false" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Boolean" Name="IsAvailable" Nullable="false" />
+          <Property Type="Boolean" Name="IsPreLottery" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateUpdated" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Game" Relationship="BananaSplitTables.FK_PartnershipGame_Game" FromRole="PartnershipGame" ToRole="Game" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_PartnershipGame_Member" FromRole="PartnershipGame" ToRole="Member" />
+          <NavigationProperty Name="Partnership" Relationship="BananaSplitTables.FK_PartnershipGame_Partnership" FromRole="PartnershipGame" ToRole="Partnership" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Type="Int64" Name="PhotoId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PhotoUrl" Nullable="false" MaxLength="76" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="Width" Nullable="false" />
+          <Property Type="Int32" Name="Height" Nullable="false" />
+          <Property Type="String" Name="Thumbnail" MaxLength="76" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateUpdated" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Teams" Relationship="BananaSplitTables.FK_Team_Photo" FromRole="Photo" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="PreLotteryOrder">
+          <Key>
+            <PropertyRef Name="PreLotteryOrderId" />
+          </Key>
+          <Property Type="Int64" Name="PreLotteryOrderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="LotteryId" Nullable="false" />
+          <Property Type="Int64" Name="MemberId" Nullable="false" />
+          <Property Type="Int16" Name="PreLotteryOrder1" Nullable="false" />
+          <NavigationProperty Name="Lottery" Relationship="BananaSplitTables.FK_PreLotteryOrder_Lottery" FromRole="PreLotteryOrder" ToRole="Lottery" />
+          <NavigationProperty Name="Member" Relationship="BananaSplitTables.FK_PreLotteryOrder_Member" FromRole="PreLotteryOrder" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="PriceLevel">
+          <Key>
+            <PropertyRef Name="PriceLevelId" />
+          </Key>
+          <Property Type="Int32" Name="PriceLevelId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PriceLevelName" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PriceLevelDescription" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="TeamId" Nullable="false" />
+          <Property Type="Int64" Name="SeasonId" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="9" Scale="2" />
+          <NavigationProperty Name="Season" Relationship="BananaSplitTables.FK_PriceLevel_Season" FromRole="PriceLevel" ToRole="Season" />
+          <NavigationProperty Name="Team" Relationship="BananaSplitTables.FK_PriceLevel_Team" FromRole="PriceLevel" ToRole="Team" />
+        </EntityType>
+        <Association Name="FK_Game_Season">
+          <End Type="BananaSplitTables.Season" Role="Season" Multiplicity="1" />
+          <End Type="BananaSplitTables.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Team">
+          <End Type="BananaSplitTables.Team" Role="Team" Multiplicity="1" />
+          <End Type="BananaSplitTables.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_TeamVisiting">
+          <End Type="BananaSplitTables.Team" Role="Team" Multiplicity="1" />
+          <End Type="BananaSplitTables.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GamePrice_Game">
+          <End Type="BananaSplitTables.Game" Role="Game" Multiplicity="1" />
+          <End Type="BananaSplitTables.GamePrice" Role="GamePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="GamePrice">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnershipGame_Game">
+          <End Type="BananaSplitTables.Game" Role="Game" Multiplicity="1" />
+          <End Type="BananaSplitTables.PartnershipGame" Role="PartnershipGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="PartnershipGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lottery_Partnership">
+          <End Type="BananaSplitTables.Partnership" Role="Partnership" Multiplicity="1" />
+          <End Type="BananaSplitTables.Lottery" Role="Lottery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership">
+              <PropertyRef Name="PartnershipId" />
+            </Principal>
+            <Dependent Role="Lottery">
+              <PropertyRef Name="PartnershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LotteryOrder_Lottery">
+          <End Type="BananaSplitTables.Lottery" Role="Lottery" Multiplicity="1" />
+          <End Type="BananaSplitTables.LotteryOrder" Role="LotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lottery">
+              <PropertyRef Name="LotteryId" />
+            </Principal>
+            <Dependent Role="LotteryOrder">
+              <PropertyRef Name="LotteryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreLotteryOrder_Lottery">
+          <End Type="BananaSplitTables.Lottery" Role="Lottery" Multiplicity="1" />
+          <End Type="BananaSplitTables.PreLotteryOrder" Role="PreLotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lottery">
+              <PropertyRef Name="LotteryId" />
+            </Principal>
+            <Dependent Role="PreLotteryOrder">
+              <PropertyRef Name="LotteryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LotteryOrder_Member">
+          <End Type="BananaSplitTables.Member" Role="Member" Multiplicity="1" />
+          <End Type="BananaSplitTables.LotteryOrder" Role="LotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="LotteryOrder">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberPartnership_Member">
+          <End Type="BananaSplitTables.Member" Role="Member" Multiplicity="1" />
+          <End Type="BananaSplitTables.MemberPartnership" Role="MemberPartnership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MemberPartnership">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnershipGame_Member">
+          <End Type="BananaSplitTables.Member" Role="Member" Multiplicity="1" />
+          <End Type="BananaSplitTables.PartnershipGame" Role="PartnershipGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PartnershipGame">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreLotteryOrder_Member">
+          <End Type="BananaSplitTables.Member" Role="Member" Multiplicity="1" />
+          <End Type="BananaSplitTables.PreLotteryOrder" Role="PreLotteryOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PreLotteryOrder">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberPartnership_Partnership">
+          <End Type="BananaSplitTables.Partnership" Role="Partnership" Multiplicity="1" />
+          <End Type="BananaSplitTables.MemberPartnership" Role="MemberPartnership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership">
+              <PropertyRef Name="PartnershipId" />
+            </Principal>
+            <Dependent Role="MemberPartnership">
+              <PropertyRef Name="PartnershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partnership_Season">
+          <End Type="BananaSplitTables.Season" Role="Season" Multiplicity="1" />
+          <End Type="BananaSplitTables.Partnership" Role="Partnership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="Partnership">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partnership_Team">
+          <End Type="BananaSplitTables.Team" Role="Team" Multiplicity="1" />
+          <End Type="BananaSplitTables.Partnership" Role="Partnership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Partnership">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnershipGame_Partnership">
+          <End Type="BananaSplitTables.Partnership" Role="Partnership" Multiplicity="1" />
+          <End Type="BananaSplitTables.PartnershipGame" Role="PartnershipGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership">
+              <PropertyRef Name="PartnershipId" />
+            </Principal>
+            <Dependent Role="PartnershipGame">
+              <PropertyRef Name="PartnershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLevel_Season">
+          <End Type="BananaSplitTables.Season" Role="Season" Multiplicity="1" />
+          <End Type="BananaSplitTables.PriceLevel" Role="PriceLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="PriceLevel">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLevel_Team">
+          <End Type="BananaSplitTables.Team" Role="Team" Multiplicity="1" />
+          <End Type="BananaSplitTables.PriceLevel" Role="PriceLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="PriceLevel">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Photo">
+          <End Type="BananaSplitTables.Photo" Role="Photo" Multiplicity="0..1" />
+          <End Type="BananaSplitTables.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PhotoId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="PhotoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -912,21 +1584,12 @@
           <EntitySetMapping Name="Partnerships">
             <EntityTypeMapping TypeName="BananaSplitTables.Partnership">
               <MappingFragment StoreEntitySet="Partnership">
-                <ScalarProperty Name="PartnershipId" ColumnName="PartnershipId" />
-                <ScalarProperty Name="MaxNumberOfTickets" ColumnName="MaxNumberOfTickets" />
-                <ScalarProperty Name="ManagingMemberId" ColumnName="ManagingMemberId" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PartnerTickets">
-            <EntityTypeMapping TypeName="BananaSplitTables.PartnerTicket">
-              <MappingFragment StoreEntitySet="PartnerTicket">
-                <ScalarProperty Name="PartnerTicketId" ColumnName="PartnerTicketId" />
-                <ScalarProperty Name="TicketPriceId" ColumnName="TicketPriceId" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="DateESigned" ColumnName="DateESigned" />
+                <ScalarProperty Name="ContractUrl" ColumnName="ContractUrl" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="PartnershipName" ColumnName="PartnershipName" />
+                <ScalarProperty Name="TotalSeats" ColumnName="TotalSeats" />
                 <ScalarProperty Name="PartnershipId" ColumnName="PartnershipId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
@@ -945,6 +1608,7 @@
           <EntitySetMapping Name="Teams">
             <EntityTypeMapping TypeName="BananaSplitTables.Team">
               <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="TeamTypeId" ColumnName="TeamTypeId" />
                 <ScalarProperty Name="TeamId" ColumnName="TeamId" />
@@ -955,22 +1619,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TicketPrices">
-            <EntityTypeMapping TypeName="BananaSplitTables.TicketPrice">
-              <MappingFragment StoreEntitySet="TicketPrice">
-                <ScalarProperty Name="TicketPriceId" ColumnName="TicketPriceId" />
-                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
-                <ScalarProperty Name="ManagingMemberId" ColumnName="ManagingMemberId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Seasons">
             <EntityTypeMapping TypeName="BananaSplitTables.Season">
               <MappingFragment StoreEntitySet="Season">
+                <ScalarProperty Name="SeasonTypeId" ColumnName="SeasonTypeId" />
                 <ScalarProperty Name="SeasonYearsId" ColumnName="SeasonYearsId" />
                 <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -1003,6 +1655,124 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SeasonTypes">
+            <EntityTypeMapping TypeName="BananaSplitTables.SeasonType">
+              <MappingFragment StoreEntitySet="SeasonType">
+                <ScalarProperty Name="SeasonTypeName" ColumnName="SeasonTypeName" />
+                <ScalarProperty Name="SeasonTypeId" ColumnName="SeasonTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="BananaSplitTables.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="EventEndDate" ColumnName="EventEndDate" />
+                <ScalarProperty Name="EventStartDate" ColumnName="EventStartDate" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="EventLocation" ColumnName="EventLocation" />
+                <ScalarProperty Name="VisitingTeamId" ColumnName="VisitingTeamId" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GamePrices">
+            <EntityTypeMapping TypeName="BananaSplitTables.GamePrice">
+              <MappingFragment StoreEntitySet="GamePrice">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PartnershipId" ColumnName="PartnershipId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="GamePriceId" ColumnName="GamePriceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lotteries">
+            <EntityTypeMapping TypeName="BananaSplitTables.Lottery">
+              <MappingFragment StoreEntitySet="Lottery">
+                <ScalarProperty Name="NumberOfParticipants" ColumnName="NumberOfParticipants" />
+                <ScalarProperty Name="PartnershipId" ColumnName="PartnershipId" />
+                <ScalarProperty Name="LotteryId" ColumnName="LotteryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LotteryOrders">
+            <EntityTypeMapping TypeName="BananaSplitTables.LotteryOrder">
+              <MappingFragment StoreEntitySet="LotteryOrder">
+                <ScalarProperty Name="OrderOfLottery" ColumnName="OrderOfLottery" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="LotteryId" ColumnName="LotteryId" />
+                <ScalarProperty Name="LotteryOrderId" ColumnName="LotteryOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberPartnerships">
+            <EntityTypeMapping TypeName="BananaSplitTables.MemberPartnership">
+              <MappingFragment StoreEntitySet="MemberPartnership">
+                <ScalarProperty Name="DateESigned" ColumnName="DateESigned" />
+                <ScalarProperty Name="HasESigned" ColumnName="HasESigned" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsManagingMember" ColumnName="IsManagingMember" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="PartnershipId" ColumnName="PartnershipId" />
+                <ScalarProperty Name="MemberPartnershipId" ColumnName="MemberPartnershipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartnershipGames">
+            <EntityTypeMapping TypeName="BananaSplitTables.PartnershipGame">
+              <MappingFragment StoreEntitySet="PartnershipGame">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsPreLottery" ColumnName="IsPreLottery" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="PartnershipId" ColumnName="PartnershipId" />
+                <ScalarProperty Name="PartnershipGameId" ColumnName="PartnershipGameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="BananaSplitTables.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreLotteryOrders">
+            <EntityTypeMapping TypeName="BananaSplitTables.PreLotteryOrder">
+              <MappingFragment StoreEntitySet="PreLotteryOrder">
+                <ScalarProperty Name="PreLotteryOrder1" ColumnName="PreLotteryOrder" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="LotteryId" ColumnName="LotteryId" />
+                <ScalarProperty Name="PreLotteryOrderId" ColumnName="PreLotteryOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceLevels">
+            <EntityTypeMapping TypeName="BananaSplitTables.PriceLevel">
+              <MappingFragment StoreEntitySet="PriceLevel">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="PriceLevelDescription" ColumnName="PriceLevelDescription" />
+                <ScalarProperty Name="PriceLevelName" ColumnName="PriceLevelName" />
+                <ScalarProperty Name="PriceLevelId" ColumnName="PriceLevelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1030,22 +1800,26 @@
         <EntityTypeShape EntityType="BananaSplitTables.Location" Width="1.5" PointX="3.75" PointY="0.75" Height="1.9802864583333326" IsExpanded="true" />
         <EntityTypeShape EntityType="BananaSplitTables.Member" Width="1.5" PointX="3" PointY="6.625" Height="4.6725065104166639" IsExpanded="true" />
         <EntityTypeShape EntityType="BananaSplitTables.MemberType" Width="1.5" PointX="0.75" PointY="8.125" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="BananaSplitTables.Partnership" Width="1.5" PointX="5.25" PointY="11.375" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="BananaSplitTables.PartnerTicket" Width="1.5" PointX="7.5" PointY="8.75" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="BananaSplitTables.Partnership" Width="1.5" PointX="5.25" PointY="11.375" Height="3.7109993489583317" IsExpanded="true" />
         <EntityTypeShape EntityType="BananaSplitTables.State" Width="1.5" PointX="1.5" PointY="3.25" Height="1.787985026041667" IsExpanded="true" />
         <EntityTypeShape EntityType="BananaSplitTables.Team" Width="1.5" PointX="6" PointY="0.875" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="BananaSplitTables.TicketPrice" Width="1.5" PointX="8.25" PointY="4.5" Height="2.9417936197916674" IsExpanded="true" />
         <AssociationConnector Association="BananaSplitTables.FK_ApiAccess_Member" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="6.81224609375" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="6.8122460937499989" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="6.81224609375" />
           <ConnectorPoint PointX="5.25" PointY="6.81224609375" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_Invoice_ManagingMember" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="9.2208968098958337" />
-          <ConnectorPoint PointX="5.25" PointY="9.2208968098958337" />
+          <ConnectorPoint PointX="4.5" PointY="9.4733356005859388" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="9.4733356005859388" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="9.4733356005859388" />
+          <ConnectorPoint PointX="5.25" PointY="9.4733356005859388" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_Invoice_Member" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.4229484049479169" />
-          <ConnectorPoint PointX="5.25" PointY="8.4229484049479169" />
+          <ConnectorPoint PointX="4.5" PointY="8.54916780029297" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="8.54916780029297" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="8.54916780029297" />
+          <ConnectorPoint PointX="5.25" PointY="8.54916780029297" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_Location_State" ManuallyRouted="false">
           <ConnectorPoint PointX="3" PointY="4.1439925130208337" />
@@ -1061,55 +1835,230 @@
           <ConnectorPoint PointX="3" PointY="9.0189925130208337" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_Partnership_Member" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="11.297506510416664" />
-          <ConnectorPoint PointX="3.75" PointY="12.557444661458334" />
-          <ConnectorPoint PointX="5.25" PointY="12.557444661458334" />
-        </AssociationConnector>
-        <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_Member" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="11.025900065104166" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="11.025900065104166" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="11.025900065104166" />
-          <ConnectorPoint PointX="7.5" PointY="11.025900065104166" />
-        </AssociationConnector>
-        <AssociationConnector Association="BananaSplitTables.FK_TicketPrice_Member" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.2518929036458335" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="7.2518929036458326" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="7.2518929036458335" />
-          <ConnectorPoint PointX="8.25" PointY="7.2518929036458335" />
-        </AssociationConnector>
-        <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_Partnership" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="11.533396809895834" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="11.533396809895834" />
-          <ConnectorPoint PointX="7.208333333333333" PointY="11.533396809895834" />
-          <ConnectorPoint PointX="7.5" PointY="11.533396809895834" />
-        </AssociationConnector>
-        <AssociationConnector Association="BananaSplitTables.FK_PartnerTicket_TicketPrice" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.625" PointY="7.4417936197916674" />
-          <ConnectorPoint PointX="8.625" PointY="8.75" />
-        </AssociationConnector>
-        <AssociationConnector Association="BananaSplitTables.FK_TicketPrice_Team" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.5" PointY="2.4420475260416663" />
-          <ConnectorPoint PointX="9" PointY="2.4420475260416663" />
-          <ConnectorPoint PointX="9" PointY="4.5" />
+          <ConnectorPoint PointX="4.5" PointY="11.720856119791666" />
+          <ConnectorPoint PointX="5.25" PointY="11.720856119791666" />
         </AssociationConnector>
         <EntityTypeShape EntityType="BananaSplitTables.Season" Width="1.5" PointX="8.25" PointY="12.75" Height="3.3263964843750031" />
         <EntityTypeShape EntityType="BananaSplitTables.TeamType" Width="1.5" PointX="10.375" PointY="1.75" Height="1.7879850260416745" />
         <AssociationConnector Association="BananaSplitTables.FK_Season_Team" >
-          <ConnectorPoint PointX="7.125" PointY="4.0090950520833326" />
-          <ConnectorPoint PointX="7.125" PointY="15.131694335937501" />
-          <ConnectorPoint PointX="8.25" PointY="15.131694335937501" />
+          <ConnectorPoint PointX="7.0521095971679681" PointY="4.9706022135416656" />
+          <ConnectorPoint PointX="7.0521095971679681" PointY="16.093201497395832" />
+          <ConnectorPoint PointX="7.947916666666667" PointY="16.093201497395832" />
+          <ConnectorPoint PointX="8.1145833333333339" PointY="16.093201497395832" />
+          <ConnectorPoint PointX="8.25" PointY="16.093201497395832" />
         </AssociationConnector>
         <AssociationConnector Association="BananaSplitTables.FK_Team_TeamType" >
-          <ConnectorPoint PointX="10.375" PointY="3.05251627604167" />
-          <ConnectorPoint PointX="9.0833333333333339" PointY="3.0525162760416698" />
-          <ConnectorPoint PointX="8.9166666666666661" PointY="3.05251627604167" />
-          <ConnectorPoint PointX="7.5" PointY="3.05251627604167" />
+          <ConnectorPoint PointX="10.375" PointY="2.7115463441395282" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="2.7115463441395278" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="2.7115463441395282" />
+          <ConnectorPoint PointX="7.5" PointY="2.7115463441395282" />
         </AssociationConnector>
         <EntityTypeShape EntityType="BananaSplitTables.SeasonYear" Width="1.5" PointX="10.375" PointY="4.875" Height="1.5956835937500031" />
         <AssociationConnector Association="BananaSplitTables.FK_Season_SeasonYears" >
-          <ConnectorPoint PointX="11.125" PointY="6.4706835937500031" />
-          <ConnectorPoint PointX="11.125" PointY="14.605499674479168" />
-          <ConnectorPoint PointX="9.75" PointY="14.605499674479168" />
+          <ConnectorPoint PointX="10.375" PointY="5.6728417968750016" />
+          <ConnectorPoint PointX="9" PointY="5.6728417968750016" />
+          <ConnectorPoint PointX="9" PointY="12.75" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BananaSplitTables.SeasonType" Width="1.5" PointX="10.375" PointY="7.875" Height="1.5956835937500031" />
+        <AssociationConnector Association="BananaSplitTables.FK_Season_SeasonType" >
+          <ConnectorPoint PointX="10.71875" PointY="9.4706835937500031" />
+          <ConnectorPoint PointX="10.71875" PointY="15.086293945312498" />
+          <ConnectorPoint PointX="9.75" PointY="15.086293945312498" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BananaSplitTables.Game" Width="1.5" PointX="13.875" PointY="4.125" Height="4.0956022135416674" />
+        <EntityTypeShape EntityType="BananaSplitTables.GamePrice" Width="1.5" PointX="16.125" PointY="5.125" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="BananaSplitTables.Lottery" Width="1.5" PointX="7.875" PointY="18.375" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="BananaSplitTables.LotteryOrder" Width="1.5" PointX="11.125" PointY="12.5" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="BananaSplitTables.MemberPartnership" Width="1.5" PointX="13.875" PointY="9.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="BananaSplitTables.PartnershipGame" Width="1.5" PointX="16.125" PointY="8.25" Height="3.1340950520833388" />
+        <EntityTypeShape EntityType="BananaSplitTables.Photo" Width="1.5" PointX="12.75" PointY="0.75" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="BananaSplitTables.PreLotteryOrder" Width="1.5" PointX="11.125" PointY="15.5" Height="2.1725878906250049" />
+        <EntityTypeShape EntityType="BananaSplitTables.PriceLevel" Width="1.5" PointX="13.875" PointY="13.875" Height="2.5571907552083388" />
+        <AssociationConnector Association="BananaSplitTables.FK_Game_Season" >
+          <ConnectorPoint PointX="9.4062525" PointY="12.75" />
+          <ConnectorPoint PointX="9.4062525" PointY="6.9539648437500015" />
+          <ConnectorPoint PointX="13.541666666666666" PointY="6.9539648437500006" />
+          <ConnectorPoint PointX="13.708333333333334" PointY="6.9539648437500015" />
+          <ConnectorPoint PointX="13.875" PointY="6.9539648437500015" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Game_Team" >
+          <ConnectorPoint PointX="7.5" PointY="4.3042541503906246" />
+          <ConnectorPoint PointX="13.541666666666666" PointY="4.3042541503906238" />
+          <ConnectorPoint PointX="13.708333333333334" PointY="4.3042541503906246" />
+          <ConnectorPoint PointX="13.875" PointY="4.3042541503906246" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Game_TeamVisiting" >
+          <ConnectorPoint PointX="7.5" PointY="4.6208770751953123" />
+          <ConnectorPoint PointX="13.541666666666666" PointY="4.6208770751953114" />
+          <ConnectorPoint PointX="13.708333333333334" PointY="4.6208770751953123" />
+          <ConnectorPoint PointX="13.875" PointY="4.6208770751953123" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_GamePrice_Game" >
+          <ConnectorPoint PointX="15.375" PointY="6.1151432291666694" />
+          <ConnectorPoint PointX="16.125" PointY="6.1151432291666694" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PartnershipGame_Game" >
+          <ConnectorPoint PointX="15.375" PointY="8.2206022135416674" />
+          <ConnectorPoint PointX="15.75" PointY="8.5956022135416674" />
+          <ConnectorPoint PointX="15.75" PointY="7.875" />
+          <ConnectorPoint PointX="16.125" PointY="8.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Lottery_Partnership" >
+          <ConnectorPoint PointX="6" PointY="15.085999348958332" />
+          <ConnectorPoint PointX="6" PointY="19.4612939453125" />
+          <ConnectorPoint PointX="7.875" PointY="19.4612939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_LotteryOrder_Lottery" >
+          <ConnectorPoint PointX="8.03125" PointY="18.375" />
+          <ConnectorPoint PointX="8.03125" PointY="12.59375" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="12.59375" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="12.59375" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="12.59375" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="12.59375" />
+          <ConnectorPoint PointX="10.635416666666666" PointY="12.59375" />
+          <ConnectorPoint PointX="10.802083333333334" PointY="12.59375" />
+          <ConnectorPoint PointX="11.125" PointY="12.59375" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PreLotteryOrder_Lottery" >
+          <ConnectorPoint PointX="8.1406275" PointY="18.375" />
+          <ConnectorPoint PointX="8.1406275" PointY="17.578797200520835" />
+          <ConnectorPoint PointX="11.125" PointY="17.578797200520835" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_LotteryOrder_Member" >
+          <ConnectorPoint PointX="4.5" PointY="7.37474609375" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="7.3747460937499989" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="7.37474609375" />
+          <ConnectorPoint PointX="6.9687762638346351" PointY="7.3747460937499989" />
+          <ConnectorPoint PointX="7.1354429305013012" PointY="7.37474609375" />
+          <ConnectorPoint PointX="7.2239739652506509" PointY="7.3747460937499989" />
+          <ConnectorPoint PointX="7.390640631917317" PointY="7.37474609375" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="7.3747460937499989" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="7.37474609375" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="7.3747460937499989" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="7.37474609375" />
+          <ConnectorPoint PointX="12.28125" PointY="7.37474609375" />
+          <ConnectorPoint PointX="12.28125" PointY="12.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_MemberPartnership_Member" >
+          <ConnectorPoint PointX="4.5" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="6.9687762638346351" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="7.1354429305013012" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="7.2239739652506509" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="7.390640631917317" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="10.635416666666666" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="10.802083333333334" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="12.197916666666666" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="12.364583333333334" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="13.541666666666666" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="13.708333333333334" PointY="11.189646809895834" />
+          <ConnectorPoint PointX="13.875" PointY="11.189646809895834" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PartnershipGame_Member" >
+          <ConnectorPoint PointX="3.75" PointY="6.625" />
+          <ConnectorPoint PointX="3.75" PointY="6.3749999999999982" />
+          <ConnectorPoint PointX="5" PointY="6.3749999999999982" />
+          <ConnectorPoint PointX="5" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="6.9687762638346351" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="7.1354429305013012" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="7.2239739652506509" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="7.390640631917317" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="10.635416666666666" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="10.802083333333334" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="12.197916666666666" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="12.364583333333334" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="13.541666666666666" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="13.708333333333334" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="13.75" PointY="10.941793619791667" />
+          <ConnectorPoint PointX="13.75" PointY="9.5" />
+          <ConnectorPoint PointX="15.75" PointY="9.5" />
+          <ConnectorPoint PointX="15.75" PointY="9.8482995260416644" />
+          <ConnectorPoint PointX="16.125" PointY="9.8482995260416644" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PreLotteryOrder_Member" >
+          <ConnectorPoint PointX="4.1562525" PointY="12.066712239583334" />
+          <ConnectorPoint PointX="4.1562525" PointY="17.547544700520842" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="17.547544700520842" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="17.547544700520842" />
+          <ConnectorPoint PointX="7.947916666666667" PointY="17.547544700520842" />
+          <ConnectorPoint PointX="8.1145833333333339" PointY="17.547544700520842" />
+          <ConnectorPoint PointX="11.125" PointY="17.547544700520842" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_MemberPartnership_Partnership" >
+          <ConnectorPoint PointX="6.75" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="6.9687762638346351" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="7.1354429305013012" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="7.2239739652506509" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="7.390640631917317" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="10.635416666666666" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="10.802083333333334" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="12.197916666666666" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="12.364583333333334" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="13.541666666666666" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="13.708333333333334" PointY="11.841095377604169" />
+          <ConnectorPoint PointX="13.875" PointY="11.841095377604169" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Partnership_Season" >
+          <ConnectorPoint PointX="8.25" PointY="14.055926235694299" />
+          <ConnectorPoint PointX="8.1145833333333339" PointY="14.055926235694299" />
+          <ConnectorPoint PointX="7.947916666666667" PointY="14.055926235694299" />
+          <ConnectorPoint PointX="7.1354429305013012" PointY="14.055926235694299" />
+          <ConnectorPoint PointX="6.9687762638346351" PointY="14.055926235694299" />
+          <ConnectorPoint PointX="6.75" PointY="14.055926235694299" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Partnership_Team" >
+          <ConnectorPoint PointX="7.307307298583984" PointY="4.9706022135416656" />
+          <ConnectorPoint PointX="7.307307298583984" PointY="13.229760806649235" />
+          <ConnectorPoint PointX="7.1354429305013012" PointY="13.229760806649235" />
+          <ConnectorPoint PointX="6.9687762638346351" PointY="13.229760806649235" />
+          <ConnectorPoint PointX="6.75" PointY="13.229760806649235" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PartnershipGame_Partnership" >
+          <ConnectorPoint PointX="6.75" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="6.9687762638346351" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="7.1354429305013012" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="7.2239739652506509" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="7.390640631917317" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="10.635416666666666" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="10.802083333333334" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="12.197916666666666" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="12.364583333333334" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="13.541666666666666" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="13.708333333333334" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="16.875" PointY="12.403595377604169" />
+          <ConnectorPoint PointX="16.875" PointY="11.384095052083339" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PriceLevel_Season" >
+          <ConnectorPoint PointX="9.75" PointY="15.324396972656249" />
+          <ConnectorPoint PointX="13.875" PointY="15.324396972656249" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_PriceLevel_Team" >
+          <ConnectorPoint PointX="7.5" PointY="1.7620211720697632" />
+          <ConnectorPoint PointX="10.125" PointY="1.7620211720697632" />
+          <ConnectorPoint PointX="10.125" PointY="3.875" />
+          <ConnectorPoint PointX="13.625" PointY="3.875" />
+          <ConnectorPoint PointX="13.625" PointY="13.5" />
+          <ConnectorPoint PointX="14.625" PointY="13.5" />
+          <ConnectorPoint PointX="14.625" PointY="13.875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BananaSplitTables.FK_Team_Photo" >
+          <ConnectorPoint PointX="12.75" PointY="1.2560105860348816" />
+          <ConnectorPoint PointX="7.5" PointY="1.2560105860348816" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

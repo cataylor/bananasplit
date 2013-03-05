@@ -39,14 +39,17 @@
       <HintPath>..\packages\Facebook.6.1.4\lib\net40-client\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\..\..\Downloads\HtmlAgilityPack\HtmlAgilityPack.dll</HintPath>
+      <HintPath>C:\Downloads\HtmlAgilityPack\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Kaliko.ImageLibrary">
-      <HintPath>..\..\..\..\Projects\VipPrez\VipPrez\bin\Kaliko.ImageLibrary.dll</HintPath>
+      <HintPath>C:\Projects\VipPrez\VipPrez\bin\Kaliko.ImageLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>J:\VipPrez\VipPrez\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RouteDebug">
-      <HintPath>..\..\..\..\Projects\VipPrez\VipPrez\bin\RouteDebug.dll</HintPath>
+      <HintPath>C:\Projects\VipPrez\VipPrez\bin\RouteDebug.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -73,9 +76,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -121,7 +121,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="Twilio.Api">
-      <HintPath>..\..\..\..\Downloads\DotNetLibraries\Twillio\twilio-twilio-csharp-3.2.3-47-g5606cc0\twilio-twilio-csharp-5606cc0\src\Twilio.Api\bin\Release\Twilio.Api.dll</HintPath>
+      <HintPath>C:\Downloads\DotNetLibraries\Twillio\twilio-twilio-csharp-3.2.3-47-g5606cc0\twilio-twilio-csharp-5606cc0\src\Twilio.Api\bin\Release\Twilio.Api.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -140,6 +140,9 @@
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\GamePriceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
     <Compile Include="Controllers\SeasonController.cs" />
@@ -167,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.ptTimeSelect.css" />
     <Content Include="Content\template.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -222,6 +226,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\ui.core.css" />
+    <Content Include="Content\ui.theme.css" />
     <Content Include="Content\validationEngine.jquery.css" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
@@ -239,6 +245,8 @@
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.formatCurrency-1.4.0.min.js" />
+    <Content Include="Scripts\jquery.ptTimeSelect.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.uploadify.v2.1.4.min.js" />
@@ -247,6 +255,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validationEngine-en.js" />
+    <Content Include="Scripts\jquery.validationEngine.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
@@ -266,6 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -326,6 +337,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Season\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Season\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Season\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contract\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GamePrice\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Game\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

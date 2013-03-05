@@ -36,6 +36,13 @@ namespace BananaSplit.Service
         }
 
 
+        public List<Team> GetAllTeamsByTeamType(int teamTypeId)
+        {
+            var allTeamsForType = GetAll().Where(t => t.TeamTypeId == teamTypeId);
+            return (allTeamsForType.Any() ? allTeamsForType.ToList() : null);
+        }
+
+
         /// <summary>
         /// 
         /// </summary>

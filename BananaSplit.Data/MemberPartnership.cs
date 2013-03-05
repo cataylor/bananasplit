@@ -15,51 +15,11 @@ using System.Collections.Specialized;
 
 namespace BananaSplit.Data
 {
-    public partial class PartnerTicket
+    public partial class MemberPartnership
     {
         #region Primitive Properties
     
-        public virtual long PartnerTicketId
-        {
-            get;
-            set;
-        }
-    
-        public virtual long TicketPriceId
-        {
-            get { return _ticketPriceId; }
-            set
-            {
-                if (_ticketPriceId != value)
-                {
-                    if (TicketPrice != null && TicketPrice.TicketPriceId != value)
-                    {
-                        TicketPrice = null;
-                    }
-                    _ticketPriceId = value;
-                }
-            }
-        }
-        private long _ticketPriceId;
-    
-        public virtual long MemberId
-        {
-            get { return _memberId; }
-            set
-            {
-                if (_memberId != value)
-                {
-                    if (Member != null && Member.MemberId != value)
-                    {
-                        Member = null;
-                    }
-                    _memberId = value;
-                }
-            }
-        }
-        private long _memberId;
-    
-        public virtual Nullable<System.DateTime> DateESigned
+        public virtual long MemberPartnershipId
         {
             get;
             set;
@@ -82,6 +42,29 @@ namespace BananaSplit.Data
         }
         private long _partnershipId;
     
+        public virtual long MemberId
+        {
+            get { return _memberId; }
+            set
+            {
+                if (_memberId != value)
+                {
+                    if (Member != null && Member.MemberId != value)
+                    {
+                        Member = null;
+                    }
+                    _memberId = value;
+                }
+            }
+        }
+        private long _memberId;
+    
+        public virtual bool IsManagingMember
+        {
+            get;
+            set;
+        }
+    
         public virtual System.DateTime DateCreated
         {
             get;
@@ -93,8 +76,21 @@ namespace BananaSplit.Data
             get;
             set;
         }
+    
+        public virtual long HasESigned
+        {
+            get;
+            set;
+        }
+    
+        public virtual Nullable<System.DateTime> DateESigned
+        {
+            get;
+            set;
+        }
 
         #endregion
+
         #region Navigation Properties
     
         public virtual Member Member
@@ -126,37 +122,23 @@ namespace BananaSplit.Data
             }
         }
         private Partnership _partnership;
-    
-        public virtual TicketPrice TicketPrice
-        {
-            get { return _ticketPrice; }
-            set
-            {
-                if (!ReferenceEquals(_ticketPrice, value))
-                {
-                    var previousValue = _ticketPrice;
-                    _ticketPrice = value;
-                    FixupTicketPrice(previousValue);
-                }
-            }
-        }
-        private TicketPrice _ticketPrice;
 
         #endregion
+
         #region Association Fixup
     
         private void FixupMember(Member previousValue)
         {
-            if (previousValue != null && previousValue.PartnerTickets.Contains(this))
+            if (previousValue != null && previousValue.MemberPartnerships.Contains(this))
             {
-                previousValue.PartnerTickets.Remove(this);
+                previousValue.MemberPartnerships.Remove(this);
             }
     
             if (Member != null)
             {
-                if (!Member.PartnerTickets.Contains(this))
+                if (!Member.MemberPartnerships.Contains(this))
                 {
-                    Member.PartnerTickets.Add(this);
+                    Member.MemberPartnerships.Add(this);
                 }
                 if (MemberId != Member.MemberId)
                 {
@@ -167,16 +149,16 @@ namespace BananaSplit.Data
     
         private void FixupPartnership(Partnership previousValue)
         {
-            if (previousValue != null && previousValue.PartnerTickets.Contains(this))
+            if (previousValue != null && previousValue.MemberPartnerships.Contains(this))
             {
-                previousValue.PartnerTickets.Remove(this);
+                previousValue.MemberPartnerships.Remove(this);
             }
     
             if (Partnership != null)
             {
-                if (!Partnership.PartnerTickets.Contains(this))
+                if (!Partnership.MemberPartnerships.Contains(this))
                 {
-                    Partnership.PartnerTickets.Add(this);
+                    Partnership.MemberPartnerships.Add(this);
                 }
                 if (PartnershipId != Partnership.PartnershipId)
                 {
@@ -184,27 +166,8 @@ namespace BananaSplit.Data
                 }
             }
         }
-    
-        private void FixupTicketPrice(TicketPrice previousValue)
-        {
-            if (previousValue != null && previousValue.PartnerTickets.Contains(this))
-            {
-                previousValue.PartnerTickets.Remove(this);
-            }
-    
-            if (TicketPrice != null)
-            {
-                if (!TicketPrice.PartnerTickets.Contains(this))
-                {
-                    TicketPrice.PartnerTickets.Add(this);
-                }
-                if (TicketPriceId != TicketPrice.TicketPriceId)
-                {
-                    TicketPriceId = TicketPrice.TicketPriceId;
-                }
-            }
-        }
 
         #endregion
+
     }
 }
