@@ -1,0 +1,100 @@
+﻿@model IEnumerable<BananaSplit.Data.Game>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
+}
+
+<h2>BananaSplit: Season Games</h2>
+
+/*
+
+On Game Index page, put a button for "Add Price Level" next to each game row
+
+Season drop down and next to it put 
+Team Type drop down
+
+Teams Rows - "Add Price Level" button Next to Edit and Delete Buttons. Pass TeamId and SeasonId to "Add/Update Price Levels"
+
+
+*/
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SeasonId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisitingTeamId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeZone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeasonId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TeamId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisitingTeamId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeZone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GameId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GameId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GameId })
+        </td>
+    </tr>
+}
+
+</table>

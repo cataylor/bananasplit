@@ -8,26 +8,43 @@ using BananaSplit.Service;
 
 namespace BananaSplit.Controllers
 {
-    public class GamePriceController : BaseController
+    public class PriceLevelController : BaseController
     {
-        private GamePriceRepository repo;
+        private PriceLevelRepository repo;
 
-        public GamePriceController()
+        public PriceLevelController()
         {
-            this.repo = new GamePriceRepository();
+            this.repo = new PriceLevelRepository();
         }
-
         //
-        // GET: /GamePrice/Create
+        // GET: /PriceLevel/
 
-        public ActionResult Create()
+        public ActionResult Index()
         {
-
             return View();
         }
 
         //
-        // POST: /GamePrice/Create
+        // GET: /PriceLevel/Details/5
+
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        //
+        // GET: /PriceLevel/Create
+
+        public ActionResult Create(long seasonId, long teamId)
+        {
+            var pricelevel = new PriceLevel();
+            pricelevel.SeasonId = seasonId;
+            pricelevel.TeamId = teamId;
+            return View(pricelevel);
+        }
+
+        //
+        // POST: /PriceLevel/Create
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -41,17 +58,21 @@ namespace BananaSplit.Controllers
                 {
                     foreach (var item in idArray)
                     {
-                        var gamePriceName = String.Format("game_price_name_{0}", item);
-                        var gPrice = String.Format("game_price_price_{0}", item);
-                        var name = collection.Get(gamePriceName);
+                        var priceLevelName = String.Format("price_level_name_{0}", item);
+                        var gPrice = String.Format("price_level_price_{0}", item);
+                        var name = collection.Get(priceLevelName);
                         var price = collection.Get(gPrice);
-                        var gamePrice = new GamePrice();
-                        gamePrice.Price = Convert.ToDecimal(price);
+                        var priceLevel = new PriceLevel();
+                        priceLevel.PriceLevelName = name;
+                        priceLevel.Price = Convert.ToDecimal(price);
+                        priceLevel.TeamId = Convert.ToInt64(collection.Get("TeamId"));
+                        priceLevel.SeasonId = Convert.ToInt64(collection.Get("SeasonId"));
+                        this.repo.Save(priceLevel);
                     }
                 }
 
 
-                return RedirectToAction("Index", "Team");
+                return RedirectToAction("Index", "PriceLevel");
             }
             catch
             {
@@ -60,7 +81,7 @@ namespace BananaSplit.Controllers
         }
 
         //
-        // GET: /GamePrice/Edit/5
+        // GET: /PriceLevel/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -68,7 +89,7 @@ namespace BananaSplit.Controllers
         }
 
         //
-        // POST: /GamePrice/Edit/5
+        // POST: /PriceLevel/Edit/5
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -86,7 +107,7 @@ namespace BananaSplit.Controllers
         }
 
         //
-        // GET: /GamePrice/Delete/5
+        // GET: /PriceLevel/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -94,7 +115,7 @@ namespace BananaSplit.Controllers
         }
 
         //
-        // POST: /GamePrice/Delete/5
+        // POST: /PriceLevel/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

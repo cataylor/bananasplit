@@ -145,6 +145,7 @@
     <Compile Include="Controllers\GamePriceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
+    <Compile Include="Controllers\PriceLevelController.cs" />
     <Compile Include="Controllers\SeasonController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
@@ -352,6 +353,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Game\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Game\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Game\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PriceLevel\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PriceLevel\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

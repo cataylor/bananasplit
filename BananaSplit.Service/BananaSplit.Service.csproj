@@ -44,12 +44,14 @@
     <Compile Include="ApiAccessRepository.cs" />
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="GamePriceRepository.cs" />
     <Compile Include="GameRepository.cs" />
     <Compile Include="InvoiceRepository.cs" />
     <Compile Include="LocationRepository.cs" />
     <Compile Include="MemberRepository.cs" />
     <Compile Include="MemberTypeRepository.cs" />
     <Compile Include="PhotoRepository.cs" />
+    <Compile Include="PriceLevelRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeasonRepository.cs" />
     <Compile Include="SeasonTypeRepository.cs" />

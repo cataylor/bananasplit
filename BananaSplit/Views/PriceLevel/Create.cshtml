@@ -1,4 +1,6 @@
-﻿@{
+﻿@model BananaSplit.Data.PriceLevel
+
+@{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
 }
@@ -17,18 +19,18 @@
             $("#" + theId).remove();
             removeHiddenId(id);
 
-/*
+            /*
             $.post('@Url.Action("Delete", "GamePrice")', { gamePriceId: id }, function (data) {
-                //alert(data.Description);
-                if (data.Success) {
-                    window.location.reload();
-                } else {
-                    alert("Failed to delete the price level");
-                }
+            //alert(data.Description);
+            if (data.Success) {
+            window.location.reload();
+            } else {
+            alert("Failed to delete the price level");
+            }
             });
-*/
+            */
         }
-        
+
     }
 
     $(document).ready(function () {
@@ -37,7 +39,7 @@
         });
 
     });
-    
+
     var startId = 1000;
     function addPriceLevelRow() {
         startId++;
@@ -49,7 +51,7 @@
         newDiv += '             <label>Name <span class="redreq">*</span></label>';
         newDiv += '          </div>';
         newDiv += '          <div class="editor-field">';
-        newDiv += '              <input type="text" style="width:250px;" name="game_price_name' + currentId + '" id="game_price_name' + currentId + '" class="" />';
+        newDiv += '              <input type="text" style="width:250px;" name="price_level_name' + currentId + '" id="price_level_name' + currentId + '" class="" />';
         newDiv += '          </div>';
         newDiv += '        </div>';
         newDiv += '       <div style="float:left;width:140px;">';
@@ -57,7 +59,7 @@
         newDiv += '           <label>Price <span class="redreq">*</span></label>';
         newDiv += '         </div>';
         newDiv += '         <div class="editor-field">';
-        newDiv += '           <input type="text" style="width:130px;" class="currencyField" name="game_price_price' + currentId + '" id="game_price_price' + currentId + '"/>';
+        newDiv += '           <input type="text" style="width:130px;" class="currencyField" name="price_level_price' + currentId + '" id="price_level_price' + currentId + '"/>';
         newDiv += '         </div>';
         newDiv += '       </div>';
         if (startId != 1001) {
@@ -83,7 +85,7 @@
             arr = new Array();
         }
         var idExists = false;
-        
+
         for (var i = 0; i < len; i++) {
             if (id == arr[i]) {
                 idExists = true;
@@ -96,10 +98,10 @@
 
         if (arr.length > 1) {
             $('#ids').val(arr.join(','));
-        }else {
+        } else {
             $('#ids').val(arr[0]);
         }
-        
+
         alert("Current Val: " + $('#ids').val());
     }
 
@@ -127,12 +129,15 @@
 
 <div class="curvedborders" style="width:860px;margin:0px auto;">
     
+    <div>
+        <b>Season:</b> @Model.Season.SeasonYear.Years <b>Team:</b> @Model.Team.TeamName
+    </div>
     <div class="line_below">
         <button id="AddPriceLevel" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Add New Price Level</span></button>
     </div>
 
 
-    @using (Html.BeginForm("Create", "GamePrice", FormMethod.Post, new { id = "myForm" }))
+    @using (Html.BeginForm("Create", "PriceLevel", FormMethod.Post, new { id = "myForm" }))
     {
         
             @*<div class="price_level_row">
@@ -141,7 +146,7 @@
                     <label>Name <span class="redreq">*</span></label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" style="width:130px;" name="game_price_name" id="game_price_name" class="" />
+                    <input type="text" style="width:130px;" name="price_level_name" id="price_level_name" class="" />
                 </div>
             </div>
                 
@@ -150,7 +155,7 @@
                     <label>Price <span class="redreq">*</span></label>
                 </div>
                 <div class="editor-field">
-                    <input type="text" style="width:130px;" class="currencyField" name="game_price_price" id="game_price"/>
+                    <input type="text" style="width:130px;" class="currencyField" name="price_level_price" id="price_level_price"/>
                 </div>
             </div>
             

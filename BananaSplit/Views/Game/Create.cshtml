@@ -1,7 +1,7 @@
 ﻿@model BananaSplit.Data.Game
 
 @{
-    ViewBag.Title = "Edit Game Information";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutPageMetro.cshtml";
 }
 
@@ -11,6 +11,12 @@
         //$("#myForm").validationEngine();
 
         $(".datepicker").datepicker();
+
+        $(".tmPicker").ptTimeSelect({
+            onClose: function (timeField) {
+                $("#" + timeField.attr('id')).blur();
+            }
+        });
 
         $('#TeamTypeId').change(function () {
             var teamTypeVal = $(this).val();
@@ -46,21 +52,10 @@
     });
 </script>
 
-@helper SelectTimeZone(string zone)
-    {
-        if (@Model.TimeZone.Equals(zone, StringComparison.OrdinalIgnoreCase))
-        {
-            @String.Format("{0}", "selected='selected'");
-        }
-        else
-        {
-            @String.Empty;
-        }
-    }
+<h2>Create</h2>
 
-@using (Html.BeginForm("Edit", "Game", FormMethod.Post)) {
-    @Html.ValidationSummary(true)
-
+@using (Html.BeginForm("Create", "Game", FormMethod.Post))
+{
     <fieldset>
         <legend>Game</legend>
 
@@ -83,14 +78,7 @@
             <select name="TeamTypeId" id="TeamTypeId" class="validate[required]">
                 @foreach (var item in ViewBag.TeamTypes)
                 {
-                    if (Model.Team.TeamTypeId == item.TeamTypeId)
-                    {
-                        <option value='@item.TeamTypeId' selected="selected">@item.TeamTypeName</option>
-                    }
-                    else
-                    {
-                        <option value='@item.TeamTypeId'>@item.TeamTypeName</option>    
-                    }
+                    <option value='@item.TeamTypeId'>@item.TeamTypeName</option>
                 }
             </select>
         </div>
@@ -100,17 +88,7 @@
         </div>
         <div class="editor-field">
             <select name="TeamId" id="TeamId" class="validate[required]">
-                @foreach (var item in ViewBag.TeamList)
-                {
-                    if (Model.TeamId == item.TeamId)
-                    {
-                        <option value='@item.TeamId' selected="selected">@item.TeamName</option>
-                    }
-                    else
-                    {
-                        <option value='@item.TeamId'>@item.TeamName</option>
-                    }
-                }
+                
             </select>
         </div>
 
@@ -119,17 +97,7 @@
         </div>
         <div class="editor-field">
             <select name="VisitingTeamId" id="VisitingTeamId" class="validate[required]">
-                @foreach (var item in ViewBag.TeamList)
-                {
-                    if (Model.VisitingTeamId == item.TeamId)
-                    {
-                        <option value='@item.TeamId' selected="selected">@item.TeamName</option>
-                    }
-                    else
-                    {
-                        <option value='@item.TeamId'>@item.TeamName</option>
-                    }
-                }
+                
             </select>
         </div>
 
@@ -138,7 +106,6 @@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.EventLocation)
-            @Html.ValidationMessageFor(model => model.EventLocation)
         </div>
 
         <div class="editor-label">
@@ -147,10 +114,10 @@
         <div class="editor-field">
             <select name="TimeZone" id="TimeZone"  class="validate[required]">
                 <option value="">Select a TimeZone</option>
-                <option value="CST" @SelectTimeZone(Model.TimeZone)>CST</option>
-                <option value="EST" @SelectTimeZone(Model.TimeZone)>EST</option>
-                <option value="MST" @SelectTimeZone(Model.TimeZone)>MST</option>
-                <option value="PST" @SelectTimeZone(Model.TimeZone)>PST</option>
+                <option value="CST">CST</option>
+                <option value="EST">EST</option>
+                <option value="MST">MST</option>
+                <option value="PST">PST</option>
             </select>
         </div>
         
@@ -189,16 +156,9 @@
                 <input type="text" class="validate[required] text-input tmPicker" style="width:200px;" value="@Model.EventEndDate.ToShortTimeString()" name="EventEndTime" id="EventEndTime" />                
             </div>  
         </div>
-        
-        <div class="editor-label">
-            Is Active?
-        </div>
-        <div class="editor-field">
-            @Html.CheckBoxFor(model => model.IsActive)
-        </div>
 
         <p style="clear: both;">
-            <input type="submit" value="Update Game" />
+            <input type="submit" value="Create Game" />
         </p>
     </fieldset>
 }

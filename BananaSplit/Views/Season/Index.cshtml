@@ -83,23 +83,32 @@
             <table id="users" class="ui-widget ui-widget-content">
                 <thead>
                     <tr class="ui-widget-header ">
-                        <th>Season</th>
                         <th>Season Year(s)</th>
-                        <th>Date</th>
-                        <th>Opponent</th>
-                        <th>TimeZone</th>
-                        <th>Action</th>
+                        <th>Minimum Game Price</th>
+                        <th>Max Game Price</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
+                    /*
+                    
+                    The index page for Season's should list the seasons. 
+The create/edit page should allow user to put in 3 things
+	Season Years: 2012-2013 (textbox)
+	Minimum Ticket Price Per Game (textbox)
+                    Maximum Ticket Price Per Game (textbox)
+                    
+                    Add Years to Season Table
+                    
+
+                    
+                    */
                     @foreach (var season in Model.Where(s => s.TeamId == team.TeamId))
                     {
                         <tr>
-                            <td>@season.SeasonType.SeasonTypeName</td>
                             <td>@season.SeasonYear.Years</td>
-                            <td>@season.EventStartDate.ToShortDateString() @season.EventStartDate.ToShortTimeString()</td>
-                            <td>@season.Opponent</td>
-                            <td>@season.TimeZone</td>
+                            <td>Min</td>
+                            <td>Max</td>
                             <td><button id="edit-season" style="margin-right: 4px;" onclick="editSeason(@season.SeasonId);">Edit</button><button id="delete-season" onclick="deleteSeason(@season.SeasonId);">Delete</button></td>
                         </tr>
                     }
